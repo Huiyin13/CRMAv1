@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">CRMA</string>
+    <string name="login">Login</string>
+    <string name="email">Email:</string>
+    <string name="password">Password:</string>
+    <string name="register">Register</string>
+    <string name="donthv">Does not have any account?</string>
+    <string name="welcome">Welcome to CRMA UMP</string>
+    <string name="registerAs">Register as:</string>
+    <string name="std">Student</string>
+    <string name="owner">Car Owner</string>
+    <string name="hv">Have any account?</string>
+    <string name="click">Click Here</string>
+
+    <string name="registerStd">Register As Student</string>
+    <string name="registerOwner">Register As Car Owner</string>
+    <string name="name">Name:</string>
+    <string name="ic">Identity Card Number:</string>
+    <string name="phone">Phone Number:</string>
+    <string name="emailStd">Email:</string>
+    <string name="passwordStd">Password:</string>
+    <string name="confirmPass">Confirm Password:</string>
+    <string name="campusStd">Campus:</string>
+    <string name="icPhoto">Identity Card Photo:</string>
+    <string name="idPhoto">Matric Card Photo:</string>
+    <string name="licence">Licence Photo:</string>
+    <string name="verify">Verify Email</string>
+    <string name="matric">Matric ID:</string>
+    <string name="next">Next</string>
+
+    <string name="profile">Profile</string>
+    <string name="editP">Update</string>
+    <string name="deleteP">Delete</string>
+    <string name="coRegister">Registration List</string>
+    <string name="approveCo">Approve</string>
+    <string name="rejectCo">Reject</string>
+    <string name="saveCo">Save</string>
+    <string name="cancelCo">Cancel</string>
+    <string name="reason">Reason: </string>
+    <string name="logout">Logout</string>
+    <string name="deleteR">Delete Account</string>
+
+    <string name="addCar">Add New Car</string>
+    <string name="coAdd">Car List</string>
+    <string name="coView">View Car List</string>
+
+    <string name="model">Car Model:</string>
+    <string name="plate">Plate Number:</string>
+    <string name="number">Person in Car:</string>
+    <string name="fee">Rent Fee (Per Hour):</string>
+    <string name="status">Car Status:</string>
+    <string name="free">Free</string>
+    <string name="book">Booked</string>
+    <string name="sticker">Car Sticker:</string>
+    <string name="cPhoto">Car Photo:</string>
+    <string name="add">Add Car</string>
+    <string name="addP">Add Photo</string>
+
+</resources>

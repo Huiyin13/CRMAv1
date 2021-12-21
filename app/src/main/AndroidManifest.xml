@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.crmav1">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CRMAv1">
+        <activity
+            android:name=".ManageCar.CarDetailsInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageCar.ACarDetailsInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageCar.AddCarPhoto"
+            android:exported="false" />
+        <activity
+            android:name=".ManageCar.AddCarInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageCar.CarListInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageCar.ACarListInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageAccount.CarOwnerRejectInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageLoginandRegistration.CarOwnerIDPhotoInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageLoginandRegistration.CarOwnerRegistrationInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageAccount.CarOwnerViewInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageAccount.CarOwnerListInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageBooking.CBookingListInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageAccount.CarOwnerProfileInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageAccount.CarOwnerAccountInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageAccount.StudentAccountInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageBooking.BookingListInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageAccount.StudentProfileInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageLoginandRegistration.StudentLicencePhotoInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageLoginandRegistration.StudentIDPhotoInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageLoginandRegistration.StudentMainInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageLoginandRegistration.EmailVerificationInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageLoginandRegistration.CarOwnerMainInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageLoginandRegistration.AdminMainInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageLoginandRegistration.StudentRegistrationInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageLoginandRegistration.RegistrationInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageLoginandRegistration.LoginInterface"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,98 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ManageAccount.CarOwnerAccountInterface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="2dp"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_nav"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            app:menu="@menu/carowner_nav" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/coName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:fontFamily="serif"
+            android:text="Jessie Lim"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/coEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:fontFamily="serif"
+            android:text="jessielim@gmail.com"
+            android:textSize="12dp"
+            android:textColor="@color/black"
+            />
+        <TextView
+            android:id="@+id/coStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="18dp"
+            android:paddingEnd="20dp"
+            android:fontFamily="serif"
+            android:textColor="@color/black"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/coEdit"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="150dp"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"
+        android:text="Edit Profile"
+        android:gravity="left|center_vertical"
+        android:drawableRight="@drawable/next" />
+
+    <Button
+        android:id="@+id/coFAQ"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="200dp"
+        android:backgroundTint="@color/white"
+        android:gravity="left|center_vertical"
+        android:text="Help (FAQ)"
+        android:textColor="@color/black"
+        android:drawableRight="@drawable/next" />
+
+    <Button
+        android:id="@+id/coLogout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="250dp"
+        android:text="Logout"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"
+        android:gravity="left|center_vertical"/>
+
+</RelativeLayout>
