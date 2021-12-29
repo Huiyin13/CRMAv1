@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ManageCar.AddCarPhoto">
+    tools:context=".ManageCar.AddCarPhotoInterface">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,6 +33,17 @@
                 android:textColor="#000000"
                 android:textSize="20dp" />
 
+            <TextView
+                android:id="@+id/alert2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:text="Reminder: MUST be more than 1 photo!!"
+                android:textColor="#FF0000"
+                android:textSize="15dp" />
+
             <Button
                 android:id="@+id/addPhoto"
                 android:layout_width="wrap_content"
@@ -43,15 +54,15 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/photos"
-                android:layout_width="match_parent"
-                android:layout_height="548dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/multiple_photo_adapter" />
-
+            <TextView
+                android:id="@+id/alert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text=" "
+                android:textColor="#000000"
+                android:textSize="20dp" />
             <Button
                 android:id="@+id/addCar"
                 android:layout_width="wrap_content"

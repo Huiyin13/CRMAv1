@@ -97,7 +97,7 @@ public class StudentLicencePhotoInterface extends AppCompatActivity {
         newPassword = getIntent().getStringExtra("newPassword");
         stdID = getIntent().getStringExtra("stdID");
         stdCampus = getIntent().getStringExtra("campusS");
-        String image_path= getIntent().getStringExtra("image_uriIC");
+        String image_path = getIntent().getStringExtra("image_uriIC");
         ICfile = Uri.parse(image_path);
         String image_path1= getIntent().getStringExtra("image_uriID");
         IDfile = Uri.parse(image_path1);

@@ -55,5 +55,8 @@
     <string name="cPhoto">Car Photo:</string>
     <string name="add">Add Car</string>
     <string name="addP">Add Photo</string>
+    <string name="des">Description:</string>
+    <string name="type">Type:</string>
+
 
 </resources>

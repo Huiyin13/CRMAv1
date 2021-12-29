@@ -22,7 +22,7 @@
             android:name=".ManageCar.ACarDetailsInterface"
             android:exported="false" />
         <activity
-            android:name=".ManageCar.AddCarPhoto"
+            android:name=".ManageCar.AddCarPhotoInterface"
             android:exported="false" />
         <activity
             android:name=".ManageCar.AddCarInterface"

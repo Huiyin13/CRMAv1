@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -79,6 +80,11 @@ public class LoginInterface extends AppCompatActivity {
                                         finish();
                                         Toast.makeText(LoginInterface.this, "Successfully login as a student.", Toast.LENGTH_SHORT).show();
                                     }
+                                    else if(firebaseAuth != null)
+                                    {
+                                        startActivity(new Intent(LoginInterface.this,StudentMainInterface.class));
+                                        finish();
+                                    }
                                     else{
                                         startActivity(new Intent(getApplicationContext(), EmailVerificationInterface.class));
                                     }
@@ -134,4 +140,18 @@ public class LoginInterface extends AppCompatActivity {
         });
 
     }
+
+    //maintain the session
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+//
+//        if(firebaseUser != null)
+//        {
+//            startActivity(new Intent(LoginInterface.this,MainActivity.class));
+//            finish();
+//        }
+//    }
 }
