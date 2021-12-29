@@ -1,5 +1,7 @@
 package com.example.crmav1.Model;
 
+import android.net.Uri;
+
 public class Car {
 
     private String uid;
@@ -13,13 +15,16 @@ public class Car {
     private String cStatus;
     private String cStrickerUri;
     private String cHideReason;
+    private String cModel;
+    private Uri imageC;
 
     public Car(){
-
+        this.imageC = imageC;
     }
 
-    public Car(String uid, String cid, String cType, String cPlate, String cPerson, String description,
-               String cPhotoUri, String rentFee, String cStatus, String cStrickerUri, String cHideReason){
+    public Car(String uid, String cid, String cType, String cModel, String cPlate, String cPerson, String description,
+               String cPhotoUri, String rentFee, String cStatus, String cStrickerUri, String cHideReason
+                ){
         this.uid = uid;
         this.cid = cid;
         this.cType = cType;
@@ -30,6 +35,7 @@ public class Car {
         this.rentFee = rentFee;
         this.cStatus = cStatus;
         this.cStrickerUri = cStrickerUri;
+        this.cModel = cModel;
         this.cHideReason = cHideReason;
     }
 
@@ -119,5 +125,21 @@ public class Car {
 
     public void setRentFee(String rentFee) {
         this.rentFee = rentFee;
+    }
+
+    public Uri getImageC() {
+        return imageC;
+    }
+
+    public void setImageC(Uri imageC) {
+        this.imageC = imageC;
+    }
+
+    public String getcModel() {
+        return cModel;
+    }
+
+    public void setcModel(String cModel) {
+        this.cModel = cModel;
     }
 }

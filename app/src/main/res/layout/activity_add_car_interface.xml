@@ -86,7 +86,7 @@
                 android:textSize="20dp" />
 
             <EditText
-                android:id="@+id/stdIC"
+                android:id="@+id/cPax"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -109,7 +109,7 @@
                 android:textSize="20dp" />
 
             <EditText
-                android:id="@+id/stdPhone"
+                android:id="@+id/cFee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -127,9 +127,70 @@
                 android:layout_gravity="left"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="20dp"
+                android:text="@string/des"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="218dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="25dp"
+                android:background="@drawable/input_text"
+                android:hint="Reason"
+                android:minHeight="48dp"
+                android:padding="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:text="@string/type"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <RadioGroup
+                android:id="@+id/type"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="50dp">
+
+                <RadioButton
+                    android:id="@+id/autoC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Automatic"
+                    android:textColor="#000000" />
+
+                <RadioButton
+                    android:id="@+id/manualC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Manual"
+                    android:textColor="#000000" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
                 android:text="@string/sticker"
                 android:textColor="#000000"
                 android:textSize="20dp" />
+
 
             <ImageView
                 android:id="@+id/cSticker"

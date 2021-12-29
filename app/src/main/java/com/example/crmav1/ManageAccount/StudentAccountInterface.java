@@ -119,8 +119,9 @@ public class StudentAccountInterface extends AppCompatActivity {
                 auth.signOut();
                 Intent logout = new Intent(StudentAccountInterface.this, LoginInterface.class);
                 logout.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(logout);
                 finish();
+                startActivity(logout);
+
             }
         });
 

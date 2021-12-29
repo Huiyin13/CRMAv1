@@ -40,8 +40,6 @@ public class CarOwnerIDPhotoInterface extends AppCompatActivity {
     private Button register;
 
     private FirebaseAuth auth;
-    private FirebaseDatabase db;
-    private DatabaseReference dbref;
     private StorageReference storageRef, storageRef1;
 
     private String fullName, emailAddress, phoneNo, coIC, newPassword, confirmPassword, coID, coCampus;
