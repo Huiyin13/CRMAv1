@@ -10,41 +10,36 @@ public class Car {
     private String cPlate;
     private String cPerson;
     private String description;
-    private String cPhotoUri;
     private String rentFee;
     private String cStatus;
     private String cStrickerUri;
     private String cHideReason;
     private String cModel;
-    private Uri imageC;
 
     public Car(){
-        this.imageC = imageC;
+
     }
 
-    public Car(String uid, String cid, String cType, String cModel, String cPlate, String cPerson, String description,
-               String cPhotoUri, String rentFee, String cStatus, String cStrickerUri, String cHideReason
-                ){
+    public Car(String uid, String cid, String cType, String cPlate, String cPerson, String description, String rentFee, String cStatus, String cStrickerUri, String cHideReason, String cModel) {
         this.uid = uid;
         this.cid = cid;
         this.cType = cType;
         this.cPlate = cPlate;
         this.cPerson = cPerson;
         this.description = description;
-        this.cPhotoUri = cPhotoUri;
         this.rentFee = rentFee;
         this.cStatus = cStatus;
         this.cStrickerUri = cStrickerUri;
-        this.cModel = cModel;
         this.cHideReason = cHideReason;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
+        this.cModel = cModel;
     }
 
     public String getUid() {
         return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getCid() {
@@ -55,28 +50,12 @@ public class Car {
         this.cid = cid;
     }
 
-    public String getcHideReason() {
-        return cHideReason;
+    public String getcType() {
+        return cType;
     }
 
-    public void setcHideReason(String cHideReason) {
-        this.cHideReason = cHideReason;
-    }
-
-    public String getcPerson() {
-        return cPerson;
-    }
-
-    public void setcPerson(String cPerson) {
-        this.cPerson = cPerson;
-    }
-
-    public String getcPhotoUri() {
-        return cPhotoUri;
-    }
-
-    public void setcPhotoUri(String cPhotoUri) {
-        this.cPhotoUri = cPhotoUri;
+    public void setcType(String cType) {
+        this.cType = cType;
     }
 
     public String getcPlate() {
@@ -87,28 +66,12 @@ public class Car {
         this.cPlate = cPlate;
     }
 
-    public String getcStatus() {
-        return cStatus;
+    public String getcPerson() {
+        return cPerson;
     }
 
-    public void setcStatus(String cStatus) {
-        this.cStatus = cStatus;
-    }
-
-    public String getcStrickerUri() {
-        return cStrickerUri;
-    }
-
-    public void setcStrickerUri(String cStrickerUri) {
-        this.cStrickerUri = cStrickerUri;
-    }
-
-    public void setcType(String cType) {
-        this.cType = cType;
-    }
-
-    public String getcType() {
-        return cType;
+    public void setcPerson(String cPerson) {
+        this.cPerson = cPerson;
     }
 
     public String getDescription() {
@@ -127,12 +90,28 @@ public class Car {
         this.rentFee = rentFee;
     }
 
-    public Uri getImageC() {
-        return imageC;
+    public String getcStatus() {
+        return cStatus;
     }
 
-    public void setImageC(Uri imageC) {
-        this.imageC = imageC;
+    public void setcStatus(String cStatus) {
+        this.cStatus = cStatus;
+    }
+
+    public String getcStrickerUri() {
+        return cStrickerUri;
+    }
+
+    public void setcStrickerUri(String cStrickerUri) {
+        this.cStrickerUri = cStrickerUri;
+    }
+
+    public String getcHideReason() {
+        return cHideReason;
+    }
+
+    public void setcHideReason(String cHideReason) {
+        this.cHideReason = cHideReason;
     }
 
     public String getcModel() {
