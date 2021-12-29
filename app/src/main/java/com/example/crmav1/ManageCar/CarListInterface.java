@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.crmav1.Adapter.CarListAdapter;
@@ -45,6 +46,7 @@ public class CarListInterface extends AppCompatActivity implements CarListAdapte
     private ArrayList<Car> carList;
     private CarListAdapter adapter;
     private FirebaseUser auth;
+    private Button add;
 
 
     @Override
@@ -90,9 +92,19 @@ public class CarListInterface extends AppCompatActivity implements CarListAdapte
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        add = findViewById(R.id.addCar);
+
         auth = FirebaseAuth.getInstance().getCurrentUser();
         carRef = FirebaseDatabase.getInstance().getReference("Car").child(auth.getUid());
         //Query query1 = carRef.child("Car").orderByChild(auth.getUid());
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2add = new Intent(CarListInterface.this, AddCarInterface.class);
+                startActivity(intent2add);
+            }
+        });
 
 
         //bottom nav
