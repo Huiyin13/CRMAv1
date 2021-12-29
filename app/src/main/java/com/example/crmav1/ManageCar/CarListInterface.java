@@ -17,6 +17,7 @@ import com.example.crmav1.Adapter.CarListAdapter;
 import com.example.crmav1.Adapter.Holder;
 import com.example.crmav1.Adapter.RegistrationListAdapter;
 import com.example.crmav1.ManageAccount.CarOwnerAccountInterface;
+import com.example.crmav1.ManageAccount.CarOwnerViewInterface;
 import com.example.crmav1.ManageBooking.CBookingListInterface;
 import com.example.crmav1.ManageLoginandRegistration.AdminMainInterface;
 import com.example.crmav1.ManageLoginandRegistration.CarOwnerMainInterface;
@@ -49,12 +50,23 @@ public class CarListInterface extends AppCompatActivity implements CarListAdapte
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseRecyclerOptions<Car> carOption = new FirebaseRecyclerOptions.Builder<Car>().setQuery(carRef, Car.class).build();
+        FirebaseRecyclerOptions<Car> carOption =
+                new FirebaseRecyclerOptions.Builder<Car>()
+                        .setQuery(carRef, Car.class)
+                        .build();
         FirebaseRecyclerAdapter<Car, Holder> carAdapter = new FirebaseRecyclerAdapter<Car, Holder>(carOption) {
             @Override
             protected void onBindViewHolder(@NonNull Holder holder, int position, @NonNull Car model) {
                 holder.cModel.setText(model.getcModel());
                 holder.cPlate.setText(model.getcPlate());
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent2view = new Intent(CarListInterface.this, CarDetailsInterface.class);
+                        intent2view.putExtra("cid", model.getCid());
+                        startActivity(intent2view);
+                    }
+                });
             }
 
             @NonNull
@@ -80,7 +92,6 @@ public class CarListInterface extends AppCompatActivity implements CarListAdapte
 
         auth = FirebaseAuth.getInstance().getCurrentUser();
         carRef = FirebaseDatabase.getInstance().getReference("Car").child(auth.getUid());
-        System.out.println(carRef + " CARREF");
         //Query query1 = carRef.child("Car").orderByChild(auth.getUid());
 
 

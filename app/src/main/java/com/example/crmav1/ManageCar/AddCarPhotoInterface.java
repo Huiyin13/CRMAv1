@@ -3,25 +3,19 @@ package com.example.crmav1.ManageCar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.OpenableColumns;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.crmav1.Adapter.MultipleImageAdapter;
 import com.example.crmav1.ManageAccount.CarOwnerAccountInterface;
-import com.example.crmav1.ManageAccount.CarOwnerProfileInterface;
 import com.example.crmav1.ManageBooking.CBookingListInterface;
 import com.example.crmav1.ManageLoginandRegistration.CarOwnerMainInterface;
 import com.example.crmav1.Model.Car;
@@ -40,7 +34,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -52,7 +45,6 @@ public class AddCarPhotoInterface extends AppCompatActivity {
     private RecyclerView photoList;
     private ArrayList<Uri> carPhoto;
     private ArrayList<Car> carPhotos;
-    private MultipleImageAdapter adapater;
     private String modelC;
     private String plateC;
     private String feeC;
@@ -250,7 +242,6 @@ public class AddCarPhotoInterface extends AppCompatActivity {
 
     private void SendLink(String url) {
 
-        final String timestamp = "" + System.currentTimeMillis();
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Car").child("carPhotoUri");
         HashMap<String,String> hashMap = new HashMap<>();

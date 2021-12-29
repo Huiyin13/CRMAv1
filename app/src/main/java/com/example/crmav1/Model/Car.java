@@ -12,7 +12,7 @@ public class Car {
     private String description;
     private String rentFee;
     private String cStatus;
-    private String cStrickerUri;
+    private String cSticker;
     private String cHideReason;
     private String cModel;
 
@@ -20,7 +20,7 @@ public class Car {
 
     }
 
-    public Car(String uid, String cid, String cType, String cPlate, String cPerson, String description, String rentFee, String cStatus, String cStrickerUri, String cHideReason, String cModel) {
+    public Car(String uid, String cid, String cType, String cPlate, String cPerson, String description, String rentFee, String cStatus, String cSticker, String cHideReason, String cModel) {
         this.uid = uid;
         this.cid = cid;
         this.cType = cType;
@@ -29,7 +29,7 @@ public class Car {
         this.description = description;
         this.rentFee = rentFee;
         this.cStatus = cStatus;
-        this.cStrickerUri = cStrickerUri;
+        this.cSticker = cSticker;
         this.cHideReason = cHideReason;
         this.cModel = cModel;
     }
@@ -98,12 +98,12 @@ public class Car {
         this.cStatus = cStatus;
     }
 
-    public String getcStrickerUri() {
-        return cStrickerUri;
+    public String getcSticker() {
+        return cSticker;
     }
 
-    public void setcStrickerUri(String cStrickerUri) {
-        this.cStrickerUri = cStrickerUri;
+    public void setcSticker(String cSticker) {
+        this.cSticker = cSticker;
     }
 
     public String getcHideReason() {

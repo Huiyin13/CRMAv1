@@ -57,6 +57,7 @@
     <string name="addP">Add Photo</string>
     <string name="des">Description:</string>
     <string name="type">Type:</string>
+    <string name="details">Car Details</string>
 
 
 </resources>
