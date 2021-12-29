@@ -47,18 +47,18 @@
             android:layout_marginTop="10dp"
             android:fontFamily="serif"
             android:text="jessielim@gmail.com"
-            android:textSize="12dp"
             android:textColor="@color/black"
-            />
+            android:textSize="12dp" />
+
         <TextView
             android:id="@+id/coStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="18dp"
-            android:paddingEnd="20dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="serif"
+            android:paddingEnd="20dp"
             android:textColor="@color/black"
             android:textSize="12dp" />
     </LinearLayout>
