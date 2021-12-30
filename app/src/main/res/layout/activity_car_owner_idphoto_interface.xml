@@ -28,8 +28,8 @@
 
             <ImageView
                 android:id="@+id/ownerIDPhoto"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="280dp"
+                android:layout_height="280dp"
                 android:layout_gravity="center"
                 android:layout_weight="3"
                 android:clickable="true"

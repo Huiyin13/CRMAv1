@@ -122,7 +122,8 @@
                     android:background="@drawable/input_text"
                     android:hint="Rent Fee (RM)"
                     android:minHeight="48dp"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:textSize="18dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -145,7 +146,8 @@
                     android:background="@drawable/input_text"
                     android:hint="Reason"
                     android:minHeight="48dp"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:textSize="18dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -190,7 +192,7 @@
                     android:paddingEnd="20dp"
                     android:text=" "
                     android:textColor="#FF0000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <RadioGroup
                     android:id="@+id/carStatus"
@@ -207,7 +209,7 @@
                         android:layout_weight="1"
                         android:text="Listed"
                         android:textColor="#000000"
-                        android:textSize="20dp"/>
+                        android:textSize="18dp"/>
 
                     <RadioButton
                         android:id="@+id/unlisted"
@@ -216,7 +218,7 @@
                         android:layout_weight="1"
                         android:text="Unlisted"
                         android:textColor="#000000"
-                        android:textSize="20dp"/>
+                        android:textSize="18dp"/>
 
                 </RadioGroup>
 
@@ -228,7 +230,7 @@
                     android:layout_marginTop="15dp"
                     android:text="Reason of Hiding Car from Student:"
                     android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/cHideReason"
@@ -258,8 +260,8 @@
 
                 <ImageView
                     android:id="@+id/cSticker"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="280dp"
+                    android:layout_height="280dp"
                     android:layout_gravity="center"
                     android:layout_weight="3"
                     android:clickable="true"
