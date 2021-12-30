@@ -12,8 +12,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.example.crmav1.ManageAccount.CarOwnerAccountInterface;
 import com.example.crmav1.ManageBooking.CBookingListInterface;
@@ -36,6 +39,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class AddCarPhotoInterface extends AppCompatActivity {
 
@@ -57,6 +61,12 @@ public class AddCarPhotoInterface extends AppCompatActivity {
     private StorageReference storage, storageRef;
     private FirebaseAuth auth;
     private FirebaseDatabase db;
+    private Button next, previous;
+    private ImageSwitcher view;
+    private int PICK_IMAGE_MULTIPLE = 1;
+    private String imageEncoded;
+    private int position = 0;
+    private List<String> imagesEncodedList;
 
     @Override
     protected void onStart() {
@@ -88,6 +98,9 @@ public class AddCarPhotoInterface extends AppCompatActivity {
         //photoList = findViewById(R.id.photos);
         alert = findViewById(R.id.alert);
         alert2 = findViewById(R.id.alert2);
+        view = findViewById(R.id.image);
+        previous = findViewById(R.id.previous);
+        next = findViewById(R.id.next);
 //        photoList.setHasFixedSize(true);
 //        photoList.setLayoutManager(new LinearLayoutManager(this));
 //        photoList.setAdapter(adapater);
@@ -95,6 +108,41 @@ public class AddCarPhotoInterface extends AppCompatActivity {
         storage = FirebaseStorage.getInstance().getReference();
         carPhoto = new ArrayList<Uri>();
         carPhotos = new ArrayList<>();
+
+        // showing all images in imageswitcher
+        view.setFactory(new ViewSwitcher.ViewFactory() {
+            @Override
+            public View makeView() {
+                ImageView imageView1 = new ImageView(getApplicationContext());
+                return imageView1;
+            }
+        });
+
+        // click here to select next image
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (position < carPhoto.size() - 1) {
+                    // increase the position by 1
+                    position++;
+                    view.setImageURI(carPhoto.get(position));
+                } else {
+                    Toast.makeText(AddCarPhotoInterface.this, "Last Image Already Shown", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // click here to view previous image
+        previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (position > 0) {
+                    // decrease the position by 1
+                    position--;
+                    view.setImageURI(carPhoto.get(position));
+                }
+            }
+        });
 
         addP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -266,12 +314,18 @@ public class AddCarPhotoInterface extends AppCompatActivity {
                         carPhoto.add(imageUri);
                         currentImageSelect = currentImageSelect +1;
                     }
-
+                    // setting 1st selected image into image switcher
+                    view.setImageURI(carPhoto.get(0));
+                    position = 0;
                     alert.setVisibility(View.VISIBLE);
                     alert2.setVisibility(View.GONE);
                     alert.setText("You Have Selected "+ carPhoto.size() +" Images");
 
                 }else{
+                    Uri imageurl = data.getData();
+                    carPhoto.add(imageurl);
+                    view.setImageURI(carPhoto.get(0));
+                    position = 0;
                     Toast.makeText(this, "Please Select Multiple File", Toast.LENGTH_SHORT).show();
                 }
             }
