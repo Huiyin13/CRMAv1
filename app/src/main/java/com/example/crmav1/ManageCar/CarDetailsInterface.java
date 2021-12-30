@@ -134,12 +134,15 @@ public class CarDetailsInterface extends AppCompatActivity {
                     Picasso.get().load(car.getcSticker()).into(sticker);
                     if (car.getcStatus().equalsIgnoreCase("Free")) {
                         list.setChecked(true);
+                        reason.setVisibility(View.GONE);
                     }
                     else if (car.getcStatus().equalsIgnoreCase("Unlisted")){
                         unlist.setChecked(true);
+                        reason.setVisibility(View.GONE);
                     }
-                    else if (car.getcStatus().equalsIgnoreCase("Booked") && car.getcStatus().equalsIgnoreCase("Applying")){
+                    else if (car.getcStatus().equalsIgnoreCase("Booked") || car.getcStatus().equalsIgnoreCase("Applying")){
                         status.setVisibility(View.GONE);
+                        reason.setVisibility(View.GONE);
                         notice.setText("This car is in the process of applying or book. Status of car cannot be changed!");
                     }
                     else {

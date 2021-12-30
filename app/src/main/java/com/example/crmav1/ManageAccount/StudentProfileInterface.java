@@ -23,6 +23,7 @@ import com.example.crmav1.ManageLoginandRegistration.LoginInterface;
 import com.example.crmav1.ManageLoginandRegistration.StudentMainInterface;
 import com.example.crmav1.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -207,17 +208,21 @@ public class StudentProfileInterface extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
 
                         FirebaseUser stdID = FirebaseAuth.getInstance().getCurrentUser();
-                        stdID.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        DatabaseReference deleteC = FirebaseDatabase.getInstance().getReference("Users").child(uid);
+
+
+                        stdID.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                /*String userID = auth.getUid();
-                                DatabaseReference ID = FirebaseDatabase.getInstance().getReference("Users");
-                                ID.child(userID).removeValue();*/
+                            public void onSuccess(Void unused) {
+                                        /*String userID = auth.getUid();
+                                                DatabaseReference ID = FirebaseDatabase.getInstance().getReference("Users");
+                                                ID.child(userID).removeValue();*/
                                 Toast.makeText(StudentProfileInterface.this, "Your account is deleted. Please REGISTER again for login!!", Toast.LENGTH_SHORT).show();
                                 Intent intent2delete = new Intent(StudentProfileInterface.this, LoginInterface.class);
                                 startActivity(intent2delete);
                             }
                         });
+
 
                     }
 

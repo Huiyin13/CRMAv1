@@ -1,4 +1,4 @@
-package com.example.crmav1.ManageAccount;
+package com.example.crmav1.ManageCar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,77 +11,61 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.crmav1.ManageCar.ACarListInterface;
+import com.example.crmav1.ManageAccount.CarOwnerListInterface;
+import com.example.crmav1.ManageAccount.CarOwnerRejectInterface;
 import com.example.crmav1.ManageLoginandRegistration.AdminMainInterface;
 import com.example.crmav1.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class CarOwnerRejectInterface extends AppCompatActivity {
-    private Button save,cancel;
+public class ACarHideReasonInterface extends AppCompatActivity {
+
+    private Button hide, cancel;
     private EditText reason;
-    private String uid,rejectReason;
+    private String cid, uid, rejectReason;
 
     private FirebaseDatabase db;
-    private DatabaseReference coDBRef;
+    private DatabaseReference carRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_car_owner_reject_interface);
+        setContentView(R.layout.activity_acar_hide_reason_interface);
 
-        this.setTitle("Registration");
-
-        save = findViewById(R.id.aSave);
+        hide = findViewById(R.id.aSave);
         cancel = findViewById(R.id.aCancel);
-        reason = findViewById(R.id.coReason);
+        reason = findViewById(R.id.hReason);
 
+        cid = getIntent().getStringExtra("cid");
         uid = getIntent().getStringExtra("uid");
-
+        carRef = FirebaseDatabase.getInstance().getReference("Car").child(uid).child(cid);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2cancel = new Intent(CarOwnerRejectInterface.this, CarOwnerViewInterface.class);
-                intent2cancel.putExtra("uid",uid);
+                Intent intent2cancel = new Intent(ACarHideReasonInterface.this, ACarDetailsInterface.class);
+                intent2cancel.putExtra("uid", uid);
+                intent2cancel.putExtra("cid", cid);
                 startActivity(intent2cancel);
+
             }
         });
 
-        save.setOnClickListener(new View.OnClickListener() {
+        hide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                db = FirebaseDatabase.getInstance();
-                coDBRef = db.getReference("Users");
-                Query query = coDBRef.child("Users").orderByChild("uid").equalTo(uid);
-
-                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                        if (reason.getText().length()!=0){
-                            rejectReason = reason.getText().toString();
-
-                            coDBRef.child(uid).child("coStatus").setValue("Rejected");
-                            coDBRef.child(uid).child("reason").setValue(rejectReason);
-                            Toast.makeText(CarOwnerRejectInterface.this, "You have unlist the car.", Toast.LENGTH_SHORT).show() ;
-                            Intent intent2reject = new Intent(CarOwnerRejectInterface.this, CarOwnerListInterface.class);
-                            startActivity(intent2reject);
-                        }else {
-                            Toast.makeText(CarOwnerRejectInterface.this, "All field must be filled!", Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                if (reason.length() == 0)
+                {
+                    Toast.makeText(ACarHideReasonInterface.this, "Reason Is Needed", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    hideCar();
+                }
             }
         });
 
@@ -106,6 +90,23 @@ public class CarOwnerRejectInterface extends AppCompatActivity {
                         return true;
                 }
                 return false;
+            }
+        });
+
+    }
+
+    private void hideCar() {
+        rejectReason = reason.getText().toString();
+        carRef.child("cHideReason").setValue(rejectReason)
+        .addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                carRef.child("cStatus").setValue("Hide");
+                Toast.makeText(ACarHideReasonInterface.this, "Updated REason and HIdden", Toast.LENGTH_SHORT).show();
+                Intent intent2cancel = new Intent(ACarHideReasonInterface.this, ACarDetailsInterface.class);
+                intent2cancel.putExtra("uid", uid);
+                intent2cancel.putExtra("cid", cid);
+                startActivity(intent2cancel);
             }
         });
     }

@@ -1,6 +1,7 @@
 package com.example.crmav1.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.crmav1.ManageCar.ACarDetailsInterface;
 import com.example.crmav1.Model.Car;
 import com.example.crmav1.R;
 
@@ -46,6 +48,10 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.Holder> 
             @Override
             public void onClick(View view) {
                 carListener.onItemClick(position);
+                Intent intent2view = new Intent(context, ACarDetailsInterface.class);
+                intent2view.putExtra("cid", cID.getCid());
+                intent2view.putExtra("uid", cID.getUid());
+                context.startActivity(intent2view);
             }
         });
     }
