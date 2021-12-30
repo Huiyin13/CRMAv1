@@ -140,6 +140,8 @@ public class AddCarPhotoInterface extends AppCompatActivity {
                     // decrease the position by 1
                     position--;
                     view.setImageURI(carPhoto.get(position));
+                }else {
+                    Toast.makeText(AddCarPhotoInterface.this, "First Image Already Shown", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -221,7 +223,7 @@ public class AddCarPhotoInterface extends AppCompatActivity {
 
 
                 HashMap<String,Object> hashMap = new HashMap<>();
-                hashMap.put("uid", "" + auth.getUid());
+                hashMap.put("coId", "" + auth.getUid());
                 hashMap.put("cid", "" + cid);
                 hashMap.put("cType", "" + typeC);
                 hashMap.put("cModel", "" + modelC);

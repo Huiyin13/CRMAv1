@@ -123,7 +123,7 @@ public class CarOwnerListInterface extends AppCompatActivity implements Registra
         intent2view.putExtra("phoneCo", registerList.get(position).getCoPhone());
         intent2view.putExtra("reasonCo", registerList.get(position).getReason());
         intent2view.putExtra("statusCo", registerList.get(position).getCoStatus());
-        intent2view.putExtra("uid", registerList.get(position).getUid());
+        intent2view.putExtra("uid", registerList.get(position).getCoId());
         startActivity(intent2view);
     }
 }

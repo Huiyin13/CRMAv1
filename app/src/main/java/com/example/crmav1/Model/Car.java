@@ -4,7 +4,7 @@ import android.net.Uri;
 
 public class Car {
 
-    private String uid;
+    private String coId;
     private String cid;
     private String cType;
     private String cPlate;
@@ -20,8 +20,8 @@ public class Car {
 
     }
 
-    public Car(String uid, String cid, String cType, String cPlate, String cPerson, String description, String rentFee, String cStatus, String cSticker, String cHideReason, String cModel) {
-        this.uid = uid;
+    public Car(String coId, String cid, String cType, String cPlate, String cPerson, String description, String rentFee, String cStatus, String cSticker, String cHideReason, String cModel) {
+        this.coId = coId;
         this.cid = cid;
         this.cType = cType;
         this.cPlate = cPlate;
@@ -34,12 +34,12 @@ public class Car {
         this.cModel = cModel;
     }
 
-    public String getUid() {
-        return uid;
+    public String getCoId() {
+        return coId;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setCoId(String coId) {
+        this.coId = coId;
     }
 
     public String getCid() {

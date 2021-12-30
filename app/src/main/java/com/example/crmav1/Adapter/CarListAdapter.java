@@ -50,7 +50,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.Holder> 
                 carListener.onItemClick(position);
                 Intent intent2view = new Intent(context, ACarDetailsInterface.class);
                 intent2view.putExtra("cid", cID.getCid());
-                intent2view.putExtra("uid", cID.getUid());
+                intent2view.putExtra("uid", cID.getCoId());
                 context.startActivity(intent2view);
             }
         });

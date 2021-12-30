@@ -148,7 +148,7 @@ public class CarOwnerIDPhotoInterface extends AppCompatActivity {
                         if (uriTask.isSuccessful()){
                             //set data to save
                             HashMap<String, Object> hashMap = new HashMap<>();
-                            hashMap.put("uid", "" + auth.getUid());
+                            hashMap.put("coId", "" + auth.getUid());
                             hashMap.put("userType", "Car Owner");
                             hashMap.put("coName", "" + fullName);
                             hashMap.put("coEmail", "" + emailAddress);
@@ -174,6 +174,7 @@ public class CarOwnerIDPhotoInterface extends AppCompatActivity {
                                         finish();
                                     } else {
                                         startActivity(new Intent(getApplicationContext(), EmailVerificationInterface.class));
+                                        finish();
                                     }
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
