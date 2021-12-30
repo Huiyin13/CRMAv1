@@ -60,7 +60,7 @@ public class CarOwnerViewInterface extends AppCompatActivity {
         nameCO = getIntent().getStringExtra("coName");
         emailCO = getIntent().getStringExtra("emailCo");
         icCO = getIntent().getStringExtra("icCo");
-        uid = getIntent().getStringExtra("uid");
+        uid = getIntent().getStringExtra("coId");
         phoneCO = getIntent().getStringExtra("phoneCo");
         matricCO = getIntent().getStringExtra("matricIDCo");
 
@@ -100,7 +100,7 @@ public class CarOwnerViewInterface extends AppCompatActivity {
             public void onClick(View view) {
                 db = FirebaseDatabase.getInstance();
                 coDBRef = db.getReference("Users");
-                Query query = coDBRef.child("Users").orderByChild("uid").equalTo(uid);
+                Query query = coDBRef.child("Users").orderByChild("coId").equalTo(uid);
 
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

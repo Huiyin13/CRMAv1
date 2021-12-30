@@ -160,7 +160,7 @@ public class StudentLicencePhotoInterface extends AppCompatActivity {
                                 if (uriTask.isSuccessful()){
                                     //set data to save
                                     HashMap<String, Object> hashMap = new HashMap<>();
-                                    hashMap.put("uid", "" + auth.getUid());
+                                    hashMap.put("sId", "" + auth.getUid());
                                     hashMap.put("userType", "Student");
                                     hashMap.put("sName", "" + fullName);
                                     hashMap.put("sEmail", "" + emailAddress);
@@ -185,6 +185,7 @@ public class StudentLicencePhotoInterface extends AppCompatActivity {
                                                 finish();
                                             } else {
                                                 startActivity(new Intent(getApplicationContext(), EmailVerificationInterface.class));
+                                                finish();
                                             }
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {

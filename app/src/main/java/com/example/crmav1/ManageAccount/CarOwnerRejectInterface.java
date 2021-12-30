@@ -57,7 +57,7 @@ public class CarOwnerRejectInterface extends AppCompatActivity {
             public void onClick(View view) {
                 db = FirebaseDatabase.getInstance();
                 coDBRef = db.getReference("Users");
-                Query query = coDBRef.child("Users").orderByChild("uid").equalTo(uid);
+                Query query = coDBRef.child("Users").orderByChild("coId").equalTo(uid);
 
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

@@ -7,7 +7,7 @@ public class CarOwner {
     private String coName;
     private String coPassword;
     private String userType;
-    private String uid;
+    private String coId;
     private String coCampus;
     private String coMatricID;
     private String coIDUri;
@@ -19,37 +19,19 @@ public class CarOwner {
 
     }
 
-    public CarOwner(String coPhone, String coEmail, String coIC, String coName,
-                    String coPassword, String userType, String uid, String coCampus, String coMatricID,
-                    String coIDUri, String coICUri, String reason, String coStatus){
-        this.coCampus = coCampus;
+    public CarOwner(String coPhone, String coEmail, String coIC, String coName, String coPassword, String userType, String coId, String coCampus, String coMatricID, String coIDUri, String coICUri, String reason, String coStatus) {
+        this.coPhone = coPhone;
         this.coEmail = coEmail;
-        this.coICUri = coICUri;
-        this.coIDUri = coIDUri;
-        this.coMatricID = coMatricID;
         this.coIC = coIC;
         this.coName = coName;
         this.coPassword = coPassword;
-        this.coStatus = coStatus;
-        this.reason = reason;
-        this.coPhone = coPhone;
-        this.uid = uid;
         this.userType = userType;
-    }
-
-    public void setReason(String reason) {
+        this.coId = coId;
+        this.coCampus = coCampus;
+        this.coMatricID = coMatricID;
+        this.coIDUri = coIDUri;
+        this.coICUri = coICUri;
         this.reason = reason;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public String getCoStatus() {
-        return coStatus;
-    }
-
-    public void setCoStatus(String coStatus) {
         this.coStatus = coStatus;
     }
 
@@ -61,28 +43,12 @@ public class CarOwner {
         this.coPhone = coPhone;
     }
 
-    public String getCoPassword() {
-        return coPassword;
+    public String getCoEmail() {
+        return coEmail;
     }
 
-    public void setCoPassword(String coPassword) {
-        this.coPassword = coPassword;
-    }
-
-    public String getCoName() {
-        return coName;
-    }
-
-    public void setCoName(String coName) {
-        this.coName = coName;
-    }
-
-    public String getCoMatricID() {
-        return coMatricID;
-    }
-
-    public void setCoMatricID(String coMatricID) {
-        this.coMatricID = coMatricID;
+    public void setCoEmail(String coEmail) {
+        this.coEmail = coEmail;
     }
 
     public String getCoIC() {
@@ -93,28 +59,20 @@ public class CarOwner {
         this.coIC = coIC;
     }
 
-    public String getCoEmail() {
-        return coEmail;
+    public String getCoName() {
+        return coName;
     }
 
-    public void setCoEmail(String coEmail) {
-        this.coEmail = coEmail;
+    public void setCoName(String coName) {
+        this.coName = coName;
     }
 
-    public String getCoCampus() {
-        return coCampus;
+    public String getCoPassword() {
+        return coPassword;
     }
 
-    public void setCoCampus(String coCampus) {
-        this.coCampus = coCampus;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setCoPassword(String coPassword) {
+        this.coPassword = coPassword;
     }
 
     public String getUserType() {
@@ -125,12 +83,28 @@ public class CarOwner {
         this.userType = userType;
     }
 
-    public String getCoICUri() {
-        return coICUri;
+    public String getCoId() {
+        return coId;
     }
 
-    public void setCoICUri(String coICUri) {
-        this.coICUri = coICUri;
+    public void setCoId(String coId) {
+        this.coId = coId;
+    }
+
+    public String getCoCampus() {
+        return coCampus;
+    }
+
+    public void setCoCampus(String coCampus) {
+        this.coCampus = coCampus;
+    }
+
+    public String getCoMatricID() {
+        return coMatricID;
+    }
+
+    public void setCoMatricID(String coMatricID) {
+        this.coMatricID = coMatricID;
     }
 
     public String getCoIDUri() {
@@ -139,5 +113,29 @@ public class CarOwner {
 
     public void setCoIDUri(String coIDUri) {
         this.coIDUri = coIDUri;
+    }
+
+    public String getCoICUri() {
+        return coICUri;
+    }
+
+    public void setCoICUri(String coICUri) {
+        this.coICUri = coICUri;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public String getCoStatus() {
+        return coStatus;
+    }
+
+    public void setCoStatus(String coStatus) {
+        this.coStatus = coStatus;
     }
 }
