@@ -122,7 +122,8 @@
                     android:background="@drawable/input_text"
                     android:hint="Rent Fee (RM)"
                     android:minHeight="48dp"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:textSize="18dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -145,7 +146,8 @@
                     android:background="@drawable/input_text"
                     android:hint="Reason"
                     android:minHeight="48dp"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:textSize="18dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -217,7 +219,8 @@
                     android:background="@drawable/input_text"
                     android:hint="Reason"
                     android:minHeight="48dp"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:textSize="18dp" />
 
 
                 <TextView
@@ -233,8 +236,8 @@
 
                 <ImageView
                     android:id="@+id/cSticker"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="280dp"
+                    android:layout_height="280dp"
                     android:layout_gravity="center"
                     android:layout_weight="3"
                     android:clickable="true"
@@ -250,7 +253,7 @@
                     android:textColor="#000000"
                     android:textSize="20dp" />
 
-                <ScrollView
+                <HorizontalScrollView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <androidx.recyclerview.widget.RecyclerView
@@ -262,7 +265,7 @@
                         android:layout_marginRight="10dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/photo_adapter" />
-                </ScrollView>
+                </HorizontalScrollView>
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -45,7 +45,8 @@
                     android:background="@drawable/input_text"
                     android:hint="Reason"
                     android:minHeight="48dp"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:textSize="18dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

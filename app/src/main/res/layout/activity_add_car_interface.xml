@@ -50,7 +50,8 @@
                 android:background="@drawable/input_text"
                 android:hint="Car Model"
                 android:minHeight="48dp"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textSize="18dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -73,7 +74,8 @@
                 android:background="@drawable/input_text"
                 android:hint="Plate number"
                 android:minHeight="48dp"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textSize="18dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -96,7 +98,8 @@
                 android:background="@drawable/input_text"
                 android:hint="Person in Car"
                 android:minHeight="48dp"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textSize="18dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -119,7 +122,8 @@
                 android:background="@drawable/input_text"
                 android:hint="Rent Fee (RM)"
                 android:minHeight="48dp"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textSize="18dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -142,7 +146,8 @@
                 android:background="@drawable/input_text"
                 android:hint="Reason"
                 android:minHeight="48dp"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textSize="18dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -169,7 +174,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Automatic"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:textSize="18dp" />
 
                 <RadioButton
                     android:id="@+id/manualC"
@@ -177,7 +183,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Manual"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:textSize="18dp" />
 
             </RadioGroup>
 
@@ -194,8 +201,8 @@
 
             <ImageView
                 android:id="@+id/cSticker"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="280dp"
+                android:layout_height="280dp"
                 android:layout_gravity="center"
                 android:layout_weight="3"
                 android:clickable="true"

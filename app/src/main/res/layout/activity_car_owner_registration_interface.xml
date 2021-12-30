@@ -47,7 +47,8 @@
                 android:background="@drawable/input_text"
                 android:hint="Your Name"
                 android:minHeight="48dp"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textSize="18dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -70,7 +71,8 @@
                 android:background="@drawable/input_text"
                 android:hint="Your Matric ID"
                 android:minHeight="48dp"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textSize="18dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -93,7 +95,8 @@
                 android:background="@drawable/input_text"
                 android:hint="Your IC No."
                 android:minHeight="48dp"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textSize="18dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -116,7 +119,8 @@
                 android:background="@drawable/input_text"
                 android:hint="Your Phone No."
                 android:minHeight="48dp"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textSize="18dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -138,7 +142,8 @@
                 android:background="@drawable/input_text"
                 android:hint="Your Email"
                 android:minHeight="48dp"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textSize="18dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -161,7 +166,8 @@
                 android:hint="Your Password"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textSize="18dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -185,7 +191,8 @@
                 android:hint="Enter Password Again"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textSize="18dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -212,7 +219,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Gambang"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:textSize="18dp" />
 
                 <RadioButton
                     android:id="@+id/rbPekan"
@@ -220,7 +228,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Pekan"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:textSize="18dp" />
 
             </RadioGroup>
 
@@ -236,8 +245,8 @@
                 android:textSize="20dp" />
             <ImageView
                 android:id="@+id/ownerICPhoto"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="280dp"
+                android:layout_height="280dp"
                 android:layout_gravity="center"
                 android:src="@drawable/add_image"
                 android:clickable="true"
