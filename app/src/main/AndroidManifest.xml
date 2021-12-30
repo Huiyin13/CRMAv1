@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CRMAv1">
         <activity
+            android:name=".ManageCar.ACarHideReasonInterface"
+            android:exported="false" />
+        <activity
             android:name=".ManageCar.CarDetailsInterface"
             android:exported="false" />
         <activity
