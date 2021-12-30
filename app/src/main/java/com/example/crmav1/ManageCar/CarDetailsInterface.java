@@ -50,7 +50,7 @@ import com.squareup.picasso.Picasso;
 
 public class CarDetailsInterface extends AppCompatActivity {
 
-    private TextView model, plate, person, type, reason, notice;
+    private TextView model, plate, person, type, reason, notice,tvReason;
     private EditText description, fee;
     private ImageView sticker;
     private RecyclerView photo;
@@ -85,6 +85,7 @@ public class CarDetailsInterface extends AppCompatActivity {
         unlist = findViewById(R.id.unlisted);
         status = findViewById(R.id.carStatus);
         notice = findViewById(R.id.notice);
+        tvReason = findViewById(R.id.tReason);
 
         photo = findViewById(R.id.photoListView);
         photo.setHasFixedSize(true);
@@ -134,14 +135,17 @@ public class CarDetailsInterface extends AppCompatActivity {
                     Picasso.get().load(car.getcSticker()).into(sticker);
                     if (car.getcStatus().equalsIgnoreCase("Free")) {
                         list.setChecked(true);
+                        tvReason.setVisibility(View.GONE);
                         reason.setVisibility(View.GONE);
                     }
                     else if (car.getcStatus().equalsIgnoreCase("Unlisted")){
                         unlist.setChecked(true);
+                        tvReason.setVisibility(View.GONE);
                         reason.setVisibility(View.GONE);
                     }
                     else if (car.getcStatus().equalsIgnoreCase("Booked") || car.getcStatus().equalsIgnoreCase("Applying")){
                         status.setVisibility(View.GONE);
+                        tvReason.setVisibility(View.GONE);
                         reason.setVisibility(View.GONE);
                         notice.setText("This car is in the process of applying or book. Status of car cannot be changed!");
                     }
