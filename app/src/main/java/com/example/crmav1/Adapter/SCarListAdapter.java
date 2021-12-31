@@ -32,7 +32,9 @@ public class SCarListAdapter extends RecyclerView.Adapter<SCarListAdapter.Holder
     @NonNull
     @Override
     public SCarListAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        //inflate layout
+        View v = LayoutInflater.from(context).inflate(R.layout.car_list_adapter, parent,false);
+        return new Holder(v);
     }
 
     @Override

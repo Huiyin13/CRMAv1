@@ -115,7 +115,6 @@ public class StudentMainInterface extends AppCompatActivity implements Registrat
                                 {
                                     CarOwner carOwner = dataSnapshot.getValue(CarOwner.class);
                                     coId = carOwner.getCoId();
-
                                     coName = carOwner.getCoName();
                                     if (carOwner.getCoStatus().equalsIgnoreCase("Approved")){
                                         coList.add(carOwner);
@@ -150,6 +149,7 @@ public class StudentMainInterface extends AppCompatActivity implements Registrat
                                 {
                                     CarOwner carOwner = dataSnapshot.getValue(CarOwner.class);
                                     coId = carOwner.getCoId();
+                                    coName = carOwner.getCoName();
                                     if (carOwner.getCoStatus().equalsIgnoreCase("Approved")){
                                         coList.add(carOwner);
                                     }
@@ -200,6 +200,7 @@ public class StudentMainInterface extends AppCompatActivity implements Registrat
     public void onItemClick(int position) {
         Intent intent2view = new Intent(this, SCarListInterface.class);
         intent2view.putExtra("coId", coId);
+        intent2view.putExtra("coName", coName);
         startActivity(intent2view);
 
     }

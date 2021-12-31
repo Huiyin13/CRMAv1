@@ -50,7 +50,7 @@
     <string name="fee">Rent Fee (Per Hour):</string>
     <string name="status">Car Status:</string>
     <string name="free">Free</string>
-    <string name="book">Booked</string>
+    <string name="book">Book</string>
     <string name="sticker">Car Sticker:</string>
     <string name="cPhoto">Car Photo:</string>
     <string name="add">Add Car</string>
