@@ -42,7 +42,7 @@ import java.util.ArrayList;
 public class CarListInterface extends AppCompatActivity implements CarListAdapter.ItemClickListener {
 
     private RecyclerView recyclerView;
-    private DatabaseReference carRef;
+    private DatabaseReference carRef, frompath;
     private ArrayList<Car> carList;
     private CarListAdapter adapter;
     private FirebaseUser auth;
@@ -52,6 +52,21 @@ public class CarListInterface extends AppCompatActivity implements CarListAdapte
     @Override
     protected void onStart() {
         super.onStart();
+        DatabaseReference delref = FirebaseDatabase.getInstance().getReference("Car").child("carPhotoUri");
+        delref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists())
+                {
+                    delref.removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         FirebaseRecyclerOptions<Car> carOption =
                 new FirebaseRecyclerOptions.Builder<Car>()
                         .setQuery(carRef, Car.class)

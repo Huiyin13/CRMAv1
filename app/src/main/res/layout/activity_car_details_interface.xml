@@ -278,21 +278,16 @@
                     android:textColor="#000000"
                     android:textSize="20dp" />
 
-                <HorizontalScrollView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/photoListView"
                         android:layout_width="match_parent"
-                        android:layout_height="548dp"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/photo_adapter" />
-                </HorizontalScrollView>
-
-
 
                 <LinearLayout
                     android:layout_width="match_parent"

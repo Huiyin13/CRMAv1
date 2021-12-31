@@ -102,7 +102,7 @@ public class ACarHideReasonInterface extends AppCompatActivity {
             @Override
             public void onSuccess(Void unused) {
                 carRef.child("cStatus").setValue("Hide");
-                Toast.makeText(ACarHideReasonInterface.this, "Updated REason and HIdden", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ACarHideReasonInterface.this, "Updated Reason and Hidden", Toast.LENGTH_SHORT).show();
                 Intent intent2cancel = new Intent(ACarHideReasonInterface.this, ACarDetailsInterface.class);
                 intent2cancel.putExtra("uid", uid);
                 intent2cancel.putExtra("cid", cid);

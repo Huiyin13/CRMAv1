@@ -16,6 +16,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CRMAv1">
         <activity
+            android:name=".ManageBooking.SCarListInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageBooking.CBookingRejectInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageBooking.CStudentProfileInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageBooking.CBookingDetailsInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageBooking.SBookingDetailsInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageBooking.BookingFormInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageBooking.SCarDetailsInterface"
+            android:exported="false" />
+        <activity
             android:name=".ManageCar.ACarHideReasonInterface"
             android:exported="false" />
         <activity

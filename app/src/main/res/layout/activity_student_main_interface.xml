@@ -14,6 +14,48 @@
         android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
         android:gravity="bottom">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="80dp"
+            android:text="@string/coAdd"
+            android:textColor="#000000"
+            android:textSize="25dp" />
+
+            <ToggleButton
+                android:id="@+id/switchCampus1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="right"
+                android:textOn="Gambang"
+                android:textOff="Pekan" />
+
+            <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/coListView"
+            android:layout_width="match_parent"
+            android:layout_height="548dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/car_owner_list_adapter" />
+
+        </LinearLayout>
+
+        </ScrollView>
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
             android:layout_width="match_parent"

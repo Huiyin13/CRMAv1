@@ -57,7 +57,7 @@ public class AddCarPhotoInterface extends AppCompatActivity {
     private String descriptionC;
     private Uri uriSticker;
     private int uploadCount = 0;
-    DatabaseReference topath, frompath;
+    private DatabaseReference topath, frompath;
     private StorageReference storage, storageRef;
     private FirebaseAuth auth;
     private FirebaseDatabase db;
@@ -275,6 +275,7 @@ public class AddCarPhotoInterface extends AppCompatActivity {
                         Toast.makeText(AddCarPhotoInterface.this,"Car Added", Toast.LENGTH_SHORT).show();
                         Intent intent2add = new Intent(AddCarPhotoInterface.this, CarListInterface.class);
                         startActivity(intent2add);
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

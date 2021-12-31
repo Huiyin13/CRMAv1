@@ -5,55 +5,55 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.crmav1.ManageCar.ACarDetailsInterface;
+import com.example.crmav1.ManageBooking.SCarDetailsInterface;
 import com.example.crmav1.Model.Car;
 import com.example.crmav1.R;
 
 import java.util.ArrayList;
 
-public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.Holder> {
+public class StdCarPhotoHolder extends RecyclerView.Adapter<StdCarPhotoHolder.Holder> {
 
     private Context context;
     public ArrayList<Car> carList;
-    private CarListAdapter.ItemClickListener carListener;
+    private StdCarPhotoHolder.ItemClickListener carListener;
 
-    public CarListAdapter(Context context, ArrayList<Car> carList, CarListAdapter.ItemClickListener carListener){
+    public StdCarPhotoHolder(Context context, ArrayList<Car> carList, ItemClickListener carListener) {
         this.context = context;
         this.carList = carList;
         this.carListener = carListener;
     }
 
-
     @NonNull
     @Override
-    public CarListAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //inflate layout
-        View v = LayoutInflater.from(context).inflate(R.layout.car_list_adapter, parent,false);
+    public StdCarPhotoHolder.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(context).inflate(R.layout.photo_adapter_std, parent,false);
         return new Holder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CarListAdapter.Holder holder, int position) {
-        Car cID = carList.get(position);
+    public void onBindViewHolder(@NonNull StdCarPhotoHolder.Holder holder, int position) {
+        Car car = carList.get(position);
 
-        holder.carPlate.setText(cID.getcPlate());
-        holder.carModel.setText(cID.getcModel());
+        holder.model.setText(car.getcModel());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 carListener.onItemClick(position);
-                Intent intent2view = new Intent(context, ACarDetailsInterface.class);
-                intent2view.putExtra("cid", cID.getCid());
-                intent2view.putExtra("coId", cID.getCoId());
+                Intent intent2view = new Intent(context, SCarDetailsInterface.class);
+                intent2view.putExtra("cid", car.getCid());
+                intent2view.putExtra("coID", car.getCoId());
                 context.startActivity(intent2view);
             }
         });
+
+
     }
 
     @Override
@@ -66,12 +66,13 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.Holder> 
     }
 
     public class Holder extends RecyclerView.ViewHolder {
-        TextView carPlate, carModel;
+
+        TextView model;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
-            carPlate = itemView.findViewById(R.id.carPlate);
-            carModel = itemView.findViewById(R.id.carModel);
+            model = itemView.findViewById(R.id.carModel);
         }
+
     }
 }
