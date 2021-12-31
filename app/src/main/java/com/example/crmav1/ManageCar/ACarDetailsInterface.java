@@ -69,7 +69,8 @@ public class ACarDetailsInterface extends AppCompatActivity {
 
         photo = findViewById(R.id.photoListView);
         photo.setHasFixedSize(true);
-        photo.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        photo.setLayoutManager(layoutManager);
 
 
         //bottom nav
@@ -97,7 +98,7 @@ public class ACarDetailsInterface extends AppCompatActivity {
         });
 
         cid = getIntent().getStringExtra("cid");
-        uid = getIntent().getStringExtra("uid");
+        uid = getIntent().getStringExtra("coId");
         carDBRef = FirebaseDatabase.getInstance().getReference("Car").child(uid).child(cid);
         list.setOnClickListener(new View.OnClickListener() {
             @Override

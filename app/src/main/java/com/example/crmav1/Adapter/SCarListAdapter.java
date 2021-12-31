@@ -10,35 +10,33 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.crmav1.ManageBooking.SCarDetailsInterface;
 import com.example.crmav1.ManageCar.ACarDetailsInterface;
 import com.example.crmav1.Model.Car;
 import com.example.crmav1.R;
 
 import java.util.ArrayList;
 
-public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.Holder> {
+public class SCarListAdapter extends RecyclerView.Adapter<SCarListAdapter.Holder> {
 
     private Context context;
     public ArrayList<Car> carList;
-    private CarListAdapter.ItemClickListener carListener;
+    private SCarListAdapter.ItemClickListener carListener;
 
-    public CarListAdapter(Context context, ArrayList<Car> carList, CarListAdapter.ItemClickListener carListener){
+    public SCarListAdapter(Context context, ArrayList<Car> carList, ItemClickListener carListener) {
         this.context = context;
         this.carList = carList;
         this.carListener = carListener;
     }
 
-
     @NonNull
     @Override
-    public CarListAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //inflate layout
-        View v = LayoutInflater.from(context).inflate(R.layout.car_list_adapter, parent,false);
-        return new Holder(v);
+    public SCarListAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return null;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CarListAdapter.Holder holder, int position) {
+    public void onBindViewHolder(@NonNull SCarListAdapter.Holder holder, int position) {
         Car cID = carList.get(position);
 
         holder.carPlate.setText(cID.getcPlate());
@@ -48,7 +46,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.Holder> 
             @Override
             public void onClick(View view) {
                 carListener.onItemClick(position);
-                Intent intent2view = new Intent(context, ACarDetailsInterface.class);
+                Intent intent2view = new Intent(context, SCarDetailsInterface.class);
                 intent2view.putExtra("cid", cID.getCid());
                 intent2view.putExtra("coId", cID.getCoId());
                 context.startActivity(intent2view);
@@ -61,13 +59,13 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.Holder> 
         return carList.size();
     }
 
+
     public interface ItemClickListener {
         void onItemClick(int position);
     }
 
     public class Holder extends RecyclerView.ViewHolder {
         TextView carPlate, carModel;
-
         public Holder(@NonNull View itemView) {
             super(itemView);
             carPlate = itemView.findViewById(R.id.carPlate);

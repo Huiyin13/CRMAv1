@@ -89,7 +89,8 @@ public class CarDetailsInterface extends AppCompatActivity {
 
         photo = findViewById(R.id.photoListView);
         photo.setHasFixedSize(true);
-        photo.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        photo.setLayoutManager(layoutManager);
 
         //bottom nav
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
