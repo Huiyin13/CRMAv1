@@ -16,11 +16,14 @@ public class Booking {
     private String bStatus;
     private String bRejectReason;
     private String bCancelReason;
+    private String finalTo;
+    private String finalFrom;
+
 
     public Booking() {
     }
 
-    public Booking(String bid, String cid, String sId, String coId, String timeF, String timeT, String placeD, String placeP, String dateF, String dateT, String rentH, String ttlFee, String bStatus, String bRejectReason, String bCancelReason) {
+    public Booking(String bid, String cid, String sId, String coId, String timeF, String timeT, String placeD, String placeP, String dateF, String dateT, String rentH, String ttlFee, String bStatus, String bRejectReason, String bCancelReason, String finalTo, String finalFrom) {
         this.bid = bid;
         this.cid = cid;
         this.sId = sId;
@@ -36,6 +39,8 @@ public class Booking {
         this.bStatus = bStatus;
         this.bRejectReason = bRejectReason;
         this.bCancelReason = bCancelReason;
+        this.finalTo = finalTo;
+        this.finalFrom = finalFrom;
     }
 
     public String getBid() {
@@ -156,5 +161,21 @@ public class Booking {
 
     public void setbCancelReason(String bCancelReason) {
         this.bCancelReason = bCancelReason;
+    }
+
+    public String getFinalTo() {
+        return finalTo;
+    }
+
+    public void setFinalTo(String finalTo) {
+        this.finalTo = finalTo;
+    }
+
+    public String getFinalFrom() {
+        return finalFrom;
+    }
+
+    public void setFinalFrom(String finalFrom) {
+        this.finalFrom = finalFrom;
     }
 }
