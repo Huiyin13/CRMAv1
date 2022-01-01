@@ -16,6 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CRMAv1">
         <activity
+            android:name=".ManagePayment.PaymentSelectionInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageBooking.BookingHistoryInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageBooking.SBookingHistoryInterface"
+            android:exported="false" />
+        <activity
             android:name=".ManageBooking.SCarListInterface"
             android:exported="false" />
         <activity

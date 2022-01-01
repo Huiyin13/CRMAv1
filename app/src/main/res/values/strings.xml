@@ -59,5 +59,16 @@
     <string name="type">Type:</string>
     <string name="details">Car Details</string>
 
+    <string name="bdetails">Booking Details</string>
+    <string name="bform">Booking Form</string>
+    <string name="blist">Booking List</string>
+    <string name="breject">Reject Booking</string>
+    <string name="timeF">Time From:</string>
+    <string name="timeT">Time To:</string>
+    <string name="dateF">Date From:</string>
+    <string name="dateT">Date To:</string>
+    <string name="pickUp">Pick Up Point:</string>
+    <string name="pick">Pick Up</string>
+    <string name="statusB">Status:</string>
 
 </resources>

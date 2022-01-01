@@ -18,6 +18,7 @@ import com.example.crmav1.Adapter.CarPhotoHolder;
 import com.example.crmav1.ManageAccount.StudentAccountInterface;
 import com.example.crmav1.ManageLoginandRegistration.StudentMainInterface;
 import com.example.crmav1.Model.Car;
+import com.example.crmav1.Model.CarOwner;
 import com.example.crmav1.Model.cPhotoUri;
 import com.example.crmav1.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -40,7 +41,7 @@ public class SCarDetailsInterface extends AppCompatActivity {
     private DatabaseReference carDBRef, carDBRef2, updateRef;
     private FirebaseUser user;
 
-    private String cid, coId;
+    private String cid, coId, coName, feetointent;
 
 
 
@@ -66,12 +67,29 @@ public class SCarDetailsInterface extends AppCompatActivity {
         cid = getIntent().getStringExtra("cid");
         coId = getIntent().getStringExtra("coId");
 
+        DatabaseReference name = FirebaseDatabase.getInstance().getReference("Users").child(coId);
+        name.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    CarOwner carOwner = snapshot.getValue(CarOwner.class);
+                    coName = carOwner.getCoName();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent2list = new Intent(SCarDetailsInterface.this, SCarListInterface.class);
                 intent2list.putExtra("cid", cid);
                 intent2list.putExtra("coId", coId);
+                intent2list.putExtra("coName", coName);
                 startActivity(intent2list);
             }
         });
@@ -82,6 +100,7 @@ public class SCarDetailsInterface extends AppCompatActivity {
                 Intent intent2book = new Intent(SCarDetailsInterface.this, BookingFormInterface.class);
                 intent2book.putExtra("cid", cid);
                 intent2book.putExtra("coId", coId);
+                intent2book.putExtra("fee", feetointent);
                 startActivity(intent2book);
             }
         });
@@ -98,6 +117,7 @@ public class SCarDetailsInterface extends AppCompatActivity {
                     person.setText(car.getcPerson());
                     type.setText(car.getcType());
                     fee.setText(car.getRentFee());
+                    feetointent = car.getRentFee();
                     description.setText(car.getDescription());
                 }
             }
