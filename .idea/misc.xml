@@ -5,8 +5,11 @@
       <map>
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/drawable-v24/home.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/drawable-v24/list.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/drawable/background_left.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/drawable/background_right.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/drawable/button.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/drawable/input_text.xml" value="0.15625" />
+        <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/drawable/tab.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_acar_details_interface.xml" value="0.136" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_acar_hide_reason_interface.xml" value="0.259375" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_acar_list_interface.xml" value="0.1" />
@@ -14,7 +17,7 @@
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_add_car_photo.xml" value="0.23731884057971014" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_add_car_photo_interface.xml" value="0.2" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_admin_main_interface.xml" value="0.1" />
-        <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_booking_form_interface.xml" value="0.1" />
+        <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_booking_form_interface.xml" value="0.45688073394495415" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_booking_history_interface.xml" value="0.259375" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_booking_list_interface.xml" value="0.2453125" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_car_details_interface.xml" value="0.1" />
@@ -31,13 +34,14 @@
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_cbooking_list.xml" value="0.19202898550724637" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_cbooking_list_interface.xml" value="0.259375" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_cbooking_reject_interface.xml" value="0.259375" />
+        <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_chat_interface.xml" value="0.264" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_cstudent_profile_interface.xml" value="0.259375" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_email_verification_interface.xml" value="0.1328125" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_login_interface.xml" value="0.264" />
-        <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_payment_selection_interface.xml" value="0.259375" />
+        <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_payment_selection_interface.xml" value="0.2" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_registration_interface.xml" value="0.264" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_registration_list_adapter.xml" value="0.264" />
-        <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_sbooking_details_interface.xml" value="0.37962962962962965" />
+        <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_sbooking_details_interface.xml" value="0.2768204558087827" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_sbooking_history_interface.xml" value="0.264" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_scar_details_interface.xml" value="0.259375" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_scar_list_interface.xml" value="0.1821705426356589" />
@@ -53,6 +57,9 @@
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/car_owner_list_adapter.xml" value="0.259375" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/carlistadapter.xml" value="0.2105978260869565" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/cbooking_list_adapter.xml" value="0.259375" />
+        <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/chat_adapter.xml" value="0.259375" />
+        <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/chat_item_left.xml" value="0.259375" />
+        <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/chat_item_right.xml" value="0.259375" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/multiple_photo_adapter.xml" value="0.2392857142857143" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/photo_adapter.xml" value="0.16428571428571428" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/photo_adapter_std.xml" value="0.1" />

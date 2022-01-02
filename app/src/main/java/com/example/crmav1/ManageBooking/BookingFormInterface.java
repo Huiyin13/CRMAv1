@@ -9,6 +9,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -17,11 +18,14 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.crmav1.ManageAccount.StudentAccountInterface;
 import com.example.crmav1.ManageCar.CarListInterface;
+import com.example.crmav1.ManageLoginandRegistration.StudentMainInterface;
 import com.example.crmav1.Model.Booking;
 import com.example.crmav1.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -186,7 +190,7 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
             @Override
             public void onClick(View view) {
                 DatabaseReference testdatereference = FirebaseDatabase.getInstance().getReference("Car").child(coId).child(cid).child("Booking");
-                testdatereference.addValueEventListener(new ValueEventListener() {
+                testdatereference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                        counter = 0;
@@ -213,6 +217,58 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
                                 counter = 0;
                                 Toast.makeText(BookingFormInterface.this, "Date is Not Available", Toast.LENGTH_SHORT).show();
                                 System.out.println("Cannot Book");
+                                payment.setText("Invalid Date");
+                            }
+                            else
+                            {
+                                finalfrom = fromdatestring + " " + fromtimestring;
+                                finalto = todatestring + " " + totimestring;
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                                try {
+                                    Date fromdate = simpleDateFormat.parse(finalfrom);
+                                    Date todate = simpleDateFormat.parse(finalto);
+                                    long difference_in_time = todate.getTime() - fromdate.getTime();
+                                    long difference_in_seconds = (difference_in_time / 1000) % 60;
+                                    long difference_in_minutes = (difference_in_time / (1000 * 60)) % 60;
+                                    long difference_in_hours = (difference_in_time / (1000 * 60 * 60)) % 24;
+                                    long difference_in_years = (difference_in_time / (10001 * 60 * 60 * 24 * 365));
+                                    long difference_in_days = (difference_in_time / (1000 * 60 * 60 * 24)) % 365;
+                                    System.out.println("Difference between two dates is: ");
+                                    System.out.println(difference_in_years + " years, " + difference_in_days + " days, " + difference_in_hours + " hours, " + difference_in_minutes + " minutes, ");
+                                    long finaltotalhours = difference_in_days * 24 + difference_in_hours + difference_in_minutes / 60;
+                                    totalHours = (int) finaltotalhours;
+                                    System.out.println(totalHours);
+                                    paymentF = totalHours * Integer.parseInt(fee);
+                                    payment.setText("RM " + paymentF + " / " + totalHours + " hour(s)");
+
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                        else {
+                            finalfrom = fromdatestring + " " + fromtimestring;
+                            finalto = todatestring + " " + totimestring;
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                            try {
+                                Date fromdate = simpleDateFormat.parse(finalfrom);
+                                Date todate = simpleDateFormat.parse(finalto);
+                                long difference_in_time = todate.getTime() - fromdate.getTime();
+                                long difference_in_seconds = (difference_in_time / 1000) % 60;
+                                long difference_in_minutes = (difference_in_time / (1000 * 60)) % 60;
+                                long difference_in_hours = (difference_in_time / (1000 * 60 * 60)) % 24;
+                                long difference_in_years = (difference_in_time / (10001 * 60 * 60 * 24 * 365));
+                                long difference_in_days = (difference_in_time / (1000 * 60 * 60 * 24)) % 365;
+                                System.out.println("Difference between two dates is: ");
+                                System.out.println(difference_in_years + " years, " + difference_in_days + " days, " + difference_in_hours + " hours, " + difference_in_minutes + " minutes, ");
+                                long finaltotalhours = difference_in_days * 24 + difference_in_hours + difference_in_minutes / 60;
+                                totalHours = (int) finaltotalhours;
+                                System.out.println(totalHours);
+                                paymentF = totalHours * Integer.parseInt(fee);
+                                payment.setText("RM " + paymentF + " / " + totalHours + " hour(s)");
+
+                            } catch (ParseException e) {
+                                e.printStackTrace();
                             }
                         }
                     }
@@ -222,29 +278,7 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
 
                     }
                 });
-                finalfrom = fromdatestring + " " + fromtimestring;
-                finalto = todatestring + " " + totimestring;
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-                try {
-                    Date fromdate = simpleDateFormat.parse(finalfrom);
-                    Date todate = simpleDateFormat.parse(finalto);
-                    long difference_in_time = todate.getTime() - fromdate.getTime();
-                    long difference_in_seconds = (difference_in_time / 1000) % 60;
-                    long difference_in_minutes = (difference_in_time / (1000 * 60)) % 60;
-                    long difference_in_hours = (difference_in_time / (1000 * 60 * 60)) % 24;
-                    long difference_in_years = (difference_in_time / (10001 * 60 * 60 * 24 * 365));
-                    long difference_in_days = (difference_in_time / (1000 * 60 * 60 * 24)) % 365;
-                    System.out.println("Difference between two dates is: ");
-                    System.out.println(difference_in_years + " years, " + difference_in_days + " days, " + difference_in_hours + " hours, " + difference_in_minutes + " minutes, ");
-                    long finaltotalhours = difference_in_days * 24 + difference_in_hours + difference_in_minutes / 60;
-                    totalHours = (int) finaltotalhours;
-                    System.out.println(totalHours);
-                    paymentF = totalHours * Integer.parseInt(fee);
-                    payment.setText("RM " + paymentF + " / " + totalHours + " hour(s)");
 
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
 
             }
         });
@@ -254,8 +288,14 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
             public void onClick(View view) {
 //                checkDate();
 //                if (finalisdateavailable){
+                if (payment.getText().toString().equalsIgnoreCase("Invalid Date"))
+                {
+                    Toast.makeText(BookingFormInterface.this, "Please Select another Date", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
                     user = FirebaseAuth.getInstance().getCurrentUser();
-                   bookRef = FirebaseDatabase.getInstance().getReference("Car").child(coId).child(cid).child("Booking");
+                    bookRef = FirebaseDatabase.getInstance().getReference("Car").child(coId).child(cid).child("Booking");
 //
 //                    bookRef = FirebaseDatabase.getInstance().getReference("Booking");
                     DatabaseReference book = bookRef.child(user.getUid());
@@ -264,13 +304,13 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
 
 
                     String bid2 = book.push().getKey();
-                    DatabaseReference bookRef1 = FirebaseDatabase.getInstance().getReference("Booking").child(user.getUid()).child(bid2);
+                    DatabaseReference bookRef1 = FirebaseDatabase.getInstance().getReference("Booking").child(user.getUid()).child(bid);
 
 
                     fromTime = timeF.getText().toString().trim();
                     toTime = timeT.getText().toString().trim();
                     ttlH = String.valueOf(totalHours);
-                    ttlPayment = payment.getText().toString().trim();
+                    ttlPayment = String.valueOf(paymentF);
 
                     HashMap<String,Object> hashMap = new HashMap<>();
                     hashMap.put("bid", bid);
@@ -279,7 +319,7 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
                     hashMap.put("sId", user.getUid());
                     hashMap.put("timeF", fromTime);
                     hashMap.put("timeT",fromTime);
-                    hashMap.put("placeP", " ");
+                    hashMap.put("memo", "Waiting Car Owner Approve.");
                     hashMap.put("dateF", fromdatestring);
                     hashMap.put("dateT", todatestring);
                     hashMap.put("rentH", ttlH);
@@ -304,11 +344,37 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
                             Toast.makeText(BookingFormInterface.this, "Failed to send.", Toast.LENGTH_SHORT).show();
                         }
                     });
+                }
+
 
 
 //                }else{
 //                    Toast.makeText(BookingFormInterface.this, "Selected Date Not Available", Toast.LENGTH_SHORT).show();
 //                }
+            }
+        });
+
+        //bottom nav
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.home);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.book:
+                        startActivity(new Intent(getApplicationContext(), BookingListInterface.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.home:
+                        startActivity(new Intent(BookingFormInterface.this, StudentMainInterface.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.account:
+                        startActivity(new Intent(BookingFormInterface.this, StudentAccountInterface.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
             }
         });
 
