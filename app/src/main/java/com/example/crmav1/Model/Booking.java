@@ -8,7 +8,7 @@ public class Booking {
     private String timeF;
     private String timeT;
     private String placeD;
-    private String placeP;
+    private String memo;
     private String dateF;
     private String dateT;
     private String rentH;
@@ -23,7 +23,7 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(String bid, String cid, String sId, String coId, String timeF, String timeT, String placeD, String placeP, String dateF, String dateT, String rentH, String ttlFee, String bStatus, String bRejectReason, String bCancelReason, String finalTo, String finalFrom) {
+    public Booking(String bid, String cid, String sId, String coId, String timeF, String timeT, String placeD, String memo, String dateF, String dateT, String rentH, String ttlFee, String bStatus, String bRejectReason, String bCancelReason, String finalTo, String finalFrom) {
         this.bid = bid;
         this.cid = cid;
         this.sId = sId;
@@ -31,7 +31,7 @@ public class Booking {
         this.timeF = timeF;
         this.timeT = timeT;
         this.placeD = placeD;
-        this.placeP = placeP;
+        this.memo = memo;
         this.dateF = dateF;
         this.dateT = dateT;
         this.rentH = rentH;
@@ -99,12 +99,12 @@ public class Booking {
         this.placeD = placeD;
     }
 
-    public String getPlaceP() {
-        return placeP;
+    public String getMemo() {
+        return memo;
     }
 
-    public void setPlaceP(String placeP) {
-        this.placeP = placeP;
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 
     public String getDateF() {

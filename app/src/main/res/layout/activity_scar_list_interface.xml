@@ -39,7 +39,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View Booking"
-                    android:layout_marginLeft="250dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="40dp"
                     />
 
                 <androidx.recyclerview.widget.RecyclerView

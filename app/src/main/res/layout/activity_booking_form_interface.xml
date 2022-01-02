@@ -62,6 +62,7 @@
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:layout_marginLeft="20dp"
+                        android:layout_marginTop="7dp"
                         app:srcCompat="@drawable/clock" />
 
                     <TextView
@@ -94,7 +95,8 @@
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:layout_marginLeft="20dp"
-                        app:srcCompat="@drawable/clock" />
+                        app:srcCompat="@drawable/clock"
+                        android:layout_marginTop="7dp" />
 
                     <TextView
                         android:id="@+id/timeT"
@@ -127,7 +129,8 @@
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:layout_marginLeft="20dp"
-                        app:srcCompat="@drawable/calendar" />
+                        app:srcCompat="@drawable/calendar"
+                        android:layout_marginTop="7dp" />
 
                     <TextView
                         android:id="@+id/dateF"
@@ -159,7 +162,8 @@
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:layout_marginLeft="20dp"
-                        app:srcCompat="@drawable/calendar" />
+                        app:srcCompat="@drawable/calendar"
+                        android:layout_marginTop="7dp" />
 
                     <TextView
                         android:id="@+id/dateT"

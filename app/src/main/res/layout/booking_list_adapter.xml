@@ -20,9 +20,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="1dp"
+                android:paddingEnd="10dp"
                 android:text="xxx"
                 android:textColor="#000000"
-                android:textSize="25dp" />
+                android:textSize="20dp" />
             <TextView
                 android:id="@+id/dateTime"
                 android:layout_width="wrap_content"
@@ -31,7 +32,7 @@
                 android:layout_marginBottom="1dp"
                 android:text="xxx"
                 android:textColor="#000000"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
         </LinearLayout>
 

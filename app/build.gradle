@@ -44,4 +44,9 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:6.4.0'
     //Picasso library to insert image
     implementation 'com.squareup.picasso:picasso:2.71828'
+    //Stripe
+    implementation 'com.stripe:stripe-android:18.1.0'
+    // sor network call
+    implementation 'com.squareup.okhttp3:okhttp:4.9.2'
+    implementation 'com.google.code.gson:gson:2.8.8'
 }
