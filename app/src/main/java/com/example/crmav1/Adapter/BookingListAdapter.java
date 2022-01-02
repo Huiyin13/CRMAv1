@@ -41,8 +41,8 @@ public class BookingListAdapter extends RecyclerView.Adapter<BookingListAdapter.
 
         Booking booking = bookings.get(position);
 
-        holder.bookid.setText(booking.getBid());
-        holder.date.setText(booking.getFinalFrom()+ " To " + booking.getFinalTo());
+        holder.date.setText(booking.getbStatus());
+        holder.bookid.setText(booking.getFinalFrom()+ " To " + booking.getFinalTo());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

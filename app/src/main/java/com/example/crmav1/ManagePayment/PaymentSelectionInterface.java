@@ -45,17 +45,17 @@ public class PaymentSelectionInterface extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_selection_interface);
 
-        amount = findViewById(R.id.amount);
-        cash = findViewById(R.id.cash);
-        card = findViewById(R.id.card);
-        payment = findViewById(R.id.pay);
-
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        bid = getIntent().getStringExtra("bid");
-        fee = getIntent().getStringExtra("fee");
-        coId = getIntent().getStringExtra("coId");
-        cid = getIntent().getStringExtra("cid");
-        amount.setText("Your Total Payment is RM "+ fee );
+//        amount = findViewById(R.id.amount);
+//        cash = findViewById(R.id.cash);
+//        card = findViewById(R.id.card);
+//        payment = findViewById(R.id.pay);
+//
+//        user = FirebaseAuth.getInstance().getCurrentUser();
+//        bid = getIntent().getStringExtra("bid");
+//        fee = getIntent().getStringExtra("fee");
+//        coId = getIntent().getStringExtra("coId");
+//        cid = getIntent().getStringExtra("cid");
+//        amount.setText("Your Total Payment is RM "+ fee );
 
 //        payment.setOnClickListener(new View.OnClickListener() {
 //            @Override

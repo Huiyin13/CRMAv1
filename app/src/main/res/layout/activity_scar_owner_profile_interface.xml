@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ManageBooking.CStudentProfileInterface">
+    tools:context=".ManageBooking.SCarOwnerProfileInterface">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="70dp"
-                    android:text="Student Profile"
+                    android:text="Car Owner Profile"
                     android:textColor="#000000"
                     android:textSize="25dp" />
 
@@ -43,7 +43,7 @@
                     android:textSize="20dp" />
 
                 <EditText
-                    android:id="@+id/stdName"
+                    android:id="@+id/coName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -67,7 +67,7 @@
                     android:textSize="20dp" />
 
                 <TextView
-                    android:id="@+id/stdID"
+                    android:id="@+id/coID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -91,7 +91,7 @@
                     android:textSize="20dp" />
 
                 <TextView
-                    android:id="@+id/stdIC"
+                    android:id="@+id/coIC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -115,7 +115,7 @@
                     android:textSize="20dp" />
 
                 <EditText
-                    android:id="@+id/stdPhone"
+                    android:id="@+id/coPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -139,7 +139,7 @@
                     android:textSize="20dp" />
 
                 <TextView
-                    android:id="@+id/stdEmail"
+                    android:id="@+id/coEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -163,7 +163,7 @@
                     android:textSize="20dp" />
 
                 <ImageView
-                    android:id="@+id/stdICPhoto"
+                    android:id="@+id/coICPhoto"
                     android:layout_width="280dp"
                     android:layout_height="280dp"
                     android:layout_gravity="center"
@@ -182,26 +182,7 @@
                     android:textSize="20dp" />
 
                 <ImageView
-                    android:id="@+id/stdIDPhoto"
-                    android:layout_width="280dp"
-                    android:layout_height="280dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="3"
-                    android:clickable="true"
-                    android:src="@drawable/add_image" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/licence"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
-
-                <ImageView
-                    android:id="@+id/stdLicencePhoto"
+                    android:id="@+id/coIDPhoto"
                     android:layout_width="280dp"
                     android:layout_height="280dp"
                     android:layout_gravity="center"

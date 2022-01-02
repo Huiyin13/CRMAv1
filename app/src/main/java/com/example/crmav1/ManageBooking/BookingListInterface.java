@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.crmav1.Adapter.BookingListAdapter;
@@ -34,6 +36,7 @@ public class BookingListInterface extends AppCompatActivity implements BookingLi
     private ArrayList<Booking> bookings;
     private BookingListAdapter adapter;
     private FirebaseUser auth;
+    private Button history;
 
 
     @Override
@@ -42,6 +45,7 @@ public class BookingListInterface extends AppCompatActivity implements BookingLi
         setContentView(R.layout.activity_booking_list_interface);
 
         recyclerView = findViewById(R.id.bookListView);
+        history = findViewById(R.id.history);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         bookings = new ArrayList<>();
@@ -58,7 +62,13 @@ public class BookingListInterface extends AppCompatActivity implements BookingLi
                 if (snapshot.exists()){
                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                        Booking book = dataSnapshot.getValue(Booking.class);
-                       bookings.add(book);
+                       if (book.getbStatus().equalsIgnoreCase("Completed")){
+                           Toast.makeText(getApplicationContext(), "No Current Booking", Toast.LENGTH_LONG).show();
+                       }
+                       else {
+                           bookings.add(book);
+                       }
+
                    }
                     Toast.makeText(getApplicationContext(), "Data Found", Toast.LENGTH_LONG).show();
                     adapter.notifyDataSetChanged();
@@ -71,6 +81,14 @@ public class BookingListInterface extends AppCompatActivity implements BookingLi
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2history = new Intent(BookingListInterface.this, SBookingHistoryInterface.class);
+                startActivity(intent2history);
             }
         });
 
