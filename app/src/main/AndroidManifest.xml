@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CRMAv1">
         <activity
+            android:name=".ManageBooking.SViewBookingDateInterface"
+            android:exported="false" />
+        <activity
             android:name=".ManagePayment.PaymentSelectionInterface"
             android:exported="false" />
         <activity

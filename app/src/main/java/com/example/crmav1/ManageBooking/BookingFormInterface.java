@@ -18,13 +18,17 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.crmav1.ManageCar.CarListInterface;
+import com.example.crmav1.Model.Booking;
 import com.example.crmav1.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,7 +42,7 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
     TimePickerDialog timePickerDialog;
 
     private ImageView time1, time2, date1, date2;
-    private Button book, cancel, calculate;
+    private Button book, cancel, calculate, view;
     private TextView timeF, timeT, dateF, dateT, payment;
 
     boolean to = false, from = true;
@@ -46,8 +50,9 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
     private DatabaseReference bookRef;
     private FirebaseUser user;
 
-    private String bid, coId, cid, sId, fromdatestring, todatestring, fromtimestring, totimestring, finalto, finalfrom, fee;
-    private int totalHours, paymentF;
+    private String ttlH, ttlPayment, bid, coId, cid, sId, fromTime, toTime, fromdatestring, todatestring, fromtimestring, totimestring, finalto, finalfrom, fee;
+    private int totalHours, paymentF, counter = 0;
+    private boolean finalisdateavailable, counterisdateavailable, finalcounterdateavailable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,16 +68,33 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
         dateF = findViewById(R.id.dateF);
         dateT = findViewById(R.id.dateT);
         book = findViewById(R.id.book);
+        view = findViewById(R.id.viewDate);
         calculate = findViewById(R.id.calculate);
         cancel = findViewById(R.id.cancel);
         payment = findViewById(R.id.payment);
+//        testingcheckDate();
+
+        coId = getIntent().getStringExtra("coId");
+        cid = getIntent().getStringExtra("cid");
+        fee = getIntent().getStringExtra("fee");
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2view = new Intent(BookingFormInterface.this, SViewBookingDateInterface.class);
+                intent2view.putExtra("coId",coId);
+                intent2view.putExtra("cid", cid);
+                intent2view.putExtra("fee", fee);
+                startActivity(intent2view);
+            }
+        });
 
         time1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Calendar cldr = java.util.Calendar.getInstance();
-                int hour = cldr.get(java.util.Calendar.HOUR_OF_DAY);
-                int minutes = cldr.get(java.util.Calendar.MINUTE);
+                final Calendar cldr = Calendar.getInstance();
+                int hour = cldr.get(Calendar.HOUR_OF_DAY);
+                int minutes = cldr.get(Calendar.MINUTE);
                 // time picker dialog
                 timePickerDialog = new TimePickerDialog(BookingFormInterface.this,
                         new TimePickerDialog.OnTimeSetListener() {
@@ -88,7 +110,7 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
                                 {
                                     hourstring = "0" + sHour;
                                 }
-                                fromtimestring = hourstring + ":" + minutestring + ":" + "00";
+                                fromtimestring = hourstring + ":" + minutestring;
                                 System.out.println(fromtimestring);
                                 timeF.setText(fromtimestring);
                             }
@@ -101,9 +123,9 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
             @Override
             public void onClick(View view) {
 
-                final Calendar cldr = java.util.Calendar.getInstance();
-                int hour = cldr.get(java.util.Calendar.HOUR_OF_DAY);
-                int minutes = cldr.get(java.util.Calendar.MINUTE);
+                final Calendar cldr = Calendar.getInstance();
+                int hour = cldr.get(Calendar.HOUR_OF_DAY);
+                int minutes = cldr.get(Calendar.MINUTE);
                 // time picker dialog
                 timePickerDialog = new TimePickerDialog(BookingFormInterface.this,
                         new TimePickerDialog.OnTimeSetListener() {
@@ -119,11 +141,13 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
                                 {
                                     hourstring = "0" + sHour;
                                 }
-                                totimestring = hourstring + ":" + minutestring + ":" + "00";
+                                totimestring = hourstring + ":" + minutestring ;
                                 System.out.println(totimestring);
+
                                 timeT.setText(totimestring);
                             }
                         }, hour, minutes, true);
+
                 timePickerDialog.show();
             }
         });
@@ -146,9 +170,6 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
             }
         });
 
-        coId = getIntent().getStringExtra("coId");
-        cid = getIntent().getStringExtra("cid");
-        fee = getIntent().getStringExtra("fee");
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,9 +185,46 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
+                DatabaseReference testdatereference = FirebaseDatabase.getInstance().getReference("Car").child(coId).child(cid).child("Booking");
+                testdatereference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        counter = 0;
+//                        counterisdateavailable = true;
+                        if (snapshot.exists())
+                        {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren())
+                            {
+                                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren())
+                                {
+                                    Booking booking = dataSnapshot1.getValue(Booking.class);
+                                    System.out.println("From " + booking.getDateF() + " to " + booking.getDateT());
+                                    counterisdateavailable = checkDate(fromdatestring, todatestring, booking.getDateF(), booking.getDateT());
+                                    System.out.println(counterisdateavailable + " counterisavailable");
+                                    if (!counterisdateavailable)
+                                    {
+                                        counter ++;
+                                    }
+
+                                }
+                            }
+                            if (counter > 0)
+                            {
+                                counter = 0;
+                                Toast.makeText(BookingFormInterface.this, "Date is Not Available", Toast.LENGTH_SHORT).show();
+                                System.out.println("Cannot Book");
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 finalfrom = fromdatestring + " " + fromtimestring;
                 finalto = todatestring + " " + totimestring;
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
                 try {
                     Date fromdate = simpleDateFormat.parse(finalfrom);
                     Date todate = simpleDateFormat.parse(finalto);
@@ -194,51 +252,144 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                user = FirebaseAuth.getInstance().getCurrentUser();
-                bookRef = FirebaseDatabase.getInstance().getReference("Car").child(coId).child(cid).child("Booking");
-                DatabaseReference book = bookRef.child(user.getUid());
-                bid = book.push().getKey();
-                DatabaseReference booked = book.child(bid);
+//                checkDate();
+//                if (finalisdateavailable){
+                    user = FirebaseAuth.getInstance().getCurrentUser();
+                   bookRef = FirebaseDatabase.getInstance().getReference("Car").child(coId).child(cid).child("Booking");
+//
+//                    bookRef = FirebaseDatabase.getInstance().getReference("Booking");
+                    DatabaseReference book = bookRef.child(user.getUid());
+                    bid = book.push().getKey();
+                    DatabaseReference booked = book.child(bid);
 
-                HashMap<String,Object> hashMap = new HashMap<>();
-                hashMap.put("bid", bid);
-                hashMap.put("cid", cid);
-                hashMap.put("coId", coId);
-                hashMap.put("sId", user.getUid());
-                hashMap.put("timeF", fromtimestring);
-                hashMap.put("timeT",totimestring);
-                hashMap.put("placeP", " ");
-                hashMap.put("dateF", fromdatestring);
-                hashMap.put("dateT", todatestring);
-                hashMap.put("rentH", totalHours);
-                hashMap.put("ttlFee", paymentF);
-                hashMap.put("bStatus", "Applying");
-                hashMap.put("bRejectReason", " ");
-                hashMap.put("bCancelReason", " ");
-                hashMap.put("finalFrom", finalfrom);
-                hashMap.put("finalTo", finalto);
 
-                booked.setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(BookingFormInterface.this,"Booking Form Sent.", Toast.LENGTH_SHORT).show();
-                        Intent intent2book = new Intent(BookingFormInterface.this, BookingListInterface.class);
-                        startActivity(intent2book);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(BookingFormInterface.this, "Failed to send.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    String bid2 = book.push().getKey();
+                    DatabaseReference bookRef1 = FirebaseDatabase.getInstance().getReference("Booking").child(user.getUid()).child(bid2);
 
+
+                    fromTime = timeF.getText().toString().trim();
+                    toTime = timeT.getText().toString().trim();
+                    ttlH = String.valueOf(totalHours);
+                    ttlPayment = payment.getText().toString().trim();
+
+                    HashMap<String,Object> hashMap = new HashMap<>();
+                    hashMap.put("bid", bid);
+                    hashMap.put("cid", cid);
+                    hashMap.put("coId", coId);
+                    hashMap.put("sId", user.getUid());
+                    hashMap.put("timeF", fromTime);
+                    hashMap.put("timeT",fromTime);
+                    hashMap.put("placeP", " ");
+                    hashMap.put("dateF", fromdatestring);
+                    hashMap.put("dateT", todatestring);
+                    hashMap.put("rentH", ttlH);
+                    hashMap.put("ttlFee", ttlPayment);
+                    hashMap.put("bStatus", "Applying");
+                    hashMap.put("bRejectReason", " ");
+                    hashMap.put("bCancelReason", " ");
+                    hashMap.put("finalFrom", finalfrom);
+                    hashMap.put("finalTo", finalto);
+
+                    booked.setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            bookRef1.setValue(hashMap);
+                            Toast.makeText(BookingFormInterface.this,"Booking Form Sent.", Toast.LENGTH_SHORT).show();
+                            Intent intent2book = new Intent(BookingFormInterface.this, BookingListInterface.class);
+                            startActivity(intent2book);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(BookingFormInterface.this, "Failed to send.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
+//                }else{
+//                    Toast.makeText(BookingFormInterface.this, "Selected Date Not Available", Toast.LENGTH_SHORT).show();
+//                }
             }
         });
 
     }
 
+    private boolean checkDate(String inputfrom, String inputto, String firebasefrom, String firebaseto) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            boolean isdateavailable = false;
+            Date testfromdate = simpleDateFormat.parse(firebasefrom);
+            Date testtodate = simpleDateFormat.parse(firebaseto);
+            Date inputtestfromdate = simpleDateFormat.parse(inputfrom);
+            Date inputesttodate = simpleDateFormat.parse(inputto);
+            boolean isDateCrashed = checkisDateCrashed(testfromdate, testtodate, inputtestfromdate, inputesttodate);
+            System.out.println(isDateCrashed + " isdatecrashed");
+            if (isDateCrashed)
+            {
+                Toast.makeText(BookingFormInterface.this, "Selected Date Not Available", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                isdateavailable = checkIsDateAvailable(testfromdate, testtodate, inputtestfromdate, inputesttodate);
+            }
+            System.out.println(isdateavailable + " isdateavailable");
+            if (!isDateCrashed && isdateavailable)
+            {
+                finalisdateavailable = true;
+            }
+            else
+            {
+                finalisdateavailable = false;
+            }
+
+            System.out.println(finalisdateavailable + " finalisdateavailable");
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return finalisdateavailable;
+    }
+
+    private boolean checkIsDateAvailable(Date testfromdate, Date testtodate, Date inputtestfromdate, Date inputesttodate) {
+        if (inputtestfromdate.before(testfromdate) && inputesttodate.after(testtodate))
+        {
+            return false;
+        }
+        else if (inputtestfromdate.after(testfromdate) && inputesttodate.before(testtodate))
+        {
+            return false;
+        }
+        else if (inputtestfromdate.after(testfromdate) && inputtestfromdate.before(testtodate))
+        {
+            return false;
+        }
+        else if (inputesttodate.after(testfromdate) && inputesttodate.before(testtodate))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    private boolean checkisDateCrashed(Date testfromdate, Date testtodate, Date inputtestfromdate, Date inputesttodate) {
+        if (inputtestfromdate.equals(testfromdate) || inputesttodate.equals(testtodate))
+        {
+            return true;
+        }
+        else if (inputtestfromdate.equals(testtodate) || inputesttodate.equals(testfromdate))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     private void showDateDialog() {
-        DatePickerDialog date = new DatePickerDialog(
+        datePickerDialog = new DatePickerDialog(
                 this,
                 this,
                 Calendar.getInstance().get(Calendar.YEAR),
@@ -246,8 +397,8 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
         );
 
-        date.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
-        date.show();
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
+        datePickerDialog.show();
     }
 
     @Override
