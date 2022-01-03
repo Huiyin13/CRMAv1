@@ -105,6 +105,13 @@ public class ChatInterface extends AppCompatActivity {
                 message.setText("");
             }
         });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void sendMsg (String sender, String receiver, String msg){
