@@ -28,7 +28,7 @@
             android:name=".ManagePayment.PaymentSelectionInterface"
             android:exported="false" />
         <activity
-            android:name=".ManageBooking.BookingHistoryInterface"
+            android:name=".ManageBooking.CBookingHistoryInterface"
             android:exported="false" />
         <activity
             android:name=".ManageBooking.SBookingHistoryInterface"
