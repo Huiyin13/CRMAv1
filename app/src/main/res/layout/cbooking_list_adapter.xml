@@ -15,17 +15,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/bid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="1dp"
-                android:text="xxx"
-                android:textColor="#000000"
-                android:textSize="25dp" />
-
-            <TextView
-                android:id="@+id/stdName"
+                android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -35,14 +25,14 @@
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/dateTime"
+                android:id="@+id/status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="1dp"
                 android:text="xxx"
                 android:textColor="#000000"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
         </LinearLayout>
 

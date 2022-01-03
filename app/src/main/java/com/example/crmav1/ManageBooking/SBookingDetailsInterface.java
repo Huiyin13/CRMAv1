@@ -22,6 +22,7 @@ import com.example.crmav1.ManageChat.ChatInterface;
 import com.example.crmav1.ManageLoginandRegistration.StudentMainInterface;
 import com.example.crmav1.ManagePayment.PaymentSelectionInterface;
 import com.example.crmav1.Model.Booking;
+import com.example.crmav1.Model.Payment;
 import com.example.crmav1.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -41,7 +42,7 @@ public class SBookingDetailsInterface extends AppCompatActivity {
     private Button pay, viewCo, cancel, complete;
 
     private FirebaseUser user;
-    private DatabaseReference display;
+    private DatabaseReference display, updateB, updateB2, paymentB;
 
     private String coId, bid, fee, cid;
 
@@ -125,13 +126,35 @@ public class SBookingDetailsInterface extends AppCompatActivity {
                         pay.setVisibility(View.GONE);
                         tvReject.setVisibility(View.GONE);
                         reject.setVisibility(View.GONE);
+
                         complete.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                DatabaseReference updateB = FirebaseDatabase.getInstance().getReference("Booking").child(user.getUid()).child(bid);
-                                DatabaseReference updateB2 = FirebaseDatabase.getInstance().getReference("Car").child(coId).child(cid).child("Booking").child(user.getUid()).child(bid);
+                                updateB = FirebaseDatabase.getInstance().getReference("Booking").child(user.getUid()).child(bid);
+                                updateB2 = FirebaseDatabase.getInstance().getReference("Car").child(coId).child(cid).child("Booking").child(user.getUid()).child(bid);
+//                                paymentB = FirebaseDatabase.getInstance().getReference("Payment");
+//                                paymentB.addValueEventListener(new ValueEventListener() {
+//                                    @Override
+//                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                                        if (snapshot.exists()){
+//                                            for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+//                                                Payment paid = dataSnapshot.getValue(Payment.class);
+//                                                status.setText(paid.getPaymentStatus());
+//                                                System.out.println(paid.getPaymentStatus());
+//                                            }
+//                                        }
+//                                    }
+//
+//                                    @Override
+//                                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                                    }
+//                                });
                                 updateB.child("bStatus").setValue("Completed");
                                 updateB2.child("bStatus").setValue("Completed");
+                                Intent intent2list = new Intent(SBookingDetailsInterface.this, BookingListInterface.class);
+                                startActivity(intent2list);
+                                finish();
                             }
                         });
                     }
@@ -143,20 +166,31 @@ public class SBookingDetailsInterface extends AppCompatActivity {
                         pay.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+
                                 Intent intent2payment = new Intent(SBookingDetailsInterface.this, PaymentSelectionInterface.class);
                                 intent2payment.putExtra("bid", bid);
                                 intent2payment.putExtra("fee", fee);
                                 intent2payment.putExtra("coId", coId);
                                 intent2payment.putExtra("cid", cid);
                                 startActivity(intent2payment);
+                                finish();
                             }
                         });
+                    }
+                    else if (booking.getbStatus().equalsIgnoreCase("Not yet receive cash payment.") || booking.getbStatus().equalsIgnoreCase("Completed")){
+                        cancel.setVisibility(View.GONE);
+                        complete.setVisibility(View.GONE);
+                        tvReject.setVisibility(View.GONE);
+                        reject.setVisibility(View.GONE);
+                        pay.setVisibility(View.GONE);
+
                     }
                     else {
                         complete.setVisibility(View.GONE);
                         pay.setVisibility(View.GONE);
                         tvMemo.setVisibility(View.GONE);
                         memo.setVisibility(View.GONE);
+                        reject.setText(booking.getbRejectReason());
                         cancel.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -220,6 +254,7 @@ public class SBookingDetailsInterface extends AppCompatActivity {
                                 Toast.makeText(SBookingDetailsInterface.this, "This booking is cancelled.", Toast.LENGTH_SHORT).show();
                                 Intent intent2delete = new Intent(SBookingDetailsInterface.this, BookingListInterface.class);
                                 startActivity(intent2delete);
+                                finish();
                             }
                         });
 

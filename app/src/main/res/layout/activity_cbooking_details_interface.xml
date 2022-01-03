@@ -43,6 +43,29 @@
                     android:textColor="#000000"
                     android:textSize="20dp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="20dp"
+                        app:srcCompat="@drawable/clock"
+                        android:layout_marginTop="7dp" />
+
+                    <TextView
+                        android:id="@+id/timeF"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginEnd="25dp"
+                        android:minHeight="48dp"
+                        android:padding="10dp"
+                        android:textSize="18dp" />
+                </LinearLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -52,6 +75,29 @@
                     android:text="@string/timeT"
                     android:textColor="#000000"
                     android:textSize="20dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="20dp"
+                        app:srcCompat="@drawable/clock"
+                        android:layout_marginTop="7dp"/>
+
+                    <TextView
+                        android:id="@+id/timeT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginEnd="25dp"
+                        android:minHeight="48dp"
+                        android:padding="10dp"
+                        android:textSize="18dp" />
+                </LinearLayout>
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -62,6 +108,28 @@
                     android:text="@string/dateF"
                     android:textColor="#000000"
                     android:textSize="20dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="20dp"
+                        app:srcCompat="@drawable/calendar"
+                        android:layout_marginTop="7dp" />
+
+                    <TextView
+                        android:id="@+id/dateF"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginEnd="25dp"
+                        android:minHeight="48dp"
+                        android:padding="10dp"
+                        android:textSize="18dp" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -72,26 +140,53 @@
                     android:text="@string/dateT"
                     android:textColor="#000000"
                     android:textSize="20dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="20dp"
+                        app:srcCompat="@drawable/calendar"
+                        android:layout_marginTop="7dp" />
+
+                    <TextView
+                        android:id="@+id/dateT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginEnd="25dp"
+                        android:minHeight="48dp"
+                        android:padding="10dp"
+                        android:textSize="18dp" />
+                </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tvMemo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:layout_marginTop="15dp"
                     android:layout_marginLeft="20dp"
-                    android:text="@string/timeF"
+                    android:text="Memo:"
                     android:textColor="#000000"
                     android:textSize="20dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/memo"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="25dp"
                     android:layout_marginTop="15dp"
-                    android:layout_marginLeft="20dp"
-                    android:text="@string/pickUp"
-                    android:textColor="#000000"
-                    android:textSize="20dp" />
+                    android:layout_marginEnd="25dp"
+                    android:minHeight="48dp"
+                    android:padding="10dp"
+                    android:textSize="18dp"
+                    android:background="@drawable/input_text"/>
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -104,7 +199,7 @@
                     android:textSize="20dp" />
 
                 <TextView
-                    android:id="@+id/coID"
+                    android:id="@+id/status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -119,26 +214,87 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Payment Method:"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/paymentMethod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="25dp"
+                    android:minHeight="48dp"
+                    android:padding="10dp"
+                    android:textSize="18dp"/>
+
+                <TextView
+                    android:id="@+id/tvPayment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="Payment:"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/ttlPayment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="25dp"
+                    android:minHeight="48dp"
+                    android:padding="10dp"
+                    android:textSize="18dp"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
                     android:layout_marginTop="15dp"
                     android:layout_marginLeft="20dp"
                     android:text="Student:"
                     android:textColor="#000000"
                     android:textSize="20dp" />
 
-                <Button
-                    android:id="@+id/viewS"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginLeft="20dp"
-                    android:text="View" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp">
+                    android:layout_marginTop="15dp">
+
+                    <Button
+                        android:id="@+id/viewS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="View" />
+
+                    <ImageView
+                        android:id="@+id/chat"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="6dp"
+                        app:srcCompat="@drawable/speak"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp">
 
                     <Button
                         android:id="@+id/approve"
@@ -161,8 +317,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:gravity="center">
 
                     <Button
@@ -170,6 +325,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/pick"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/done"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Received Cash"/>
 
                 </LinearLayout>
 

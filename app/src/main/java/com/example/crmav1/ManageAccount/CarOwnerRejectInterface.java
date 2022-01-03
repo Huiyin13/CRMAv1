@@ -71,6 +71,7 @@ public class CarOwnerRejectInterface extends AppCompatActivity {
                             Toast.makeText(CarOwnerRejectInterface.this, "You have unlist the car.", Toast.LENGTH_SHORT).show() ;
                             Intent intent2reject = new Intent(CarOwnerRejectInterface.this, CarOwnerListInterface.class);
                             startActivity(intent2reject);
+                            finish();
                         }else {
                             Toast.makeText(CarOwnerRejectInterface.this, "All field must be filled!", Toast.LENGTH_SHORT).show();
                         }
