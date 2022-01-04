@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.example.crmav1.Model.Admin;
+import com.example.crmav1.Model.CarOwner;
+import com.example.crmav1.Model.Student;
 import com.example.crmav1.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,7 +33,53 @@ public class LoginInterface extends AppCompatActivity {
     private Button login, register;
 
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference dbRef;
+    private FirebaseUser user;
+    private DatabaseReference dbRef, userRef;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user !=null){
+            userRef = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()){
+                        Student std = snapshot.getValue(Student.class);
+                        CarOwner co = snapshot.getValue(CarOwner.class);
+                        Admin admin = snapshot.getValue(Admin.class);
+
+                        if (std.getUserType().equals("Student")){
+                            Intent intent2main = new Intent(LoginInterface.this, StudentMainInterface.class);
+                            intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent2main);
+                            finish();
+                        }
+
+                        else if (co.getUserType().equalsIgnoreCase("Car Owner")){
+                            Intent intent2main = new Intent(LoginInterface.this, CarOwnerMainInterface.class);
+                            intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent2main);
+                            finish();
+                        }
+                        else  if (admin.getUserType().equalsIgnoreCase("Admin")){
+                            Intent intent2main = new Intent(LoginInterface.this, AdminMainInterface.class);
+                            intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent2main);
+                            finish();
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,13 +125,18 @@ public class LoginInterface extends AppCompatActivity {
                                 String userType = snapshot.child("userType").getValue().toString();
                                 if(userType.equalsIgnoreCase("Student") && student.isChecked()){
                                     if(firebaseAuth.getCurrentUser().isEmailVerified()){
-                                        startActivity(new Intent(getApplicationContext(), StudentMainInterface.class));
-                                        finish();
+                                        Intent intent2std = new Intent(LoginInterface.this, StudentMainInterface.class);
+                                        intent2std.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent2std);
                                         Toast.makeText(LoginInterface.this, "Successfully login as a student.", Toast.LENGTH_SHORT).show();
+                                        finish();
                                     }
                                     else if(firebaseAuth != null)
                                     {
-                                        startActivity(new Intent(LoginInterface.this,StudentMainInterface.class));
+                                        Intent intent2std = new Intent(LoginInterface.this, StudentMainInterface.class);
+                                        intent2std.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent2std);
+                                        Toast.makeText(LoginInterface.this, "Successfully login as a student.", Toast.LENGTH_SHORT).show();
                                         finish();
                                     }
                                     else{
@@ -91,7 +145,9 @@ public class LoginInterface extends AppCompatActivity {
                                 }
                                 else if(userType.equalsIgnoreCase("Car Owner") && carOwner.isChecked()){
                                     if(firebaseAuth.getCurrentUser().isEmailVerified()){
-                                        startActivity(new Intent(getApplicationContext(), CarOwnerMainInterface.class));
+                                        Intent intent2co = new Intent(LoginInterface.this, CarOwnerMainInterface.class);
+                                        intent2co.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent2co);
                                         finish();
                                         Toast.makeText(LoginInterface.this, "Successfully login as a car owner.", Toast.LENGTH_SHORT).show();
                                     }
@@ -101,7 +157,9 @@ public class LoginInterface extends AppCompatActivity {
                                 }
                                 else if(userType.equalsIgnoreCase("Admin") && admin.isChecked()){
                                     if(firebaseAuth.getCurrentUser().isEmailVerified()){
-                                        startActivity(new Intent(getApplicationContext(), AdminMainInterface.class));
+                                        Intent intent2a = new Intent(LoginInterface.this, AdminMainInterface.class);
+                                        intent2a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent2a);
                                         finish();
                                         Toast.makeText(LoginInterface.this, "Successfully login as a admin.", Toast.LENGTH_SHORT).show();
                                     }
@@ -141,17 +199,4 @@ public class LoginInterface extends AppCompatActivity {
 
     }
 
-    //maintain the session
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//
-//        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-//
-//        if(firebaseUser != null)
-//        {
-//            startActivity(new Intent(LoginInterface.this,MainActivity.class));
-//            finish();
-//        }
-//    }
 }
