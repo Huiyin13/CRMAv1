@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.crmav1.Adapter.ChatAdapter;
+import com.example.crmav1.ManageBooking.CBookingDetailsInterface;
+import com.example.crmav1.ManageBooking.SBookingDetailsInterface;
 import com.example.crmav1.Model.CarOwner;
 import com.example.crmav1.Model.Chat;
 import com.example.crmav1.Model.Student;
@@ -44,7 +47,7 @@ public class ChatInterface extends AppCompatActivity {
     private FirebaseUser user;
     private DatabaseReference nameRef, chatRef;
 
-    private String uid;
+    private String uid, userType, bid, cid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,9 @@ public class ChatInterface extends AppCompatActivity {
         message = findViewById(R.id.message);
         back = findViewById(R.id.back);
         send = findViewById(R.id.send);
+
+        bid = getIntent().getStringExtra("bid");
+        cid = getIntent().getStringExtra("cid");
 
         messaging = findViewById(R.id.chatMsg);
         messaging.setHasFixedSize(true);
@@ -75,11 +81,13 @@ public class ChatInterface extends AppCompatActivity {
                     Student student = snapshot.getValue(Student.class);
                     if (carOwner.getUserType().equalsIgnoreCase("Car Owner")){
                         name.setText(carOwner.getCoName());
+                        userType = carOwner.getUserType();
 
                         System.out.println(carOwner.getCoName());
                     }
                     else if (student.getUserType().equalsIgnoreCase("Student")){
                         name.setText(student.getsName());
+                        userType = student.getUserType();
                         System.out.println(student.getsName());
                     }
                 }
@@ -109,6 +117,19 @@ public class ChatInterface extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (userType.equalsIgnoreCase("Student")){
+                    Intent intent2back = new Intent(ChatInterface.this, SBookingDetailsInterface.class);
+                    intent2back.putExtra("bid", bid);
+                    intent2back.putExtra("coId", uid);
+                    startActivity(intent2back);
+                }
+                else {
+                    Intent intent2back = new Intent(ChatInterface.this, CBookingDetailsInterface.class);
+                    intent2back.putExtra("bid", bid);
+                    intent2back.putExtra("sId", uid);
+                    intent2back.putExtra("cid", cid);
+                    startActivity(intent2back);
+                }
 
             }
         });
