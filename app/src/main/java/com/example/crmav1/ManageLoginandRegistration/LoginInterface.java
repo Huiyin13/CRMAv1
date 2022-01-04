@@ -51,23 +51,29 @@ public class LoginInterface extends AppCompatActivity {
                         Admin admin = snapshot.getValue(Admin.class);
 
                         if (std.getUserType().equals("Student")){
-                            Intent intent2main = new Intent(LoginInterface.this, StudentMainInterface.class);
-                            intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent2main);
-                            finish();
+                            if(firebaseAuth.getCurrentUser().isEmailVerified()) {
+                                Intent intent2main = new Intent(LoginInterface.this, StudentMainInterface.class);
+                                intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent2main);
+                                finish();
+                            }
                         }
 
                         else if (co.getUserType().equalsIgnoreCase("Car Owner")){
-                            Intent intent2main = new Intent(LoginInterface.this, CarOwnerMainInterface.class);
-                            intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent2main);
-                            finish();
+                            if(firebaseAuth.getCurrentUser().isEmailVerified()) {
+                                Intent intent2main = new Intent(LoginInterface.this, CarOwnerMainInterface.class);
+                                intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent2main);
+                                finish();
+                            }
                         }
                         else  if (admin.getUserType().equalsIgnoreCase("Admin")){
-                            Intent intent2main = new Intent(LoginInterface.this, AdminMainInterface.class);
-                            intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent2main);
-                            finish();
+                            if(firebaseAuth.getCurrentUser().isEmailVerified()){
+                                Intent intent2main = new Intent(LoginInterface.this, AdminMainInterface.class);
+                                intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent2main);
+                                finish();
+                            }
                         }
                     }
                 }
@@ -131,14 +137,14 @@ public class LoginInterface extends AppCompatActivity {
                                         Toast.makeText(LoginInterface.this, "Successfully login as a student.", Toast.LENGTH_SHORT).show();
                                         finish();
                                     }
-                                    else if(firebaseAuth != null)
-                                    {
-                                        Intent intent2std = new Intent(LoginInterface.this, StudentMainInterface.class);
-                                        intent2std.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(intent2std);
-                                        Toast.makeText(LoginInterface.this, "Successfully login as a student.", Toast.LENGTH_SHORT).show();
-                                        finish();
-                                    }
+//                                    else if(firebaseAuth != null)
+//                                    {
+//                                        Intent intent2std = new Intent(LoginInterface.this, StudentMainInterface.class);
+//                                        intent2std.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                        startActivity(intent2std);
+//                                        Toast.makeText(LoginInterface.this, "Successfully login as a student.", Toast.LENGTH_SHORT).show();
+//                                        finish();
+//                                    }
                                     else{
                                         startActivity(new Intent(getApplicationContext(), EmailVerificationInterface.class));
                                     }
@@ -151,6 +157,14 @@ public class LoginInterface extends AppCompatActivity {
                                         finish();
                                         Toast.makeText(LoginInterface.this, "Successfully login as a car owner.", Toast.LENGTH_SHORT).show();
                                     }
+//                                    else if(firebaseAuth != null)
+//                                    {
+//                                        Intent intent2main = new Intent(LoginInterface.this, CarOwnerMainInterface.class);
+//                                        intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                        startActivity(intent2main);
+//                                        Toast.makeText(LoginInterface.this, "Successfully login as a car owner.", Toast.LENGTH_SHORT).show();
+//                                        finish();
+//                                    }
                                     else{
                                         startActivity(new Intent(getApplicationContext(), EmailVerificationInterface.class));
                                     }
@@ -163,6 +177,14 @@ public class LoginInterface extends AppCompatActivity {
                                         finish();
                                         Toast.makeText(LoginInterface.this, "Successfully login as a admin.", Toast.LENGTH_SHORT).show();
                                     }
+//                                    else if(firebaseAuth != null)
+//                                    {
+//                                        Intent intent2main = new Intent(LoginInterface.this, CarOwnerMainInterface.class);
+//                                        intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                        startActivity(intent2main);
+//                                        finish();
+//                                        Toast.makeText(LoginInterface.this, "Successfully login as a admin.", Toast.LENGTH_SHORT).show();
+//                                    }
                                     else{
                                          startActivity(new Intent(getApplicationContext(), EmailVerificationInterface.class));
                                     }

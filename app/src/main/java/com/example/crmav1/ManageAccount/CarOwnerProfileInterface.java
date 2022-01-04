@@ -201,7 +201,7 @@ public class CarOwnerProfileInterface extends AppCompatActivity {
                         coID.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                String userID = auth.getUid();
+                                String userID = coID.getUid();
                                 DatabaseReference ID = FirebaseDatabase.getInstance().getReference("Users");
                                 ID.child(userID).removeValue();
                                 Toast.makeText(CarOwnerProfileInterface.this, "Your account is deleted. Please REGISTER again for login!!", Toast.LENGTH_SHORT).show();

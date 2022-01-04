@@ -207,16 +207,13 @@ public class StudentProfileInterface extends AppCompatActivity {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
 
-                        FirebaseUser stdID = FirebaseAuth.getInstance().getCurrentUser();
-                        DatabaseReference deleteC = FirebaseDatabase.getInstance().getReference("Users").child(uid);
-
-
-                        stdID.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        FirebaseUser sID = FirebaseAuth.getInstance().getCurrentUser();
+                        sID.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
-                            public void onSuccess(Void unused) {
-                                        /*String userID = auth.getUid();
-                                                DatabaseReference ID = FirebaseDatabase.getInstance().getReference("Users");
-                                                ID.child(userID).removeValue();*/
+                            public void onComplete(@NonNull Task<Void> task) {
+                                String userID = sID.getUid();
+                                DatabaseReference ID = FirebaseDatabase.getInstance().getReference("Users");
+                                ID.child(userID).removeValue();
                                 Toast.makeText(StudentProfileInterface.this, "Your account is deleted. Please REGISTER again for login!!", Toast.LENGTH_SHORT).show();
                                 Intent intent2delete = new Intent(StudentProfileInterface.this, LoginInterface.class);
                                 startActivity(intent2delete);
