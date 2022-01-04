@@ -104,6 +104,14 @@ public class CarOwnerAccountInterface extends AppCompatActivity {
             }
         });
 
+        faq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2faq = new Intent(CarOwnerAccountInterface.this, CViewFaqInterface.class);
+                startActivity(intent2faq);
+            }
+        });
+
         //bottom nav
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.home);

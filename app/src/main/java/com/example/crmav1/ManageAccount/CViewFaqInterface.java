@@ -1,4 +1,4 @@
-package com.example.crmav1.ManageLoginandRegistration;
+package com.example.crmav1.ManageAccount;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,53 +9,47 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.crmav1.Adapter.CSFaqAdapter;
 import com.example.crmav1.Adapter.CarListAdapter;
-import com.example.crmav1.Adapter.FaqAdapter;
-import com.example.crmav1.ManageAccount.AddFaqInterface;
-import com.example.crmav1.ManageAccount.CarOwnerListInterface;
-import com.example.crmav1.ManageAccount.CarOwnerViewInterface;
-import com.example.crmav1.ManageAccount.StudentAccountInterface;
-import com.example.crmav1.ManageCar.ACarListInterface;
+import com.example.crmav1.ManageBooking.CBookingListInterface;
+import com.example.crmav1.ManageLoginandRegistration.CarOwnerMainInterface;
+import com.example.crmav1.Model.Car;
 import com.example.crmav1.Model.FAQ;
 import com.example.crmav1.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class AdminMainInterface extends AppCompatActivity implements FaqAdapter.ItemClickListener {
+public class CViewFaqInterface extends AppCompatActivity implements CSFaqAdapter.ItemClickListener {
 
-    private Button logout, faq;
     private RecyclerView recyclerView;
-
-    private FirebaseAuth auth;
     private DatabaseReference faqRef;
-    private ArrayList<FAQ> faqArrayList;
-    private FaqAdapter adapter;
+    private ArrayList<FAQ> faqList;
+    private CSFaqAdapter adapter;
+    private Button back;
+    private String name, email, status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_main_interface);
+        setContentView(R.layout.activity_cview_faq_interface);
 
-        logout = findViewById(R.id.aLogout);
-        faq = findViewById(R.id.addFaq);
         recyclerView = findViewById(R.id.faqListView);
+        back = findViewById(R.id.back);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        faqArrayList = new ArrayList<>();
+        faqList = new ArrayList<>();
 
-        adapter = new FaqAdapter(this, faqArrayList, this);
+        adapter = new CSFaqAdapter(this, faqList);
         recyclerView.setAdapter(adapter);
 
         faqRef = FirebaseDatabase.getInstance().getReference("Faq");
@@ -66,9 +60,9 @@ public class AdminMainInterface extends AppCompatActivity implements FaqAdapter.
                 if (snapshot.exists()){
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         FAQ faq1 = dataSnapshot.getValue(FAQ.class);
-
-                            faqArrayList.add(faq1);
-
+                        if (faq1.getUserType().equals("Car Owner")){
+                            faqList.add(faq1);
+                        }
                     }
                     Toast.makeText(getApplicationContext(), "Data Found", Toast.LENGTH_LONG).show();
                     adapter.notifyDataSetChanged();
@@ -84,26 +78,14 @@ public class AdminMainInterface extends AppCompatActivity implements FaqAdapter.
             }
         });
 
-        faq.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2faq = new Intent(AdminMainInterface.this, AddFaqInterface.class);
-                startActivity(intent2faq);
+                Intent intent2back = new Intent(CViewFaqInterface.this, CarOwnerAccountInterface.class);
+                startActivity(intent2back);
             }
         });
 
-
-        auth = FirebaseAuth.getInstance();
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                auth.signOut();
-                Intent logout = new Intent(AdminMainInterface.this, LoginInterface.class);
-                logout.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(logout);
-                finish();
-            }
-        });
         //bottom nav
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.home);
@@ -111,15 +93,17 @@ public class AdminMainInterface extends AppCompatActivity implements FaqAdapter.
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.car:
-                        startActivity(new Intent(getApplicationContext(), ACarListInterface.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.list:
-                        startActivity(new Intent(getApplicationContext(), CarOwnerListInterface.class));
+                    case R.id.book:
+                        startActivity(new Intent(getApplicationContext(), CBookingListInterface.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.home:
+                        startActivity(new Intent(CViewFaqInterface.this, CarOwnerMainInterface.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.account:
+                        startActivity(new Intent(CViewFaqInterface.this, CarOwnerAccountInterface.class));
+                        overridePendingTransition(0,0);
                         return true;
                 }
                 return false;

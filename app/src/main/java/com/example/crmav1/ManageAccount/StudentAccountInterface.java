@@ -30,7 +30,7 @@ public class StudentAccountInterface extends AppCompatActivity {
     private Button logout, faq, edit;
     private FirebaseUser Student;
     private DatabaseReference stdDBRef;
-    private String stdID;
+    private String stdID, emailS, nameS;
     private FirebaseAuth auth;
 
     @Override
@@ -54,8 +54,8 @@ public class StudentAccountInterface extends AppCompatActivity {
         stdDBRef.child(stdID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String nameS = snapshot.child("sName").getValue().toString();
-                String emailS = snapshot.child("sEmail").getValue().toString();
+                nameS = snapshot.child("sName").getValue().toString();
+                emailS = snapshot.child("sEmail").getValue().toString();
                 String icS = snapshot.child("sIC").getValue().toString();
                 String campusS = snapshot.child("sCampus").getValue().toString();
                 String ICUriS = "" + snapshot.child("sICUri").getValue();
@@ -88,6 +88,16 @@ public class StudentAccountInterface extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(StudentAccountInterface.this,"Something Wrong Happened!",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        faq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2faq = new Intent(StudentAccountInterface.this, SViewFaqInterface.class);
+                intent2faq.putExtra("nameS", nameS);
+                intent2faq.putExtra("emailS", emailS);
+                startActivity(intent2faq);
             }
         });
 

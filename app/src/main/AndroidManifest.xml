@@ -16,6 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CRMAv1">
         <activity
+            android:name=".ManageAccount.CViewFaqInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageAccount.SViewFaqInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageAccount.AddFaqInterface"
+            android:exported="false" />
+        <activity
             android:name=".ManageBooking.SCarOwnerProfileInterface"
             android:exported="false" />
         <activity
@@ -95,6 +104,9 @@
             android:exported="false" />
         <activity
             android:name=".ManageAccount.CarOwnerProfileInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageAccount.UpdateFaqInterface"
             android:exported="false" />
         <activity
             android:name=".ManageAccount.CarOwnerAccountInterface"

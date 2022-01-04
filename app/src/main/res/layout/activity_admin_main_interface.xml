@@ -28,6 +28,24 @@
                 android:text="@string/logout"
                 android:layout_marginTop="100dp"
                 android:layout_gravity="center"/>
+            <Button
+                android:id="@+id/addFaq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add FAQ"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/faqListView"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/faq_list_adapter" />
 
 
         </LinearLayout>
