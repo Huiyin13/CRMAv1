@@ -28,10 +28,10 @@ import java.util.ArrayList;
 
 public class SBookingHistoryInterface extends AppCompatActivity implements BookingListAdapter.ItemClickListener {
 
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView, recyclerView2;
     private DatabaseReference bookRef;
-    private ArrayList<Booking> bookings;
-    private BookingListAdapter adapter;
+    private ArrayList<Booking> bookings, bookings2;
+    private BookingListAdapter adapter, adapter2;
     private FirebaseUser auth;
 
     @Override
@@ -47,6 +47,14 @@ public class SBookingHistoryInterface extends AppCompatActivity implements Booki
         adapter = new BookingListAdapter(this, bookings, this);
         recyclerView.setAdapter(adapter);
 
+        recyclerView2 = findViewById(R.id.bookListView2);
+        recyclerView2.setHasFixedSize(true);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(this));
+        bookings2 = new ArrayList<>();
+
+        adapter2 = new BookingListAdapter(this, bookings2, this);
+        recyclerView2.setAdapter(adapter2);
+
         auth = FirebaseAuth.getInstance().getCurrentUser();
         bookRef = FirebaseDatabase.getInstance().getReference("Booking").child(auth.getUid());
 //        DatabaseReference payment = FirebaseDatabase.getInstance().getReference("Car").child(coId).child(cid).child("Booking").child(user.getUid()).child(bid).child("bStatus");
@@ -57,13 +65,17 @@ public class SBookingHistoryInterface extends AppCompatActivity implements Booki
                 if (snapshot.exists()){
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         Booking book = dataSnapshot.getValue(Booking.class);
-                        if (book.getbStatus().equalsIgnoreCase("Completed")){
+                        if (book.getbStatus().equalsIgnoreCase("Completed") ){
                             bookings.add(book);
+                        }
+                        else if (book.getbStatus().equalsIgnoreCase("Cancelled") ){
+                            bookings2.add(book);
                         }
 
                     }
                     Toast.makeText(getApplicationContext(), "Data Found", Toast.LENGTH_LONG).show();
                     adapter.notifyDataSetChanged();
+                    adapter2.notifyDataSetChanged();
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"No Data Found", Toast.LENGTH_LONG).show();

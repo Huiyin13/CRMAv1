@@ -11,11 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.crmav1.ManageAccount.CarOwnerAccountInterface;
-import com.example.crmav1.ManageAccount.CarOwnerListInterface;
-import com.example.crmav1.ManageAccount.CarOwnerRejectInterface;
-import com.example.crmav1.ManageAccount.CarOwnerViewInterface;
-import com.example.crmav1.ManageLoginandRegistration.CarOwnerMainInterface;
+import com.example.crmav1.ManageAccount.StudentAccountInterface;
+import com.example.crmav1.ManageLoginandRegistration.StudentMainInterface;
 import com.example.crmav1.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,14 +21,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class CBookingRejectInterface extends AppCompatActivity {
-
+public class SBookingCancelReason extends AppCompatActivity {
     private Button save,cancel;
     private EditText reason;
-    private String bid,rejectReason, sId, cid;
+    private String bid,cancelreason, coId, cid;
 
     private FirebaseDatabase db;
     private FirebaseUser user;
@@ -40,22 +35,22 @@ public class CBookingRejectInterface extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cbooking_reject_interface);
+        setContentView(R.layout.activity_sbooking_cancel_reason);
 
         save = findViewById(R.id.aSave);
         cancel = findViewById(R.id.aCancel);
         reason = findViewById(R.id.rReason);
 
         bid = getIntent().getStringExtra("bid");
-        sId = getIntent().getStringExtra("sId");
+        coId = getIntent().getStringExtra("coId");
         cid = getIntent().getStringExtra("cid");
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2cancel = new Intent(CBookingRejectInterface.this, CBookingDetailsInterface.class);
+                Intent intent2cancel = new Intent(SBookingCancelReason.this, SBookingDetailsInterface.class);
                 intent2cancel.putExtra("bid",bid);
-                intent2cancel.putExtra("sId", sId);
+                intent2cancel.putExtra("coId", coId);
                 intent2cancel.putExtra("cid", cid);
                 startActivity(intent2cancel);
             }
@@ -67,26 +62,26 @@ public class CBookingRejectInterface extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 db = FirebaseDatabase.getInstance();
-                book = db.getReference("Booking").child(sId).child(bid);
-                book2 = db.getReference("Car").child(user.getUid()).child(cid).child("Booking").child(sId).child(bid);
+                book = db.getReference("Booking").child(user.getUid()).child(bid);
+                book2 = db.getReference("Car").child(coId).child(cid).child("Booking").child(user.getUid()).child(bid);
 
                 book.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                       if (reason.getText().length()!=0){
-                           rejectReason = reason.getText().toString();
+                        if (reason.getText().length()!=0){
+                            cancelreason = reason.getText().toString();
 
-                           book.child("bStatus").setValue("Rejected");
-                           book.child("bRejectReason").setValue(rejectReason);
-                           book2.child("bStatus").setValue("Rejected");
-                           book2.child("bRejectReason").setValue(rejectReason);
-                           Toast.makeText(CBookingRejectInterface.this, "You have rejected this booking.", Toast.LENGTH_SHORT).show() ;
-                           Intent intent2reject = new Intent(CBookingRejectInterface.this, CBookingListInterface.class);
-                           startActivity(intent2reject);
-                           finish();
-                       }else {
-                           Toast.makeText(CBookingRejectInterface.this, "All field must be filled!", Toast.LENGTH_SHORT).show();
-                       }
+                            book.child("bStatus").setValue("Cancelled");
+                            book.child("bCancelReason").setValue(cancelreason);
+                            book2.child("bStatus").setValue("Cancelled");
+                            book2.child("bCancelReason").setValue(cancelreason);
+                            Toast.makeText(SBookingCancelReason.this, "You have cancelled this booking.", Toast.LENGTH_SHORT).show() ;
+                            Intent intent2reject = new Intent(SBookingCancelReason.this, BookingListInterface.class);
+                            startActivity(intent2reject);
+                            finish();
+                        }else {
+                            Toast.makeText(SBookingCancelReason.this, "All field must be filled!", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -105,21 +100,20 @@ public class CBookingRejectInterface extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.book:
-                        startActivity(new Intent(getApplicationContext(), CBookingListInterface.class));
+                        startActivity(new Intent(getApplicationContext(), BookingListInterface.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.home:
-                        startActivity(new Intent(CBookingRejectInterface.this, CarOwnerMainInterface.class));
+                        startActivity(new Intent(SBookingCancelReason.this, StudentMainInterface.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.account:
-                        startActivity(new Intent(CBookingRejectInterface.this, CarOwnerAccountInterface.class));
+                        startActivity(new Intent(SBookingCancelReason.this, StudentAccountInterface.class));
                         overridePendingTransition(0,0);
                         return true;
                 }
                 return false;
             }
         });
-
     }
 }

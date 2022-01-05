@@ -29,10 +29,10 @@ import java.util.ArrayList;
 
 public class CBookingHistoryInterface extends AppCompatActivity implements CBookingListAdapter.ItemClickListener {
 
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView,recyclerView2;
     private DatabaseReference bookRef;
-    private ArrayList<Booking> bookings;
-    private CBookingListAdapter adapter;
+    private ArrayList<Booking> bookings, bookingsCancel;
+    private CBookingListAdapter adapter, adapter2;
     private FirebaseUser auth;
     private String sid;
 
@@ -45,9 +45,15 @@ public class CBookingHistoryInterface extends AppCompatActivity implements CBook
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         bookings = new ArrayList<>();
+        recyclerView2 = findViewById(R.id.bookListView2);
+        recyclerView2.setHasFixedSize(true);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(this));
+        bookingsCancel = new ArrayList<>();
 
         adapter = new CBookingListAdapter(this, bookings,  this);
         recyclerView.setAdapter(adapter);
+        adapter2 = new CBookingListAdapter(this, bookingsCancel,  this);
+        recyclerView2.setAdapter(adapter2);
 
         auth = FirebaseAuth.getInstance().getCurrentUser();
         bookRef = FirebaseDatabase.getInstance().getReference("Booking");
@@ -65,13 +71,18 @@ public class CBookingHistoryInterface extends AppCompatActivity implements CBook
                                     bookings.add(booked);
                                 }
 
+                                else if (booked.getbStatus().equalsIgnoreCase("Cancelled")){
+                                    bookingsCancel.add(booked);
+                                }
+
                             }else {
-                                Toast.makeText(getApplicationContext(), "No Current Booking", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "No Booking Record", Toast.LENGTH_LONG).show();
                             }
                         }
                     }
                     Toast.makeText(getApplicationContext(), "Data Found", Toast.LENGTH_LONG).show();
                     adapter.notifyDataSetChanged();
+                    adapter2.notifyDataSetChanged();
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"No Data Found", Toast.LENGTH_LONG).show();

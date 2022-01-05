@@ -186,7 +186,29 @@
                     android:padding="10dp"
                     android:textSize="18dp"
                     android:background="@drawable/input_text"/>
+                <TextView
+                    android:id="@+id/tvcancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="Cancel Reason:"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
 
+                <TextView
+                    android:id="@+id/cancelReason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="25dp"
+                    android:minHeight="48dp"
+                    android:padding="10dp"
+                    android:textSize="18dp"
+                    android:background="@drawable/input_text"/>
 
                 <TextView
                     android:layout_width="wrap_content"

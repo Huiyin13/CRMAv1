@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CRMAv1">
         <activity
+            android:name=".ManageBooking.SBookingCancelReason"
+            android:exported="false" />
+        <activity
             android:name=".ManageAccount.CViewFaqInterface"
             android:exported="false" />
         <activity
