@@ -37,9 +37,9 @@ import com.google.firebase.database.ValueEventListener;
 
 public class SBookingDetailsInterface extends AppCompatActivity {
 
-    private TextView timeF, timeT, dateF, dateT, status, payment, memo, reject, tvMemo, tvReject;
+    private TextView timeF, timeT, dateF, dateT, status, payment, memo, reject, tvMemo, tvReject, tvCancel,reasonCancel;
     private ImageView chat;
-    private Button pay, viewCo, cancel, complete;
+    private Button pay, viewCo, cancel, complete, cancel2;
 
     private FirebaseUser user;
     private DatabaseReference display, updateB, updateB2, paymentB;
@@ -62,10 +62,13 @@ public class SBookingDetailsInterface extends AppCompatActivity {
         memo = findViewById(R.id.memo);
         viewCo = findViewById(R.id.viewC);
         cancel = findViewById(R.id.cancel);
+        cancel2 = findViewById(R.id.cancel2);
         complete = findViewById(R.id.complete);
         reject = findViewById(R.id.reason);
         tvMemo = findViewById(R.id.tvMemo);
         tvReject = findViewById(R.id.tvReject);
+        tvCancel = findViewById(R.id.tvcancel);
+        reasonCancel = findViewById(R.id.cancelReason);
 
         coId = getIntent().getStringExtra("coId");
         bid = getIntent().getStringExtra("bid");
@@ -109,11 +112,14 @@ public class SBookingDetailsInterface extends AppCompatActivity {
                     payment.setText("RM " +booking.getTtlFee());
                     memo.setText(booking.getMemo());
 
-                    if (booking.getbStatus().equalsIgnoreCase("Applying") || booking.getbStatus().equalsIgnoreCase("Accepted")){
+                    if (booking.getbStatus().equalsIgnoreCase("Applying") ){
                         complete.setVisibility(View.GONE);
                         pay.setVisibility(View.GONE);
                         tvReject.setVisibility(View.GONE);
                         reject.setVisibility(View.GONE);
+                        tvCancel.setVisibility(View.GONE);
+                        reasonCancel.setVisibility(View.GONE);
+                        cancel2.setVisibility(View.GONE);
                         cancel.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -122,11 +128,44 @@ public class SBookingDetailsInterface extends AppCompatActivity {
                             }
                         });
                     }
+                    else if (booking.getbStatus().equalsIgnoreCase("Cancelled")){
+                        complete.setVisibility(View.GONE);
+                        pay.setVisibility(View.GONE);
+                        tvReject.setVisibility(View.GONE);
+                        reject.setVisibility(View.GONE);
+                        cancel2.setVisibility(View.GONE);
+                        cancel.setVisibility(View.GONE);
+                        reasonCancel.setText(booking.getbCancelReason());
+
+                    }
+                    else if (booking.getbStatus().equalsIgnoreCase("Accepted")){
+                        complete.setVisibility(View.GONE);
+                        pay.setVisibility(View.GONE);
+                        tvReject.setVisibility(View.GONE);
+                        reject.setVisibility(View.GONE);
+                        tvCancel.setVisibility(View.GONE);
+                        reasonCancel.setVisibility(View.GONE);
+                        cancel.setVisibility(View.GONE);
+                        cancel2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent2cancel = new Intent(SBookingDetailsInterface.this, SBookingCancelReason.class);
+                                intent2cancel.putExtra("bid", bid);
+                                intent2cancel.putExtra("coId", coId);
+                                intent2cancel.putExtra("cid", cid);
+                                startActivity(intent2cancel);
+                                finish();
+                            }
+                        });
+                    }
                     else if (booking.getbStatus().equalsIgnoreCase("Paid")){
                         cancel.setVisibility(View.GONE);
                         pay.setVisibility(View.GONE);
                         tvReject.setVisibility(View.GONE);
                         reject.setVisibility(View.GONE);
+                        tvCancel.setVisibility(View.GONE);
+                        reasonCancel.setVisibility(View.GONE);
+                        cancel2.setVisibility(View.GONE);
 
                         complete.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -164,6 +203,9 @@ public class SBookingDetailsInterface extends AppCompatActivity {
                         complete.setVisibility(View.GONE);
                         tvReject.setVisibility(View.GONE);
                         reject.setVisibility(View.GONE);
+                        tvCancel.setVisibility(View.GONE);
+                        reasonCancel.setVisibility(View.GONE);
+                        cancel2.setVisibility(View.GONE);
                         pay.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -184,6 +226,9 @@ public class SBookingDetailsInterface extends AppCompatActivity {
                         tvReject.setVisibility(View.GONE);
                         reject.setVisibility(View.GONE);
                         pay.setVisibility(View.GONE);
+                        tvCancel.setVisibility(View.GONE);
+                        reasonCancel.setVisibility(View.GONE);
+                        cancel2.setVisibility(View.GONE);
 
                     }
                     else {
@@ -191,6 +236,9 @@ public class SBookingDetailsInterface extends AppCompatActivity {
                         pay.setVisibility(View.GONE);
                         tvMemo.setVisibility(View.GONE);
                         memo.setVisibility(View.GONE);
+                        tvCancel.setVisibility(View.GONE);
+                        reasonCancel.setVisibility(View.GONE);
+                        cancel2.setVisibility(View.GONE);
                         reject.setText(booking.getbRejectReason());
                         cancel.setOnClickListener(new View.OnClickListener() {
                             @Override

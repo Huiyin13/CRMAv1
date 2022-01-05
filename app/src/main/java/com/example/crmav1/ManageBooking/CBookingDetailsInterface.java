@@ -30,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class CBookingDetailsInterface extends AppCompatActivity {
 
-    private TextView timeF, timeT, dateF, dateT, status, payment, payMethod;
+    private TextView timeF, timeT, dateF, dateT, status, payment, payMethod, tvCancel, cancelReason;
     private EditText memo;
     private ImageView chat;
     private Button viewS, reject, approve, pickup, paidReceive;
@@ -59,6 +59,8 @@ public class CBookingDetailsInterface extends AppCompatActivity {
         approve = findViewById(R.id.approve);
         pickup = findViewById(R.id.pickUp);
         paidReceive = findViewById(R.id.done);
+        tvCancel = findViewById(R.id.tvcancel);
+        cancelReason = findViewById(R.id.cancelReason);
 
         bid = getIntent().getStringExtra("bid");
         sId = getIntent().getStringExtra("sId");
@@ -102,6 +104,9 @@ public class CBookingDetailsInterface extends AppCompatActivity {
                            System.out.println("none");
                        }
                    }
+                }else {
+                    payMethod.setText("Still in progress.");
+                    System.out.println("none");
                 }
             }
 
@@ -132,7 +137,8 @@ public class CBookingDetailsInterface extends AppCompatActivity {
                     if (booking.getbStatus().equalsIgnoreCase("Applying")){
                         pickup.setVisibility(View.GONE);
                         paidReceive.setVisibility(View.GONE);
-
+                        tvCancel.setVisibility(View.GONE);
+                        cancelReason.setVisibility(View.GONE);
                         approve.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -166,6 +172,8 @@ public class CBookingDetailsInterface extends AppCompatActivity {
                         approve.setVisibility(View.GONE);
                         reject.setVisibility(View.GONE);
                         paidReceive.setVisibility(View.GONE);
+                        tvCancel.setVisibility(View.GONE);
+                        cancelReason.setVisibility(View.GONE);
                         pickup.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -184,6 +192,15 @@ public class CBookingDetailsInterface extends AppCompatActivity {
                         reject.setVisibility(View.GONE);
                         paidReceive.setVisibility(View.GONE);
                         pickup.setVisibility(View.GONE);
+                        tvCancel.setVisibility(View.GONE);
+                        cancelReason.setVisibility(View.GONE);
+                    }
+                    else if (booking.getbStatus().equalsIgnoreCase("Cancelled")){
+                        approve.setVisibility(View.GONE);
+                        reject.setVisibility(View.GONE);
+                        paidReceive.setVisibility(View.GONE);
+                        pickup.setVisibility(View.GONE);
+                        cancelReason.setText(booking.getbCancelReason());
                     }
                     else{
                         approve.setVisibility(View.GONE);
