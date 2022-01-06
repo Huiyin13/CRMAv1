@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.crmav1.ManageAccount.CarOwnerAccountInterface;
-import com.example.crmav1.ManageAccount.CarOwnerProfileInterface;
 import com.example.crmav1.ManageChat.ChatInterface;
 import com.example.crmav1.ManageLoginandRegistration.CarOwnerMainInterface;
 import com.example.crmav1.Model.Booking;
@@ -33,7 +32,7 @@ public class CBookingDetailsInterface extends AppCompatActivity {
     private TextView timeF, timeT, dateF, dateT, status, payment, payMethod, tvCancel, cancelReason;
     private EditText memo;
     private ImageView chat;
-    private Button viewS, reject, approve, pickup, paidReceive;
+    private Button viewS, reject, approve, pickup, paidReceive, viewCar;
 
     private FirebaseUser user;
     private DatabaseReference display, updateB, updateB2, paymentB;
@@ -55,6 +54,7 @@ public class CBookingDetailsInterface extends AppCompatActivity {
         memo = findViewById(R.id.memo);
         viewS = findViewById(R.id.viewS);
         reject = findViewById(R.id.reject);
+        viewCar = findViewById(R.id.viewCar);
         payMethod = findViewById(R.id.paymentMethod);
         approve = findViewById(R.id.approve);
         pickup = findViewById(R.id.pickUp);
@@ -65,6 +65,17 @@ public class CBookingDetailsInterface extends AppCompatActivity {
         bid = getIntent().getStringExtra("bid");
         sId = getIntent().getStringExtra("sId");
         cid = getIntent().getStringExtra("cid");
+
+        viewCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2view = new Intent(CBookingDetailsInterface.this, CCheckCarDetailsInterface.class);
+                intent2view.putExtra("sId", sId);
+                intent2view.putExtra("bid", bid);
+                intent2view.putExtra("cid", cid);
+                startActivity(intent2view);
+            }
+        });
 
         chat.setOnClickListener(new View.OnClickListener() {
             @Override

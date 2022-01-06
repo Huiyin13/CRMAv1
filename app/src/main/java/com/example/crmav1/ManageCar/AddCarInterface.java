@@ -95,8 +95,8 @@ public class AddCarInterface extends AppCompatActivity {
             public void onClick(View view) {
                 inputData();
                 Intent intent2next = new Intent(AddCarInterface.this, AddCarPhotoInterface.class);
-                if(!modelC.isEmpty() && !plateC.isEmpty() && !feeC.isEmpty() && !paxC.isEmpty()  &&
-                        !stickerUri.isEmpty()){
+                if(!modelC.isEmpty() && !plateC.isEmpty() && !feeC.isEmpty() && !paxC.isEmpty()  && !descriptionC.isEmpty() &&
+                        !stickerUri.isEmpty() && auto.isChecked() == true || manual.isChecked() == true){
                     intent2next.putExtra("modelC", modelC);
                     intent2next.putExtra("plateC", plateC);
                     intent2next.putExtra("feeC", feeC);
@@ -164,7 +164,7 @@ public class AddCarInterface extends AppCompatActivity {
             return;
         }
         if(descriptionC.isEmpty()){
-            description.setError("Person in Car is required");
+            description.setError("Description of Car is required");
             return;
         }
         if(auto.isChecked()){

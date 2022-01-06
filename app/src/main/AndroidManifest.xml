@@ -17,6 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CRMAv1">
         <activity
+            android:name=".ManageBooking.CCheckCarDetailsInterface"
+            android:exported="false" />
+        <activity
+            android:name=".ManageBooking.SCheckCarDetailsInterface"
+            android:exported="false" />
+        <activity
             android:name=".ManageBooking.SBookingCancelReason"
             android:exported="false" />
         <activity
