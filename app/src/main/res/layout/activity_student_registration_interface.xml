@@ -91,6 +91,7 @@
                 android:layout_marginEnd="25dp"
                 android:background="@drawable/input_text"
                 android:hint="Your IC No."
+                android:inputType="number"
                 android:minHeight="48dp"
                 android:padding="10dp" />
 
@@ -114,6 +115,7 @@
                 android:layout_marginEnd="25dp"
                 android:background="@drawable/input_text"
                 android:hint="Your Phone No."
+                android:inputType="phone"
                 android:minHeight="48dp"
                 android:padding="10dp" />
             <TextView
@@ -136,6 +138,7 @@
                 android:layout_marginEnd="25dp"
                 android:background="@drawable/input_text"
                 android:hint="Your Email"
+                android:inputType="textEmailAddress"
                 android:minHeight="48dp"
                 android:padding="10dp" />
             <TextView
