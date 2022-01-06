@@ -83,10 +83,11 @@ public class AddCarInterface extends AppCompatActivity {
         cameraPermission =  new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission =  new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
+
         sticker.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showImageDialog();
+                    showImageDialog();
             }
         }));
 
@@ -95,8 +96,8 @@ public class AddCarInterface extends AppCompatActivity {
             public void onClick(View view) {
                 inputData();
                 Intent intent2next = new Intent(AddCarInterface.this, AddCarPhotoInterface.class);
-                if(!modelC.isEmpty() && !plateC.isEmpty() && !feeC.isEmpty() && !paxC.isEmpty()  &&
-                        !stickerUri.isEmpty()){
+                if(!modelC.isEmpty() && !plateC.isEmpty() && !feeC.isEmpty() && !paxC.isEmpty()  && !descriptionC.isEmpty() &&
+                        !stickerUri.isEmpty() && auto.isChecked() == true || manual.isChecked() == true){
                     intent2next.putExtra("modelC", modelC);
                     intent2next.putExtra("plateC", plateC);
                     intent2next.putExtra("feeC", feeC);
@@ -155,17 +156,20 @@ public class AddCarInterface extends AppCompatActivity {
             plate.setError("Plate Number is required");
             return;
         }
-        if(feeC.isEmpty()){
-            fee.setError("Fee for Rent is required");
-            return;
-        }
         if(paxC.isEmpty()){
             pax.setError("Person in Car is required");
             return;
         }
-        if(descriptionC.isEmpty()){
-            description.setError("Person in Car is required");
+        if(feeC.isEmpty()){
+            fee.setError("Fee for Rent is required");
             return;
+        }
+        if(descriptionC.isEmpty()){
+            description.setError("Description of Car is required");
+            return;
+        }
+        if (auto.isChecked() == false || manual.isChecked() == false){
+            Toast.makeText(AddCarInterface.this, "Please select the car type.", Toast.LENGTH_SHORT).show();
         }
         if(auto.isChecked()){
             typeC = "Automatic";
@@ -173,9 +177,6 @@ public class AddCarInterface extends AppCompatActivity {
         else if(manual.isChecked()){
             typeC = "Manual";
         }
-
-
-
     }
 
     private void showImageDialog() {

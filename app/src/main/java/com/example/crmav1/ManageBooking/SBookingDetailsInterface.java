@@ -10,19 +10,15 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.crmav1.ManageAccount.StudentAccountInterface;
-import com.example.crmav1.ManageCar.CarDetailsInterface;
-import com.example.crmav1.ManageCar.CarListInterface;
 import com.example.crmav1.ManageChat.ChatInterface;
 import com.example.crmav1.ManageLoginandRegistration.StudentMainInterface;
 import com.example.crmav1.ManagePayment.PaymentSelectionInterface;
 import com.example.crmav1.Model.Booking;
-import com.example.crmav1.Model.Payment;
 import com.example.crmav1.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,7 +35,7 @@ public class SBookingDetailsInterface extends AppCompatActivity {
 
     private TextView timeF, timeT, dateF, dateT, status, payment, memo, reject, tvMemo, tvReject, tvCancel,reasonCancel;
     private ImageView chat;
-    private Button pay, viewCo, cancel, complete, cancel2;
+    private Button pay, viewCo, cancel, complete, cancel2, viewCar;
 
     private FirebaseUser user;
     private DatabaseReference display, updateB, updateB2, paymentB;
@@ -61,6 +57,7 @@ public class SBookingDetailsInterface extends AppCompatActivity {
         payment = findViewById(R.id.ttlPayment);
         memo = findViewById(R.id.memo);
         viewCo = findViewById(R.id.viewC);
+        viewCar = findViewById(R.id.viewCar);
         cancel = findViewById(R.id.cancel);
         cancel2 = findViewById(R.id.cancel2);
         complete = findViewById(R.id.complete);
@@ -80,6 +77,18 @@ public class SBookingDetailsInterface extends AppCompatActivity {
                 intent2chat.putExtra("uid", coId);
                 intent2chat.putExtra("bid", bid);
                 startActivity(intent2chat);
+            }
+        });
+
+        viewCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2view = new Intent(SBookingDetailsInterface.this, SCheckCarDetailsInterface.class);
+                intent2view.putExtra("coId", coId);
+                intent2view.putExtra("bid", bid);
+                intent2view.putExtra("cid", cid);
+                startActivity(intent2view);
+                finish();
             }
         });
 

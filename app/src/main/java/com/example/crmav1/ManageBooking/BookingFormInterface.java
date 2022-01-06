@@ -195,32 +195,26 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                        counter = 0;
 //                        counterisdateavailable = true;
-                        if (snapshot.exists())
-                        {
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren())
-                            {
-                                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren())
-                                {
+                        if (timeF.getText().length()!=0 && timeT.getText().length()!=0 && dateT.getText().length()!=0 && dateF.getText().length()!=0){
+                        if (snapshot.exists()) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                                     Booking booking = dataSnapshot1.getValue(Booking.class);
                                     System.out.println("From " + booking.getDateF() + " to " + booking.getDateT());
                                     counterisdateavailable = checkDate(fromdatestring, todatestring, booking.getDateF(), booking.getDateT());
                                     System.out.println(counterisdateavailable + " counterisavailable");
-                                    if (!counterisdateavailable)
-                                    {
-                                        counter ++;
+                                    if (!counterisdateavailable) {
+                                        counter++;
                                     }
 
                                 }
                             }
-                            if (counter > 0)
-                            {
+                            if (counter > 0) {
                                 counter = 0;
                                 Toast.makeText(BookingFormInterface.this, "Date is Not Available", Toast.LENGTH_SHORT).show();
                                 System.out.println("Cannot Book");
                                 payment.setText("Invalid Date");
-                            }
-                            else
-                            {
+                            } else {
                                 finalfrom = fromdatestring + " " + fromtimestring;
                                 finalto = todatestring + " " + totimestring;
                                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
@@ -245,8 +239,7 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
                                     e.printStackTrace();
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             finalfrom = fromdatestring + " " + fromtimestring;
                             finalto = todatestring + " " + totimestring;
                             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
@@ -272,6 +265,11 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
                             }
                         }
                     }
+                        else {
+                            Toast.makeText(BookingFormInterface.this, "You miss some info.", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -292,8 +290,8 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
                 {
                     Toast.makeText(BookingFormInterface.this, "Please Select another Date", Toast.LENGTH_SHORT).show();
                 }
-                else
-                {
+                else if (timeF.getText().length()!=0 && timeT.getText().length()!=0 && dateT.getText().length()!=0 && dateF.getText().length()!=0 && payment.getText().length()!=0){
+
                     user = FirebaseAuth.getInstance().getCurrentUser();
                     bookRef = FirebaseDatabase.getInstance().getReference("Car").child(coId).child(cid).child("Booking");
 //
@@ -344,13 +342,8 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
                             Toast.makeText(BookingFormInterface.this, "Failed to send.", Toast.LENGTH_SHORT).show();
                         }
                     });
-                }
-
-
-
-//                }else{
-//                    Toast.makeText(BookingFormInterface.this, "Selected Date Not Available", Toast.LENGTH_SHORT).show();
-//                }
+                }else {
+                    Toast.makeText(BookingFormInterface.this, "You miss some info.", Toast.LENGTH_SHORT).show();                }
             }
         });
 
