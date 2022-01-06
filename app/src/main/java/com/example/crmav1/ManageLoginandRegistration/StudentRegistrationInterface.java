@@ -95,16 +95,23 @@ public class StudentRegistrationInterface extends AppCompatActivity {
                 inputData();
                 Intent intent2next = new Intent(StudentRegistrationInterface.this, StudentIDPhotoInterface.class);
                 if(!fullName.isEmpty() && !emailAddress.isEmpty() && !phoneNo.isEmpty() && !stdIC.isEmpty()  && !newPassword.isEmpty()  && !confirmPassword.isEmpty()
-                        && !stdID.isEmpty()  && !phoneNo.isEmpty()){
-                    intent2next.putExtra("fullName", fullName);
-                    intent2next.putExtra("emailAddress", emailAddress);
-                    intent2next.putExtra("phoneNo", phoneNo);
-                    intent2next.putExtra("stdIC", stdIC);
-                    intent2next.putExtra("newPassword", newPassword);
-                    intent2next.putExtra("campusS", campusS);
-                    intent2next.putExtra("stdID", stdID);
-                    intent2next.putExtra("image_uriIC", image_uriIC);
-                    startActivity(intent2next);
+                        && !stdID.isEmpty()  && !phoneNo.isEmpty() && icPhoto.getDrawable()!=null && gambang.isChecked() == true || pekan.isChecked() == true){
+                    if (password.getText().length()> 6){
+                        if (newPassword.equals(confirmPassword)){
+                            intent2next.putExtra("fullName", fullName);
+                            intent2next.putExtra("emailAddress", emailAddress);
+                            intent2next.putExtra("phoneNo", phoneNo);
+                            intent2next.putExtra("stdIC", stdIC);
+                            intent2next.putExtra("newPassword", newPassword);
+                            intent2next.putExtra("campusS", campusS);
+                            intent2next.putExtra("stdID", stdID);
+                            intent2next.putExtra("image_uriIC", image_uriIC);
+                            startActivity(intent2next);
+                        }
+                    }
+                    else{
+                        Toast.makeText(StudentRegistrationInterface.this, "Minimum password length is 6.", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else{
                     Toast.makeText(StudentRegistrationInterface.this, "Some info missing!", Toast.LENGTH_SHORT).show();
@@ -123,28 +130,36 @@ public class StudentRegistrationInterface extends AppCompatActivity {
         confirmPassword = confirmPass.getText().toString();
         image_uriIC = image_uri.toString();
 
+        if(image_uriIC.isEmpty()){
+            Toast.makeText(getApplicationContext(), "Please insert your IC/ Passport Photo", Toast.LENGTH_SHORT).show();
+        }
+
         if(fullName.isEmpty()){
             name.setError("Full Name is required");
             return;
         }
-        if(emailAddress.isEmpty()){
-            email.setError("Email Address is required");
-            return;
-        }
-        if(phoneNo.isEmpty()){
-            phone.setError("Contact Number is required");
+        if(stdID.isEmpty()){
+            id.setError("Matric ID is required");
             return;
         }
         if(stdIC.isEmpty()){
             ic.setError("IC Number/ Passport Number is required");
             return;
         }
-        if(stdID.isEmpty()){
-            ic.setError("Matric ID is required");
+        if(phoneNo.isEmpty()){
+            phone.setError("Contact Number is required");
+            return;
+        }
+        if(emailAddress.isEmpty()){
+            email.setError("Email Address is required");
             return;
         }
         if(newPassword.isEmpty()){
             password.setError("Password is required");
+            return;
+        }
+        if (password.getText().length()> 6) {
+            password.setError("Password minimum length is 6");
             return;
         }
         if(confirmPassword.isEmpty()){
@@ -155,10 +170,6 @@ public class StudentRegistrationInterface extends AppCompatActivity {
         if(!newPassword.equals(confirmPassword)) {
             confirmPass.setError("Password does not match!");
             return;
-        }
-
-        if(icPhoto.getDrawable() == null){
-            Toast.makeText(getApplicationContext(), "Please insert your IC/ Passport Photo", Toast.LENGTH_SHORT).show();
         }
 
         if (gambang.isChecked() == false && pekan.isChecked() == false){
