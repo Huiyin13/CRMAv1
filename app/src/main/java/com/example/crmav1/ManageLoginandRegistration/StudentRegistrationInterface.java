@@ -96,7 +96,7 @@ public class StudentRegistrationInterface extends AppCompatActivity {
                 Intent intent2next = new Intent(StudentRegistrationInterface.this, StudentIDPhotoInterface.class);
                 if(!fullName.isEmpty() && !emailAddress.isEmpty() && !phoneNo.isEmpty() && !stdIC.isEmpty()  && !newPassword.isEmpty()  && !confirmPassword.isEmpty()
                         && !stdID.isEmpty()  && !phoneNo.isEmpty() && icPhoto.getDrawable()!=null && gambang.isChecked() == true || pekan.isChecked() == true){
-                    if (password.getText().length()> 6){
+                    if (password.getText().length()> 5){
                         if (newPassword.equals(confirmPassword)){
                             intent2next.putExtra("fullName", fullName);
                             intent2next.putExtra("emailAddress", emailAddress);
@@ -158,7 +158,7 @@ public class StudentRegistrationInterface extends AppCompatActivity {
             password.setError("Password is required");
             return;
         }
-        if (password.getText().length()> 6) {
+        if (password.getText().length()> 5) {
             password.setError("Password minimum length is 6");
             return;
         }

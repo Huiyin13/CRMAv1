@@ -140,13 +140,13 @@
             <EditText
                 android:id="@+id/description"
                 android:layout_width="match_parent"
-                android:layout_height="218dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="25dp"
                 android:background="@drawable/input_text"
-                android:hint="Reason"
+                android:hint="Description"
                 android:minHeight="48dp"
                 android:padding="10dp"
                 android:textSize="18dp" />
