@@ -95,7 +95,7 @@ public class StudentRegistrationInterface extends AppCompatActivity {
                 inputData();
                 Intent intent2next = new Intent(StudentRegistrationInterface.this, StudentIDPhotoInterface.class);
                 if(!fullName.isEmpty() && !emailAddress.isEmpty() && !phoneNo.isEmpty() && !stdIC.isEmpty()  && !newPassword.isEmpty()  && !confirmPassword.isEmpty()
-                        && !stdID.isEmpty()  && !phoneNo.isEmpty() && icPhoto.getDrawable()!=null && gambang.isChecked() == true || pekan.isChecked() == true){
+                        && !stdID.isEmpty()  && !phoneNo.isEmpty() && gambang.isChecked() == true || pekan.isChecked() == true){
                     if (password.getText().length()> 5){
                         if (newPassword.equals(confirmPassword)){
                             intent2next.putExtra("fullName", fullName);
@@ -107,6 +107,7 @@ public class StudentRegistrationInterface extends AppCompatActivity {
                             intent2next.putExtra("stdID", stdID);
                             intent2next.putExtra("image_uriIC", image_uriIC);
                             startActivity(intent2next);
+
                         }
                     }
                     else{
@@ -121,14 +122,21 @@ public class StudentRegistrationInterface extends AppCompatActivity {
     }
 
     private void inputData(){
-        fullName = name.getText().toString().trim();
+        fullName = name.getText().toString().trim().toUpperCase();
         emailAddress = email.getText().toString().trim();
         phoneNo = phone.getText().toString().trim();
         stdIC = ic.getText().toString().trim();
-        stdID = id.getText().toString().trim();
+        stdID = id.getText().toString().trim().toUpperCase();
         newPassword = password.getText().toString().trim();
         confirmPassword = confirmPass.getText().toString();
         image_uriIC = image_uri.toString();
+
+        if(gambang.isChecked()){
+            campusS = "Gambang";
+        }
+        else if(pekan.isChecked()) {
+            campusS = "Pekan";
+        }
 
         if(image_uriIC.isEmpty()){
             Toast.makeText(getApplicationContext(), "Please insert your IC/ Passport Photo", Toast.LENGTH_SHORT).show();
@@ -158,8 +166,8 @@ public class StudentRegistrationInterface extends AppCompatActivity {
             password.setError("Password is required");
             return;
         }
-        if (password.getText().length()> 5) {
-            password.setError("Password minimum length is 6");
+        if (password.getText().length() < 5) {
+            password.setError("Password minimum length is 61");
             return;
         }
         if(confirmPassword.isEmpty()){
@@ -176,12 +184,7 @@ public class StudentRegistrationInterface extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Please select your Campus", Toast.LENGTH_SHORT).show();
         }
 
-        if(gambang.isChecked()){
-            campusS = "Gambang";
-        }
-        else if(pekan.isChecked()){
-            campusS = "Pekan";
-        }
+
 
     }
 

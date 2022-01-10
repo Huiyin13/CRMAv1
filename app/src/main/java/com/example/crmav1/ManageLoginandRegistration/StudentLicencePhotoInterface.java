@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -45,6 +46,7 @@ public class StudentLicencePhotoInterface extends AppCompatActivity {
     private StorageReference storageRef, storageRef1, storageRef2;
 
     private String fullName, emailAddress, phoneNo, stdIC, newPassword, image_uriID, stdID, stdCampus, image_uriIC;
+    ProgressDialog progressDialog;
 
     //permission constants
     private static final int CAMERA_REQUEST_CODE = 100;
@@ -64,6 +66,8 @@ public class StudentLicencePhotoInterface extends AppCompatActivity {
         setContentView(R.layout.activity_student_licence_photo_interface);
 
         this.setTitle("Registration");
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Your registration is in progress. Please wait for a few second.");
 
         register = findViewById(R.id.registerS);
         licencePhoto = findViewById(R.id.stdLicencePhoto);
@@ -84,6 +88,7 @@ public class StudentLicencePhotoInterface extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.show();
                 inputData();
             }
         });
@@ -345,4 +350,12 @@ public class StudentLicencePhotoInterface extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
+    }
 }

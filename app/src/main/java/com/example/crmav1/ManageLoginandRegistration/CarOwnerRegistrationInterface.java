@@ -97,8 +97,8 @@ public class CarOwnerRegistrationInterface extends AppCompatActivity {
                 inputData();
                 Intent intent2next = new Intent(CarOwnerRegistrationInterface.this, CarOwnerIDPhotoInterface.class);
                 if(!fullName.isEmpty() && !emailAddress.isEmpty() && !phoneNo.isEmpty() && !coIC.isEmpty()  && !newPassword.isEmpty()  && !confirmPassword.isEmpty()
-                        && !coID.isEmpty()  && !phoneNo.isEmpty() && icPhoto.getDrawable()!=null && gambang.isChecked() == true || pekan.isChecked() == true){
-                    if (password.getText().length() > 6) {
+                        && !coID.isEmpty()  && !phoneNo.isEmpty() && gambang.isChecked() == true || pekan.isChecked() == true){
+                    if (password.getText().length() > 5) {
                         if (newPassword.equals(confirmPassword)) {
                             intent2next.putExtra("fullName", fullName);
                             intent2next.putExtra("emailAddress", emailAddress);
@@ -109,6 +109,7 @@ public class CarOwnerRegistrationInterface extends AppCompatActivity {
                             intent2next.putExtra("coID", coID);
                             intent2next.putExtra("image_uriIC", image_uriIC);
                             startActivity(intent2next);
+
                         }
                     } else {
                         Toast.makeText(CarOwnerRegistrationInterface.this, "Minimum password length is 6.", Toast.LENGTH_SHORT).show();
@@ -122,6 +123,8 @@ public class CarOwnerRegistrationInterface extends AppCompatActivity {
 
     }
 
+
+
     private void inputData(){
         fullName = name.getText().toString().trim();
         emailAddress = email.getText().toString().trim();
@@ -131,6 +134,13 @@ public class CarOwnerRegistrationInterface extends AppCompatActivity {
         confirmPassword = confirmPass.getText().toString().trim();
         coID = id.getText().toString().trim();
         image_uriIC = image_uri.toString();
+
+        if(gambang.isChecked()){
+            campusCo = "Gambang";
+        }
+        else if(pekan.isChecked()){
+            campusCo = "Pekan";
+        }
 
         if(fullName.isEmpty()){
             name.setError("Full Name is required");
@@ -157,7 +167,7 @@ public class CarOwnerRegistrationInterface extends AppCompatActivity {
             password.setError("Password is required");
             return;
         }
-        if (password.getText().length()> 6) {
+        if (password.getText().length() < 5) {
             password.setError("Password minimum length is 6");
             return;
         }
@@ -177,13 +187,6 @@ public class CarOwnerRegistrationInterface extends AppCompatActivity {
 
         if (gambang.isChecked() == false && pekan.isChecked() == false){
             Toast.makeText(getApplicationContext(), "Please select your Campus", Toast.LENGTH_SHORT).show();
-        }
-
-        if(gambang.isChecked()){
-            campusCo = "Gambang";
-        }
-        else if(pekan.isChecked()){
-            campusCo = "Pekan";
         }
 
 
