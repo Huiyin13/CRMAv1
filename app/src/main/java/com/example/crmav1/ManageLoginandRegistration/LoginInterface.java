@@ -3,6 +3,7 @@ package com.example.crmav1.ManageLoginandRegistration;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,8 @@ public class LoginInterface extends AppCompatActivity {
     private RadioButton admin, student, carOwner;
     private Button login, register;
 
+    ProgressDialog progressDialog;
+
     private FirebaseAuth firebaseAuth;
     private FirebaseUser user;
     private DatabaseReference dbRef, userRef;
@@ -39,6 +42,10 @@ public class LoginInterface extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Login...");
+
+
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user !=null){
             userRef = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
@@ -108,6 +115,7 @@ public class LoginInterface extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.show();
                 if(email.getText().toString().isEmpty()){
                     email.setError("Email is missing!");
                     return;
@@ -220,5 +228,13 @@ public class LoginInterface extends AppCompatActivity {
         });
 
     }
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
+    }
 }
+

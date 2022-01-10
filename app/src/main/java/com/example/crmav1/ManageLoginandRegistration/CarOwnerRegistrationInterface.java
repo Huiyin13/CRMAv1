@@ -126,13 +126,13 @@ public class CarOwnerRegistrationInterface extends AppCompatActivity {
 
 
     private void inputData(){
-        fullName = name.getText().toString().trim();
+        fullName = name.getText().toString().trim().toUpperCase();
         emailAddress = email.getText().toString().trim();
         phoneNo = phone.getText().toString().trim();
         coIC = ic.getText().toString().trim();
         newPassword = password.getText().toString().trim();
         confirmPassword = confirmPass.getText().toString().trim();
-        coID = id.getText().toString().trim();
+        coID = id.getText().toString().trim().toUpperCase();
         image_uriIC = image_uri.toString();
 
         if(gambang.isChecked()){

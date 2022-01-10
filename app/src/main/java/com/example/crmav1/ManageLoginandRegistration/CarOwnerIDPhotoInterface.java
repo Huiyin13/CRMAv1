@@ -68,7 +68,7 @@ public class CarOwnerIDPhotoInterface extends AppCompatActivity {
         this.setTitle("Registration");
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Your registration is in progress. Please wait for a few second.");
+        progressDialog.setMessage("Your registration is in progress. Please wait for a few seconds.");
 
         register = findViewById(R.id.registerCo);
         idPhoto = findViewById(R.id.ownerIDPhoto);
