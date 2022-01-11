@@ -241,7 +241,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="3"
                     android:clickable="true"
-                    android:src="@drawable/add_image" />
+                    android:src="@drawable/loading" />
 
                 <TextView
                     android:layout_width="wrap_content"
