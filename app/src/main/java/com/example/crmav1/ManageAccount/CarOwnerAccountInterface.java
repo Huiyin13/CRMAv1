@@ -3,6 +3,7 @@ package com.example.crmav1.ManageAccount;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -33,11 +34,15 @@ public class CarOwnerAccountInterface extends AppCompatActivity {
     private DatabaseReference coDBRef;
     private String coID;
     private FirebaseAuth auth;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_owner_account_interface);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading....");
 
         name = findViewById(R.id.coName);
         email = findViewById(R.id.coEmail);
@@ -107,6 +112,7 @@ public class CarOwnerAccountInterface extends AppCompatActivity {
         faq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog.show();
                 Intent intent2faq = new Intent(CarOwnerAccountInterface.this, CViewFaqInterface.class);
                 startActivity(intent2faq);
             }

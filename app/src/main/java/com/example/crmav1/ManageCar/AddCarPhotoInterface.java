@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -68,6 +69,8 @@ public class AddCarPhotoInterface extends AppCompatActivity {
     private int position = 0;
     private List<String> imagesEncodedList;
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -92,6 +95,10 @@ public class AddCarPhotoInterface extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_car_photo_interface);
+
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Adding your car into list...");
 
         addP = findViewById(R.id.addPhoto);
         addC = findViewById(R.id.addCar);
@@ -160,6 +167,8 @@ public class AddCarPhotoInterface extends AppCompatActivity {
         addC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                progressDialog.show();
                 inputData();
             }
         });
@@ -275,6 +284,7 @@ public class AddCarPhotoInterface extends AppCompatActivity {
                         Toast.makeText(AddCarPhotoInterface.this,"Car Added", Toast.LENGTH_SHORT).show();
                         Intent intent2add = new Intent(AddCarPhotoInterface.this, CarListInterface.class);
                         startActivity(intent2add);
+                        finish();
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {

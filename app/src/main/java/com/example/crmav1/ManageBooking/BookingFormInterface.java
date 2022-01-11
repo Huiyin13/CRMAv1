@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Build;
@@ -49,6 +50,8 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
     private Button book, cancel, calculate, view;
     private TextView timeF, timeT, dateF, dateT, payment;
 
+    ProgressDialog progressDialog, progressDialogCalc;
+
     boolean to = false, from = true;
     private FirebaseDatabase db;
     private DatabaseReference bookRef;
@@ -62,6 +65,12 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_form_interface);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Sending....");
+
+        progressDialogCalc = new ProgressDialog(this);
+        progressDialogCalc.setMessage("Calculating....");
 
         time1 = findViewById(R.id.time1);
         time2 = findViewById(R.id.time2);
@@ -193,6 +202,7 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
                 testdatereference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+
 //                        counter = 0;
 //                        counterisdateavailable = true;
                         if (timeF.getText().length()!=0 && timeT.getText().length()!=0 && dateT.getText().length()!=0 && dateF.getText().length()!=0){
@@ -284,6 +294,7 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog.show();
 //                checkDate();
 //                if (finalisdateavailable){
                 if (payment.getText().toString().equalsIgnoreCase("Invalid Date"))
@@ -481,5 +492,15 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
             todatestring = datestring;
             dateT.setText(todatestring);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
+
     }
 }

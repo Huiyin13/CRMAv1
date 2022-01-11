@@ -58,7 +58,7 @@ public class SViewFaqInterface extends AppCompatActivity implements CSFaqAdapter
                 if (snapshot.exists()){
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         FAQ faq1 = dataSnapshot.getValue(FAQ.class);
-                        if (faq1.getUserType().equals("Student")){
+                        if (faq1.getUserType().equals("Student") || faq1.getUserType().equals("Both")){
                             faqList.add(faq1);
                         }
                     }
@@ -81,6 +81,7 @@ public class SViewFaqInterface extends AppCompatActivity implements CSFaqAdapter
             public void onClick(View view) {
                 Intent intent2back = new Intent(SViewFaqInterface.this, StudentAccountInterface.class);
                 startActivity(intent2back);
+                finish();
             }
         });
 

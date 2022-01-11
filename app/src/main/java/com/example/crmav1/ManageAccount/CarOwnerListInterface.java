@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,11 +33,17 @@ public class CarOwnerListInterface extends AppCompatActivity implements Registra
     private ArrayList<CarOwner> registerList;
     private RegistrationListAdapter adapter;
 
+    ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_owner_list_interface);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+
         recyclerView = findViewById(R.id.registerListView);
 
         recyclerView.setHasFixedSize(true);
@@ -112,6 +119,7 @@ public class CarOwnerListInterface extends AppCompatActivity implements Registra
 
     @Override
     public void onItemClick(int position) {
+        progressDialog.show();
         Intent intent2view = new Intent(this, CarOwnerViewInterface.class);
         intent2view.putExtra("coName", registerList.get(position).getCoName());
         intent2view.putExtra("emailCo", registerList.get(position).getCoEmail());

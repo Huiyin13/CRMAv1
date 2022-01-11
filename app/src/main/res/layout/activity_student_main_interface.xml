@@ -24,14 +24,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="80dp"
-            android:text="@string/coAdd"
-            android:textColor="#000000"
-            android:textSize="25dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="80dp"
+                android:text="Car Owner List"
+                android:textColor="#000000"
+                android:textSize="25dp" />
 
             <ToggleButton
                 android:id="@+id/switchCampus1"

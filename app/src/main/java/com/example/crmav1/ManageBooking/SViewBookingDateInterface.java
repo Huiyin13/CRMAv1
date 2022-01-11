@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,10 +16,13 @@ import android.widget.Toast;
 
 import com.example.crmav1.Adapter.Holder;
 import com.example.crmav1.Adapter.ViewBookedDateAdapter;
+import com.example.crmav1.ManageAccount.StudentAccountInterface;
+import com.example.crmav1.ManageLoginandRegistration.StudentMainInterface;
 import com.example.crmav1.Model.Booking;
 import com.example.crmav1.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -96,9 +100,33 @@ public class SViewBookingDateInterface extends AppCompatActivity {
                 intent2back.putExtra("cid", cid);
                 intent2back.putExtra("coId", coId);
                 startActivity(intent2back);
+                finish();
             }
         });
 
+        //bottom nav
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.home);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.book:
+                        startActivity(new Intent(getApplicationContext(), BookingListInterface.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.home:
+                        startActivity(new Intent(SViewBookingDateInterface.this, StudentMainInterface.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.account:
+                        startActivity(new Intent(SViewBookingDateInterface.this, StudentAccountInterface.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
+            }
+        });
     }
 
 }

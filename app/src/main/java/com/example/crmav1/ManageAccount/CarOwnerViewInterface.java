@@ -44,7 +44,6 @@ public class CarOwnerViewInterface extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_owner_view_interface);
-        this.setTitle("Registration");
 
         name = findViewById(R.id.coName);
         ic = findViewById(R.id.coIC);

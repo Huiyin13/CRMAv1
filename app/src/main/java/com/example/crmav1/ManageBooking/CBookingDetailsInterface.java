@@ -114,6 +114,9 @@ public class CBookingDetailsInterface extends AppCompatActivity {
                            payMethod.setText("Still in progress.");
                            System.out.println("none");
                        }
+                       if (payMethod.getText().toString().equalsIgnoreCase("Credit Card/Debit Card")){
+                           paidReceive.setVisibility(View.GONE);
+                       }
                    }
                 }else {
                     payMethod.setText("Still in progress.");
@@ -217,6 +220,8 @@ public class CBookingDetailsInterface extends AppCompatActivity {
                         approve.setVisibility(View.GONE);
                         reject.setVisibility(View.GONE);
                         pickup.setVisibility(View.GONE);
+                        tvCancel.setVisibility(View.GONE);
+                        cancelReason.setVisibility(View.GONE);
 
                         paidReceive.setOnClickListener(new View.OnClickListener() {
                             @Override

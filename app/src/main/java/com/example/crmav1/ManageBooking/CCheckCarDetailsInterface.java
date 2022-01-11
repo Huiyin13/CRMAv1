@@ -78,6 +78,7 @@ public class CCheckCarDetailsInterface extends AppCompatActivity {
                 intent2view.putExtra("bid", bid);
                 intent2view.putExtra("cid", cid);
                 startActivity(intent2view);
+                finish();
             }
         });
 

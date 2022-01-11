@@ -88,6 +88,7 @@ public class StudentIDPhotoInterface extends AppCompatActivity {
                 intent2next.putExtra("image_uriIC", image_uriIC);
                 intent2next.putExtra("image_uriID", image_uriID);
                 startActivity(intent2next);
+
             }
         });
 

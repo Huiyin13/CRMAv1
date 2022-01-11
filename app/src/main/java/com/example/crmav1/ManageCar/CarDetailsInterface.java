@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -116,6 +117,8 @@ public class CarDetailsInterface extends AppCompatActivity {
             }
         });
 
+
+
         cid = getIntent().getStringExtra("cid");
         user = FirebaseAuth.getInstance().getCurrentUser();
         carDBRef = FirebaseDatabase.getInstance().getReference("Car").child(user.getUid()).child(cid);
@@ -124,6 +127,7 @@ public class CarDetailsInterface extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
+
                     Car car = snapshot.getValue(Car.class);
                     System.out.println(car.getcModel());
                     model.setText(car.getcModel());
@@ -237,10 +241,12 @@ public class CarDetailsInterface extends AppCompatActivity {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
 
+                        DatabaseReference deleteCUri = FirebaseDatabase.getInstance().getReference("Car").child(user.getUid()).child(cid).child("cPhotoUri");
                         DatabaseReference deleteC = FirebaseDatabase.getInstance().getReference("Car").child(user.getUid()).child(cid);
                         deleteC.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
+                                deleteCUri.removeValue();
                                 Toast.makeText(CarDetailsInterface.this, "This car details is deleted.", Toast.LENGTH_SHORT).show();
                                 Intent intent2delete = new Intent(CarDetailsInterface.this, CarListInterface.class);
                                 startActivity(intent2delete);
@@ -271,6 +277,7 @@ public class CarDetailsInterface extends AppCompatActivity {
         FirebaseRecyclerAdapter<cPhotoUri, CarPhotoHolder> photoAdapter = new FirebaseRecyclerAdapter<cPhotoUri, CarPhotoHolder>(carPhoto) {
             @Override
             protected void onBindViewHolder(@NonNull CarPhotoHolder holder, int position, @NonNull cPhotoUri model) {
+
                 Picasso.get().load(model.getImageLink()).into(holder.cPhoto);
             }
 
@@ -285,4 +292,5 @@ public class CarDetailsInterface extends AppCompatActivity {
         photo.setAdapter(photoAdapter);
         photoAdapter.startListening();
     }
+
 }

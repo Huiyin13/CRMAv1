@@ -3,6 +3,7 @@ package com.example.crmav1.ManageBooking;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -33,6 +34,8 @@ public class CBookingRejectInterface extends AppCompatActivity {
     private EditText reason;
     private String bid,rejectReason, sId, cid;
 
+    ProgressDialog progressDialog;
+
     private FirebaseDatabase db;
     private FirebaseUser user;
     private DatabaseReference book, book2;
@@ -46,6 +49,9 @@ public class CBookingRejectInterface extends AppCompatActivity {
         cancel = findViewById(R.id.aCancel);
         reason = findViewById(R.id.rReason);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Saving....");
+
         bid = getIntent().getStringExtra("bid");
         sId = getIntent().getStringExtra("sId");
         cid = getIntent().getStringExtra("cid");
@@ -58,6 +64,7 @@ public class CBookingRejectInterface extends AppCompatActivity {
                 intent2cancel.putExtra("sId", sId);
                 intent2cancel.putExtra("cid", cid);
                 startActivity(intent2cancel);
+                finish();
             }
         });
 
@@ -75,7 +82,7 @@ public class CBookingRejectInterface extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                        if (reason.getText().length()!=0){
                            rejectReason = reason.getText().toString();
-
+                           progressDialog.show();
                            book.child("bStatus").setValue("Rejected");
                            book.child("bRejectReason").setValue(rejectReason);
                            book2.child("bStatus").setValue("Rejected");

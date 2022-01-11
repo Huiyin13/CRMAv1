@@ -3,6 +3,7 @@ package com.example.crmav1.ManageAccount;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -27,6 +28,8 @@ public class CarOwnerRejectInterface extends AppCompatActivity {
     private EditText reason;
     private String uid,rejectReason;
 
+    ProgressDialog progressDialog;
+
     private FirebaseDatabase db;
     private DatabaseReference coDBRef;
 
@@ -35,11 +38,12 @@ public class CarOwnerRejectInterface extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_owner_reject_interface);
 
-        this.setTitle("Registration");
-
         save = findViewById(R.id.aSave);
         cancel = findViewById(R.id.aCancel);
         reason = findViewById(R.id.coReason);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Saving....");
 
         uid = getIntent().getStringExtra("uid");
 
@@ -49,6 +53,7 @@ public class CarOwnerRejectInterface extends AppCompatActivity {
                 Intent intent2cancel = new Intent(CarOwnerRejectInterface.this, CarOwnerViewInterface.class);
                 intent2cancel.putExtra("uid",uid);
                 startActivity(intent2cancel);
+                finish();
             }
         });
 
@@ -65,7 +70,7 @@ public class CarOwnerRejectInterface extends AppCompatActivity {
 
                         if (reason.getText().length()!=0){
                             rejectReason = reason.getText().toString();
-
+                            progressDialog.show();
                             coDBRef.child(uid).child("coStatus").setValue("Rejected");
                             coDBRef.child(uid).child("reason").setValue(rejectReason);
                             Toast.makeText(CarOwnerRejectInterface.this, "You have unlist the car.", Toast.LENGTH_SHORT).show() ;

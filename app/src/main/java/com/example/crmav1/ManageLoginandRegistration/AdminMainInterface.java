@@ -43,6 +43,7 @@ public class AdminMainInterface extends AppCompatActivity implements FaqAdapter.
     private ArrayList<FAQ> faqArrayList;
     private FaqAdapter adapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +88,7 @@ public class AdminMainInterface extends AppCompatActivity implements FaqAdapter.
         faq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent2faq = new Intent(AdminMainInterface.this, AddFaqInterface.class);
                 startActivity(intent2faq);
             }

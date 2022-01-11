@@ -3,6 +3,7 @@ package com.example.crmav1.ManageAccount;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -32,11 +33,16 @@ public class StudentAccountInterface extends AppCompatActivity {
     private DatabaseReference stdDBRef;
     private String stdID, emailS, nameS;
     private FirebaseAuth auth;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_account_interface);
+
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading....");
 
         name = findViewById(R.id.stdName);
         email = findViewById(R.id.stdEmail);
@@ -94,6 +100,7 @@ public class StudentAccountInterface extends AppCompatActivity {
         faq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog.show();
                 Intent intent2faq = new Intent(StudentAccountInterface.this, SViewFaqInterface.class);
                 intent2faq.putExtra("nameS", nameS);
                 intent2faq.putExtra("emailS", emailS);

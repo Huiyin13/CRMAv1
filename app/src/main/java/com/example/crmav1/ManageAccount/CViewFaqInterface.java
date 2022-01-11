@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -37,6 +38,7 @@ public class CViewFaqInterface extends AppCompatActivity implements CSFaqAdapter
     private Button back;
     private String name, email, status;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +62,7 @@ public class CViewFaqInterface extends AppCompatActivity implements CSFaqAdapter
                 if (snapshot.exists()){
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         FAQ faq1 = dataSnapshot.getValue(FAQ.class);
-                        if (faq1.getUserType().equals("Car Owner")){
+                        if (faq1.getUserType().equals("Car Owner")||faq1.getUserType().equals("Both")){
                             faqList.add(faq1);
                         }
                     }
@@ -83,6 +85,7 @@ public class CViewFaqInterface extends AppCompatActivity implements CSFaqAdapter
             public void onClick(View view) {
                 Intent intent2back = new Intent(CViewFaqInterface.this, CarOwnerAccountInterface.class);
                 startActivity(intent2back);
+                finish();
             }
         });
 

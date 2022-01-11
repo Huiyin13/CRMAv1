@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -67,7 +68,14 @@ public class CStudentProfileInterface extends AppCompatActivity {
                     Picasso.get().load(std.getsICUri()).into(icPhoto);
                     Picasso.get().load(std.getsIDUri()).into(idPhoto);
                     Picasso.get().load(std.getsLicenceUri()).into(licencePhoto);
-
+                    phone.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                            callIntent.setData(Uri.parse("tel:" + std.getsPhone()));//change the number
+                            startActivity(callIntent);
+                        }
+                    });
                 }
             }
 
@@ -76,6 +84,8 @@ public class CStudentProfileInterface extends AppCompatActivity {
 
             }
         });
+
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

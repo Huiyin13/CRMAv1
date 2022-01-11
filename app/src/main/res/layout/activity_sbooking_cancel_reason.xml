@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ManageBooking.SBookingCancelReason">
+    tools:context=".ManageBooking.SBookingCancelReasonInterface">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
                 <EditText
                     android:id="@+id/rReason"
                     android:layout_width="match_parent"
-                    android:layout_height="218dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="25dp"
                     android:layout_marginTop="15dp"

@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -42,6 +43,8 @@ public class CarOwnerProfileInterface extends AppCompatActivity {
     private Button update, delete;
     private ImageView icPhoto, idPhoto;
 
+    ProgressDialog progressDialogDel;
+
     private FirebaseDatabase db;
     private DatabaseReference stdDBRef;
     private FirebaseAuth auth;
@@ -55,7 +58,9 @@ public class CarOwnerProfileInterface extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_owner_profile_interface);
 
-        this.setTitle("Edit Profile");
+
+        progressDialogDel = new ProgressDialog(this);
+        progressDialogDel.setMessage("Deleting...");
 
         name = findViewById(R.id.coName);
         ic = findViewById(R.id.coIC);
@@ -201,9 +206,12 @@ public class CarOwnerProfileInterface extends AppCompatActivity {
                         coID.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
+
                                 String userID = coID.getUid();
                                 DatabaseReference ID = FirebaseDatabase.getInstance().getReference("Users");
+                                DatabaseReference car = FirebaseDatabase.getInstance().getReference("Car").child(userID);
                                 ID.child(userID).removeValue();
+                                car.removeValue();
                                 Toast.makeText(CarOwnerProfileInterface.this, "Your account is deleted. Please REGISTER again for login!!", Toast.LENGTH_SHORT).show();
                                 Intent intent2delete = new Intent(CarOwnerProfileInterface.this, LoginInterface.class);
                                 startActivity(intent2delete);

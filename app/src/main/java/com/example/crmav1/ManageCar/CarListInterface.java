@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -47,6 +48,7 @@ public class CarListInterface extends AppCompatActivity implements CarListAdapte
     private CarListAdapter adapter;
     private FirebaseUser auth;
     private Button add;
+    ProgressDialog progressDialog;
 
 
     @Override
@@ -67,6 +69,9 @@ public class CarListInterface extends AppCompatActivity implements CarListAdapte
 
             }
         });
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading....");
         FirebaseRecyclerOptions<Car> carOption =
                 new FirebaseRecyclerOptions.Builder<Car>()
                         .setQuery(carRef, Car.class)
@@ -79,6 +84,7 @@ public class CarListInterface extends AppCompatActivity implements CarListAdapte
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         Intent intent2view = new Intent(CarListInterface.this, CarDetailsInterface.class);
                         intent2view.putExtra("cid", model.getCid());
                         startActivity(intent2view);
@@ -150,5 +156,14 @@ public class CarListInterface extends AppCompatActivity implements CarListAdapte
     @Override
     public void onItemClick(int position) {
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
     }
 }

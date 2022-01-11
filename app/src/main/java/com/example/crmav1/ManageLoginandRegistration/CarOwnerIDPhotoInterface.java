@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -39,6 +40,8 @@ public class CarOwnerIDPhotoInterface extends AppCompatActivity {
     private ImageView idPhoto;
     private Button register;
 
+    ProgressDialog progressDialog;
+
     private FirebaseAuth auth;
     private StorageReference storageRef, storageRef1;
 
@@ -64,6 +67,9 @@ public class CarOwnerIDPhotoInterface extends AppCompatActivity {
 
         this.setTitle("Registration");
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Your registration is in progress. Please wait for a few seconds.");
+
         register = findViewById(R.id.registerCo);
         idPhoto = findViewById(R.id.ownerIDPhoto);
 
@@ -83,11 +89,17 @@ public class CarOwnerIDPhotoInterface extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                progressDialog.show();
                 inputData();
+
             }
         });
 
+
     }
+
+
 
     private void inputData(){
         fullName = getIntent().getStringExtra("fullName");
@@ -323,6 +335,15 @@ public class CarOwnerIDPhotoInterface extends AppCompatActivity {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
     }
 
 }
