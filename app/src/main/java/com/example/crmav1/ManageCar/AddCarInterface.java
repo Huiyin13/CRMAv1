@@ -65,8 +65,6 @@ public class AddCarInterface extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_car_interface);
 
-        this.setTitle("Add Car");
-
         model = findViewById(R.id.cModel);
         fee = findViewById(R.id.cFee);
         plate = findViewById(R.id.cPlate);
@@ -140,13 +138,20 @@ public class AddCarInterface extends AppCompatActivity {
     }
 
     private void inputData() {
-        modelC = model.getText().toString().trim();
-        plateC = plate.getText().toString().trim();
+        modelC = model.getText().toString().trim().toUpperCase();
+        plateC = plate.getText().toString().trim().toUpperCase();
         feeC = fee.getText().toString().trim();
         paxC = pax.getText().toString().trim();
         descriptionC = description.getText().toString().trim();
 
         stickerUri = image_uri.toString();
+
+        if(auto.isChecked()){
+            typeC = "Automatic";
+        }
+        else if(manual.isChecked()){
+            typeC = "Manual";
+        }
 
         if(modelC.isEmpty()){
             model.setError("Car Model is required");
@@ -168,15 +173,10 @@ public class AddCarInterface extends AppCompatActivity {
             description.setError("Description of Car is required");
             return;
         }
-        if (auto.isChecked() == false || manual.isChecked() == false){
+        if (auto.isChecked() == false && manual.isChecked() == false){
             Toast.makeText(AddCarInterface.this, "Please select the car type.", Toast.LENGTH_SHORT).show();
         }
-        if(auto.isChecked()){
-            typeC = "Automatic";
-        }
-        else if(manual.isChecked()){
-            typeC = "Manual";
-        }
+
     }
 
     private void showImageDialog() {

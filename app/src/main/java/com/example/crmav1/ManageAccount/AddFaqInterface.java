@@ -3,6 +3,7 @@ package com.example.crmav1.ManageAccount;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -29,8 +30,9 @@ public class AddFaqInterface extends AppCompatActivity {
 
     private TextView title, answer;
     private Button add, cancel;
-    private RadioButton std, co;
+    private RadioButton std, co, both;
     private RadioGroup type;
+    ProgressDialog progressDialog;
 
     private String question, ans, userType;
 
@@ -48,19 +50,22 @@ public class AddFaqInterface extends AppCompatActivity {
         cancel = findViewById(R.id.cancel);
         std = findViewById(R.id.std);
         co = findViewById(R.id.co);
+        both = findViewById(R.id.both);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Adding FAQ....");
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2back = new Intent(AddFaqInterface.this, AdminMainInterface.class);
-                startActivity(intent2back);
-                finish();
+
             }
         });
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 question = title.getText().toString().trim();
                 ans = answer.getText().toString().trim();
                 if (co.isChecked()){
@@ -69,12 +74,30 @@ public class AddFaqInterface extends AppCompatActivity {
                 else if (std.isChecked()){
                     userType = "Student";
                 }
+                else if (both.isChecked()){
+                    userType = "Both";
+                }
+
+                if(question.isEmpty()){
+                    title.setError("Question is required");
+                    return;
+                }
+
+                if(ans.isEmpty()){
+                    answer.setError("Answer is required");
+                    return;
+                }
+
+                if (co.isChecked() == false && std.isChecked() == false && both.isChecked() == false){
+                    Toast.makeText(getApplicationContext(), "Please select the user type/category.", Toast.LENGTH_SHORT).show();
+                }
 
                 databaseReference = FirebaseDatabase.getInstance().getReference("Faq");
                 String fid = databaseReference.push().getKey();
                 DatabaseReference faqRef = databaseReference.child(fid);
 
-                if (title.getText().length()!=0 && answer.getText().length()!=0 && std.isChecked() || co.isChecked()){
+                if (title.getText().length()!=0 && answer.getText().length()!=0 && std.isChecked() == true || co.isChecked() == true || both.isChecked() == true){
+                    progressDialog.show();
                     HashMap<String,Object> hashMap = new HashMap<>();
                     hashMap.put("fid", "" + fid);
                     hashMap.put("userType", "" + userType);
@@ -95,8 +118,6 @@ public class AddFaqInterface extends AppCompatActivity {
                             Toast.makeText(AddFaqInterface.this, "Add FAQ Failed", Toast.LENGTH_SHORT).show();
                         }
                     });
-                    Intent intent2add = new Intent(AddFaqInterface.this, AdminMainInterface.class);
-                    startActivity(intent2add);
                 }
             }
         });

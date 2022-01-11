@@ -34,7 +34,7 @@ import java.util.HashMap;
 public class UpdateFaqInterface extends AppCompatActivity {
     private TextView title, answer;
     private Button update, delete;
-    private RadioButton std, co;
+    private RadioButton std, co, both;
 
     private String question, ans, userType, fid;
     private DatabaseReference databaseReference;
@@ -50,6 +50,7 @@ public class UpdateFaqInterface extends AppCompatActivity {
         delete = findViewById(R.id.delete);
         std = findViewById(R.id.std);
         co = findViewById(R.id.co);
+        both = findViewById(R.id.both);
 
         fid = getIntent().getStringExtra("fid");
 
@@ -72,8 +73,11 @@ public class UpdateFaqInterface extends AppCompatActivity {
                     if (qna.getUserType().equalsIgnoreCase("Car owner")){
                         co.setChecked(true);
                     }
-                    else {
+                    else if (qna.getUserType().equalsIgnoreCase("Student")){
                         std.setChecked(true);
+                    }
+                    else {
+                        both.setChecked(true);
                     }
                 }
             }
@@ -95,9 +99,27 @@ public class UpdateFaqInterface extends AppCompatActivity {
                 else if (std.isChecked()){
                     userType = "Student";
                 }
+                else if (both.isChecked()){
+                    userType = "Both";
+                }
+
+                if(question.isEmpty()){
+                    title.setError("Question is required");
+                    return;
+                }
+
+                if(ans.isEmpty()){
+                    answer.setError("Answer is required");
+                    return;
+                }
+
+                if (co.isChecked() == false && std.isChecked() == false && both.isChecked() == false){
+                    Toast.makeText(getApplicationContext(), "Please select the user type/category.", Toast.LENGTH_SHORT).show();
+                }
 
                 databaseReference = FirebaseDatabase.getInstance().getReference("Faq").child(fid);
-                if (title.getText().length()!=0 && answer.getText().length()!=0 && std.isChecked() || co.isChecked()){
+                if (title.getText().length()!=0 && answer.getText().length()!=0 && std.isChecked() == true || co.isChecked() == true || both.isChecked() == true){
+
                     databaseReference.child("title").setValue(question);
                     databaseReference.child("answer").setValue(ans);
                     databaseReference.child("userType").setValue(userType);

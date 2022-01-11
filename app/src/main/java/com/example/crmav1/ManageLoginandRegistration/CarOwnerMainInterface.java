@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,6 +36,8 @@ public class CarOwnerMainInterface extends AppCompatActivity {
 
     private Button deleteAcc, addCar, viewCar;
 
+    ProgressDialog progressDialogAdd, progressDialogDel, progressDialogView;
+
     private FirebaseUser CarOwner;
     private DatabaseReference coDBRef;
     private FirebaseAuth auth;
@@ -45,6 +48,12 @@ public class CarOwnerMainInterface extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_owner_main_interface);
+
+        progressDialogDel = new ProgressDialog(this);
+        progressDialogDel.setMessage("Deleting...");
+
+        progressDialogView = new ProgressDialog(this);
+        progressDialogView.setMessage("Loading...");
 
         deleteAcc = findViewById(R.id.coDelete);
         addCar = findViewById(R.id.addCar);
@@ -86,6 +95,7 @@ public class CarOwnerMainInterface extends AppCompatActivity {
                 viewCar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        progressDialogView.show();
                         Intent intent2view = new Intent(CarOwnerMainInterface.this, CarListInterface.class);
                         startActivity(intent2view);
                     }
@@ -155,6 +165,10 @@ public class CarOwnerMainInterface extends AppCompatActivity {
                                 /*String userID = auth.getUid();
                                 DatabaseReference ID = FirebaseDatabase.getInstance().getReference("Users");
                                 ID.child(userID).removeValue();*/
+                                String userID = coID.getUid();
+                                DatabaseReference ID = FirebaseDatabase.getInstance().getReference("Users");
+                                ID.child(userID).removeValue();
+                                progressDialogDel.show();
                                 Toast.makeText(CarOwnerMainInterface.this, "Your account is deleted. Please REGISTER again for login!!", Toast.LENGTH_SHORT).show();
                                 Intent intent2delete = new Intent(CarOwnerMainInterface.this, LoginInterface.class);
                                 startActivity(intent2delete);

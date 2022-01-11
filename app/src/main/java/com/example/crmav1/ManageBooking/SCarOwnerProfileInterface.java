@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,6 +66,15 @@ public class SCarOwnerProfileInterface extends AppCompatActivity {
 
                     Picasso.get().load(co.getCoICUri()).into(icPhoto);
                     Picasso.get().load(co.getCoIDUri()).into(idPhoto);
+
+                    phone.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                            callIntent.setData(Uri.parse("tel:" + co.getCoPhone()));//change the number
+                            startActivity(callIntent);
+                        }
+                    });
 
                 }
             }

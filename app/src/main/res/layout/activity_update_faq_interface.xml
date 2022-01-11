@@ -108,6 +108,15 @@
                     android:textColor="#000000"
                     android:textSize="18dp" />
 
+                <RadioButton
+                android:id="@+id/both"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Both"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
             </RadioGroup>
         </LinearLayout>
 

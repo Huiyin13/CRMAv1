@@ -3,6 +3,7 @@ package com.example.crmav1.ManageBooking;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -23,10 +24,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class SBookingCancelReason extends AppCompatActivity {
+public class SBookingCancelReasonInterface extends AppCompatActivity {
     private Button save,cancel;
     private EditText reason;
     private String bid,cancelreason, coId, cid;
+
+    ProgressDialog progressDialog;
 
     private FirebaseDatabase db;
     private FirebaseUser user;
@@ -41,6 +44,9 @@ public class SBookingCancelReason extends AppCompatActivity {
         cancel = findViewById(R.id.aCancel);
         reason = findViewById(R.id.rReason);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Saving....");
+
         bid = getIntent().getStringExtra("bid");
         coId = getIntent().getStringExtra("coId");
         cid = getIntent().getStringExtra("cid");
@@ -48,11 +54,12 @@ public class SBookingCancelReason extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2cancel = new Intent(SBookingCancelReason.this, SBookingDetailsInterface.class);
+                Intent intent2cancel = new Intent(SBookingCancelReasonInterface.this, SBookingDetailsInterface.class);
                 intent2cancel.putExtra("bid",bid);
                 intent2cancel.putExtra("coId", coId);
                 intent2cancel.putExtra("cid", cid);
                 startActivity(intent2cancel);
+                finish();
             }
         });
 
@@ -70,17 +77,17 @@ public class SBookingCancelReason extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (reason.getText().length()!=0){
                             cancelreason = reason.getText().toString();
-
+                            progressDialog.show();
                             book.child("bStatus").setValue("Cancelled");
                             book.child("bCancelReason").setValue(cancelreason);
                             book2.child("bStatus").setValue("Cancelled");
                             book2.child("bCancelReason").setValue(cancelreason);
-                            Toast.makeText(SBookingCancelReason.this, "You have cancelled this booking.", Toast.LENGTH_SHORT).show() ;
-                            Intent intent2reject = new Intent(SBookingCancelReason.this, BookingListInterface.class);
+                            Toast.makeText(SBookingCancelReasonInterface.this, "You have cancelled this booking.", Toast.LENGTH_SHORT).show() ;
+                            Intent intent2reject = new Intent(SBookingCancelReasonInterface.this, BookingListInterface.class);
                             startActivity(intent2reject);
                             finish();
                         }else {
-                            Toast.makeText(SBookingCancelReason.this, "All field must be filled!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SBookingCancelReasonInterface.this, "All field must be filled!", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -104,11 +111,11 @@ public class SBookingCancelReason extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.home:
-                        startActivity(new Intent(SBookingCancelReason.this, StudentMainInterface.class));
+                        startActivity(new Intent(SBookingCancelReasonInterface.this, StudentMainInterface.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.account:
-                        startActivity(new Intent(SBookingCancelReason.this, StudentAccountInterface.class));
+                        startActivity(new Intent(SBookingCancelReasonInterface.this, StudentAccountInterface.class));
                         overridePendingTransition(0,0);
                         return true;
                 }

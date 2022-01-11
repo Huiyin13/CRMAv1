@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -48,6 +49,8 @@ public class StudentProfileInterface extends AppCompatActivity {
     private FirebaseAuth auth;
     private Uri icFile, idFile, licenceFile;
 
+    ProgressDialog progressDialog;
+
     private String uid, nameStd, emailStd, phoneStd, campusStd;
 
 
@@ -56,7 +59,8 @@ public class StudentProfileInterface extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_profile_interface);
 
-        this.setTitle("Edit Profile");
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Deleting...");
 
         name = findViewById(R.id.stdName);
         ic = findViewById(R.id.stdIC);
@@ -211,9 +215,12 @@ public class StudentProfileInterface extends AppCompatActivity {
                         sID.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
+
                                 String userID = sID.getUid();
                                 DatabaseReference ID = FirebaseDatabase.getInstance().getReference("Users");
+                                DatabaseReference booking = FirebaseDatabase.getInstance().getReference("Booking").child(userID);
                                 ID.child(userID).removeValue();
+                                booking.removeValue();
                                 Toast.makeText(StudentProfileInterface.this, "Your account is deleted. Please REGISTER again for login!!", Toast.LENGTH_SHORT).show();
                                 Intent intent2delete = new Intent(StudentProfileInterface.this, LoginInterface.class);
                                 startActivity(intent2delete);

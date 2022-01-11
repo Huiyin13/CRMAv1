@@ -88,7 +88,7 @@ public class SBookingDetailsInterface extends AppCompatActivity {
                 intent2view.putExtra("bid", bid);
                 intent2view.putExtra("cid", cid);
                 startActivity(intent2view);
-                finish();
+
             }
         });
 
@@ -100,6 +100,7 @@ public class SBookingDetailsInterface extends AppCompatActivity {
                 intent2view.putExtra("bid", bid);
                 intent2view.putExtra("cid", cid);
                 startActivity(intent2view);
+
             }
         });
 
@@ -158,7 +159,7 @@ public class SBookingDetailsInterface extends AppCompatActivity {
                         cancel2.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Intent intent2cancel = new Intent(SBookingDetailsInterface.this, SBookingCancelReason.class);
+                                Intent intent2cancel = new Intent(SBookingDetailsInterface.this, SBookingCancelReasonInterface.class);
                                 intent2cancel.putExtra("bid", bid);
                                 intent2cancel.putExtra("coId", coId);
                                 intent2cancel.putExtra("cid", cid);

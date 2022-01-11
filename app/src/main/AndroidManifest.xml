@@ -23,7 +23,7 @@
             android:name=".ManageBooking.SCheckCarDetailsInterface"
             android:exported="false" />
         <activity
-            android:name=".ManageBooking.SBookingCancelReason"
+            android:name=".ManageBooking.SBookingCancelReasonInterface"
             android:exported="false" />
         <activity
             android:name=".ManageAccount.CViewFaqInterface"

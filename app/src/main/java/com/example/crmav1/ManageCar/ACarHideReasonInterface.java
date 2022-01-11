@@ -3,6 +3,7 @@ package com.example.crmav1.ManageCar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -29,6 +30,8 @@ public class ACarHideReasonInterface extends AppCompatActivity {
     private EditText reason;
     private String cid, uid, rejectReason;
 
+    ProgressDialog progressDialog;
+
     private FirebaseDatabase db;
     private DatabaseReference carRef;
 
@@ -40,6 +43,9 @@ public class ACarHideReasonInterface extends AppCompatActivity {
         hide = findViewById(R.id.aSave);
         cancel = findViewById(R.id.aCancel);
         reason = findViewById(R.id.hReason);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Saving....");
 
         cid = getIntent().getStringExtra("cid");
         uid = getIntent().getStringExtra("uid");
@@ -64,6 +70,7 @@ public class ACarHideReasonInterface extends AppCompatActivity {
                 }
                 else
                 {
+                    progressDialog.show();
                     hideCar();
                 }
             }
@@ -103,7 +110,7 @@ public class ACarHideReasonInterface extends AppCompatActivity {
             public void onSuccess(Void unused) {
                 carRef.child("cStatus").setValue("Hide");
                 Toast.makeText(ACarHideReasonInterface.this, "Updated Reason and Hidden", Toast.LENGTH_SHORT).show();
-                Intent intent2cancel = new Intent(ACarHideReasonInterface.this, ACarDetailsInterface.class);
+                Intent intent2cancel = new Intent(ACarHideReasonInterface.this, ACarListInterface.class);
                 intent2cancel.putExtra("uid", uid);
                 intent2cancel.putExtra("cid", cid);
                 startActivity(intent2cancel);
