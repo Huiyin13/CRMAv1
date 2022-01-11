@@ -71,7 +71,11 @@ public class SViewBookingDateInterface extends AppCompatActivity {
                                 Booking booking = dataSnapshot.getValue(Booking.class);
                                 System.out.println(booking.getbStatus() + "4567890");
                                 if (booking.getCid().equalsIgnoreCase(cid)){
-                                    bookedDate.add(booking);
+                                    if (booking.getbStatus().equalsIgnoreCase("Applying") || booking.getbStatus().equalsIgnoreCase("Pick Up")
+                                            || booking.getbStatus().equalsIgnoreCase("Accepted")){
+                                        bookedDate.add(booking);
+                                    }
+
                                 }
 
 
