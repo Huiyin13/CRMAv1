@@ -73,7 +73,7 @@ public class CarOwnerRejectInterface extends AppCompatActivity {
                             progressDialog.show();
                             coDBRef.child(uid).child("coStatus").setValue("Rejected");
                             coDBRef.child(uid).child("reason").setValue(rejectReason);
-                            Toast.makeText(CarOwnerRejectInterface.this, "You have unlist the car.", Toast.LENGTH_SHORT).show() ;
+                            Toast.makeText(CarOwnerRejectInterface.this, "You have rejected the registration.", Toast.LENGTH_SHORT).show() ;
                             Intent intent2reject = new Intent(CarOwnerRejectInterface.this, CarOwnerListInterface.class);
                             startActivity(intent2reject);
                             finish();

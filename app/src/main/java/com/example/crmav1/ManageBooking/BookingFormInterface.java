@@ -327,7 +327,7 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
                     hashMap.put("coId", coId);
                     hashMap.put("sId", user.getUid());
                     hashMap.put("timeF", fromTime);
-                    hashMap.put("timeT",fromTime);
+                    hashMap.put("timeT",toTime);
                     hashMap.put("memo", "Waiting Car Owner Approve.");
                     hashMap.put("dateF", fromdatestring);
                     hashMap.put("dateT", todatestring);
