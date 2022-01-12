@@ -61,58 +61,58 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreen.this, LoginInterface.class);
-                startActivity(intent);
-                finish();
+//                Intent intent = new Intent(SplashScreen.this, LoginInterface.class);
+//                startActivity(intent);
+//                finish();
                 user = FirebaseAuth.getInstance().getCurrentUser();
-//                if (user !=null){
-//                    userRef = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
-//                    userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            if (snapshot.exists()){
-//                                Student std = snapshot.getValue(Student.class);
-//                                CarOwner co = snapshot.getValue(CarOwner.class);
-//                                Admin admin = snapshot.getValue(Admin.class);
-//
-//                                if (std.getUserType().equals("Student")){
-//                                    if(firebaseAuth.getCurrentUser().isEmailVerified()) {
-//                                        Intent intent2main = new Intent(SplashScreen.this, StudentMainInterface.class);
-//                                        intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                                        startActivity(intent2main);
-//                                        finish();
-//                                    }
-//                                }
-//
-//                                else if (co.getUserType().equalsIgnoreCase("Car Owner")){
-//                                    if(firebaseAuth.getCurrentUser().isEmailVerified()) {
-//                                        Intent intent2main = new Intent(SplashScreen.this, CarOwnerMainInterface.class);
-//                                        intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                                        startActivity(intent2main);
-//                                        finish();
-//                                    }
-//                                }
-//                                else  if (admin.getUserType().equalsIgnoreCase("Admin")){
-//                                    if(firebaseAuth.getCurrentUser().isEmailVerified()){
-//                                        Intent intent2main = new Intent(SplashScreen.this, AdminMainInterface.class);
-//                                        intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
-//                                        startActivity(intent2main);
-//                                        finish();
-//                                    }
-//                                }
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
-//                }
-//                else
-//                {
-//                    startActivity(new Intent(SplashScreen.this, LoginInterface.class));
-//                }
+                if (user !=null){
+                    userRef = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
+                    userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()){
+                                Student std = snapshot.getValue(Student.class);
+                                CarOwner co = snapshot.getValue(CarOwner.class);
+                                Admin admin = snapshot.getValue(Admin.class);
+
+                                if (std.getUserType().equals("Student")){
+                                    if(firebaseAuth.getCurrentUser().isEmailVerified()) {
+                                        Intent intent2main = new Intent(SplashScreen.this, StudentMainInterface.class);
+                                        intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent2main);
+                                        finish();
+                                    }
+                                }
+
+                                else if (co.getUserType().equalsIgnoreCase("Car Owner")){
+                                    if(firebaseAuth.getCurrentUser().isEmailVerified()) {
+                                        Intent intent2main = new Intent(SplashScreen.this, CarOwnerMainInterface.class);
+                                        intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent2main);
+                                        finish();
+                                    }
+                                }
+                                else  if (admin.getUserType().equalsIgnoreCase("Admin")){
+                                    if(firebaseAuth.getCurrentUser().isEmailVerified()){
+                                        Intent intent2main = new Intent(SplashScreen.this, AdminMainInterface.class);
+                                        intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent2main);
+                                        finish();
+                                    }
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+                else
+                {
+                    startActivity(new Intent(SplashScreen.this, LoginInterface.class));
+                }
             }
         },SPLASH_SCREEN);
 

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 public class ACarDetailsInterface extends AppCompatActivity {
@@ -197,7 +199,13 @@ public class ACarDetailsInterface extends AppCompatActivity {
         FirebaseRecyclerAdapter<cPhotoUri, CarPhotoHolder> photoAdapter = new FirebaseRecyclerAdapter<cPhotoUri, CarPhotoHolder>(carPhoto) {
             @Override
             protected void onBindViewHolder(@NonNull CarPhotoHolder holder, int position, @NonNull cPhotoUri model) {
-                Picasso.get().load(model.getImageLink()).into(holder.cPhoto);
+                holder.progressBar.setVisibility(View.VISIBLE);
+                Picasso.get().load(model.getImageLink()).into(holder.cPhoto, new ImageLoadedCallback(holder.progressBar){
+                    @Override
+                    public void onSuccess() {
+                        this.progressBar.setVisibility(View.GONE);
+                    }
+                });
             }
 
             @NonNull
@@ -210,5 +218,22 @@ public class ACarDetailsInterface extends AppCompatActivity {
         };
         photo.setAdapter(photoAdapter);
         photoAdapter.startListening();
+    }
+    private class ImageLoadedCallback implements Callback {
+        ProgressBar progressBar;
+
+        public ImageLoadedCallback(ProgressBar progressBar) {
+            this.progressBar = progressBar;
+        }
+
+        @Override
+        public void onSuccess() {
+
+        }
+
+        @Override
+        public void onError(Exception e) {
+
+        }
     }
 }
