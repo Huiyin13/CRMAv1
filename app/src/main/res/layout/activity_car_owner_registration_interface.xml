@@ -84,6 +84,14 @@
                 android:textColor="#000000"
                 android:textSize="20dp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="**For International Student can use Passport Number**"
+                android:textColor="#FF0033"
+                android:textSize="15dp" />
+
             <EditText
                 android:id="@+id/ownerIC"
                 android:layout_width="match_parent"
@@ -92,7 +100,6 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="25dp"
-                android:inputType="number"
                 android:background="@drawable/input_text"
                 android:hint="Your IC No."
                 android:minHeight="48dp"

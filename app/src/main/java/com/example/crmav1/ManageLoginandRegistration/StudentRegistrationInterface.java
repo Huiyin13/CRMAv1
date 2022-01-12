@@ -125,7 +125,7 @@ public class StudentRegistrationInterface extends AppCompatActivity {
         fullName = name.getText().toString().trim().toUpperCase();
         emailAddress = email.getText().toString().trim();
         phoneNo = phone.getText().toString().trim();
-        stdIC = ic.getText().toString().trim();
+        stdIC = ic.getText().toString().trim().toUpperCase();
         stdID = id.getText().toString().trim().toUpperCase();
         newPassword = password.getText().toString().trim();
         confirmPassword = confirmPass.getText().toString();

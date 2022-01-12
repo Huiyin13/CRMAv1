@@ -129,7 +129,7 @@ public class CarOwnerRegistrationInterface extends AppCompatActivity {
         fullName = name.getText().toString().trim().toUpperCase();
         emailAddress = email.getText().toString().trim();
         phoneNo = phone.getText().toString().trim();
-        coIC = ic.getText().toString().trim();
+        coIC = ic.getText().toString().trim().toUpperCase();
         newPassword = password.getText().toString().trim();
         confirmPassword = confirmPass.getText().toString().trim();
         coID = id.getText().toString().trim().toUpperCase();
