@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CRMAv1">
         <activity
-            android:name=".ACarOwnerDetailsInterface"
+            android:name=".ManageCar.ACarOwnerDetailsInterface"
             android:exported="false" />
         <activity
             android:name=".SplashScreen"

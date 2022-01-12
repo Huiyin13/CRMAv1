@@ -1,4 +1,4 @@
-package com.example.crmav1;
+package com.example.crmav1.ManageCar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.crmav1.ManageAccount.CarOwnerListInterface;
-import com.example.crmav1.ManageBooking.SBookingDetailsInterface;
-import com.example.crmav1.ManageBooking.SCarOwnerProfileInterface;
-import com.example.crmav1.ManageCar.ACarDetailsInterface;
-import com.example.crmav1.ManageCar.ACarListInterface;
 import com.example.crmav1.ManageLoginandRegistration.AdminMainInterface;
 import com.example.crmav1.Model.CarOwner;
+import com.example.crmav1.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

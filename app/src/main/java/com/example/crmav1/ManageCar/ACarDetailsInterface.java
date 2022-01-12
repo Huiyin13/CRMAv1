@@ -12,18 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.crmav1.ACarOwnerDetailsInterface;
 import com.example.crmav1.Adapter.CarPhotoHolder;
 import com.example.crmav1.ManageAccount.CarOwnerListInterface;
-import com.example.crmav1.ManageAccount.CarOwnerRejectInterface;
-import com.example.crmav1.ManageBooking.SBookingDetailsInterface;
-import com.example.crmav1.ManageBooking.SCarOwnerProfileInterface;
 import com.example.crmav1.ManageLoginandRegistration.AdminMainInterface;
 import com.example.crmav1.Model.Car;
 import com.example.crmav1.Model.cPhotoUri;

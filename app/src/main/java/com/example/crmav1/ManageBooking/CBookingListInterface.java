@@ -71,13 +71,18 @@ public class CBookingListInterface extends AppCompatActivity implements CBooking
                             sid = booked.getsId();
                             if (booked.getCoId().equals(auth.getUid())){
                                 if (booked.getbStatus().equalsIgnoreCase("Completed") || booked.getbStatus().equalsIgnoreCase("Cancelled")){
-                                    Toast.makeText(getApplicationContext(), "No Current Booking", Toast.LENGTH_LONG).show();
+                                    if (bookings.size()<0){
+                                        Toast.makeText(getApplicationContext(), "No Current Booking", Toast.LENGTH_LONG).show();
+                                    }
+
                                 }
                                 else {
                                     bookings.add(booked);
                                 }
                             }else {
-                                Toast.makeText(getApplicationContext(), "No Current Booking", Toast.LENGTH_LONG).show();
+                                if (bookings.size()<0){
+                                    Toast.makeText(getApplicationContext(), "No Current Booking", Toast.LENGTH_LONG).show();
+                                }
                             }
                         }
                     }

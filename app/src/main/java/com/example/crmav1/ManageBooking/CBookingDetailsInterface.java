@@ -29,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class CBookingDetailsInterface extends AppCompatActivity {
 
-    private TextView timeF, timeT, dateF, dateT, status, payment, payMethod, tvCancel, cancelReason;
+    private TextView timeF, timeT, dateF, dateT, status, payment, payMethod, tvCancel, cancelReason, tvMemo;
     private EditText memo;
     private ImageView chat;
     private Button viewS, reject, approve, pickup, paidReceive, viewCar;
@@ -61,6 +61,7 @@ public class CBookingDetailsInterface extends AppCompatActivity {
         paidReceive = findViewById(R.id.done);
         tvCancel = findViewById(R.id.tvcancel);
         cancelReason = findViewById(R.id.cancelReason);
+        tvMemo = findViewById(R.id.tvMemo);
 
         bid = getIntent().getStringExtra("bid");
         sId = getIntent().getStringExtra("sId");
@@ -201,7 +202,7 @@ public class CBookingDetailsInterface extends AppCompatActivity {
                             }
                         });
                     }
-                    else if (booking.getbStatus().equalsIgnoreCase("Pick Up") || booking.getbStatus().equalsIgnoreCase("Paid") || booking.getbStatus().equalsIgnoreCase("Rejected")){
+                    else if (booking.getbStatus().equalsIgnoreCase("Pick Up") || booking.getbStatus().equalsIgnoreCase("Paid")){
                         approve.setVisibility(View.GONE);
                         reject.setVisibility(View.GONE);
                         paidReceive.setVisibility(View.GONE);
@@ -209,6 +210,17 @@ public class CBookingDetailsInterface extends AppCompatActivity {
                         tvCancel.setVisibility(View.GONE);
                         cancelReason.setVisibility(View.GONE);
                     }
+                    else if (booking.getbStatus().equalsIgnoreCase("Rejected")){
+                        approve.setVisibility(View.GONE);
+                        reject.setVisibility(View.GONE);
+                        paidReceive.setVisibility(View.GONE);
+                        pickup.setVisibility(View.GONE);
+                        tvCancel.setVisibility(View.GONE);
+                        cancelReason.setVisibility(View.GONE);
+                        memo.setVisibility(View.GONE);
+                        tvMemo.setVisibility(View.GONE);
+                    }
+
                     else if (booking.getbStatus().equalsIgnoreCase("Cancelled")){
                         approve.setVisibility(View.GONE);
                         reject.setVisibility(View.GONE);

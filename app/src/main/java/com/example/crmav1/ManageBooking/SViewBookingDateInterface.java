@@ -69,12 +69,13 @@ public class SViewBookingDateInterface extends AppCompatActivity {
                         for (DataSnapshot dataSnapshot : DataSnapshot.getChildren()){
 
                                 Booking booking = dataSnapshot.getValue(Booking.class);
+                            if (booking.getbStatus().equalsIgnoreCase("Applying")||booking.getbStatus().equalsIgnoreCase("Accepted")||booking.getbStatus().equalsIgnoreCase("Pick Up")
+                                    ||booking.getbStatus().equalsIgnoreCase("Paid")||booking.getbStatus().equalsIgnoreCase("Not yet receive cash payment.")){
                                 System.out.println(booking.getbStatus() + "4567890");
                                 if (booking.getCid().equalsIgnoreCase(cid)){
                                     bookedDate.add(booking);
                                 }
-
-
+                            }
                         }
                     }
                     Toast.makeText(getApplicationContext(), "Data Found", Toast.LENGTH_LONG).show();

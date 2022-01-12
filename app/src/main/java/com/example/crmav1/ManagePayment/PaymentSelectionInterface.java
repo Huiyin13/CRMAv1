@@ -284,7 +284,7 @@ public class PaymentSelectionInterface extends AppCompatActivity {
             if (status == PaymentIntent.Status.Succeeded) {
                 // Payment completed successfully
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                Toast toast =Toast.makeText(activity, "Ordered Successful", Toast.LENGTH_SHORT);
+                Toast toast =Toast.makeText(activity, "Paid Successful", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
                 DatabaseReference updateB = FirebaseDatabase.getInstance().getReference("Booking").child(user.getUid()).child(bid);

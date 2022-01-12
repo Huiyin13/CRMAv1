@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.crmav1.ManageBooking.BookingListInterface;
 import com.example.crmav1.ManageLoginandRegistration.LoginInterface;
 import com.example.crmav1.ManageLoginandRegistration.StudentMainInterface;
+import com.example.crmav1.Model.Chat;
 import com.example.crmav1.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,6 +35,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class StudentProfileInterface extends AppCompatActivity {
@@ -217,6 +219,28 @@ public class StudentProfileInterface extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
 
                                 String userID = sID.getUid();
+                                DatabaseReference chat = FirebaseDatabase.getInstance().getReference("Chat");
+                                chat.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.exists()){
+                                            for (DataSnapshot  dataSnapshot : snapshot.getChildren()){
+                                                Chat chat1 = dataSnapshot.getValue(Chat.class);
+                                                if (chat1.getReceiver().equalsIgnoreCase(userID)){
+                                                    chat.child(dataSnapshot.getKey()).removeValue();
+                                                }
+                                                if (chat1.getSender().equalsIgnoreCase(userID)){
+                                                    chat.child(dataSnapshot.getKey()).removeValue();
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
                                 DatabaseReference ID = FirebaseDatabase.getInstance().getReference("Users");
                                 DatabaseReference booking = FirebaseDatabase.getInstance().getReference("Booking").child(userID);
                                 ID.child(userID).removeValue();

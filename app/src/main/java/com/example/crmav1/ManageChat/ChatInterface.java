@@ -90,6 +90,11 @@ public class ChatInterface extends AppCompatActivity {
                         System.out.println(student.getsName());
                     }
                 }
+                else{
+                    name.setText("User not existed!");
+                    message.setVisibility(View.GONE);
+                    send.setVisibility(View.GONE);
+                }
             }
 
             @Override

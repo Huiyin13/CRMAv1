@@ -211,11 +211,15 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
                                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                                     Booking booking = dataSnapshot1.getValue(Booking.class);
                                     System.out.println("From " + booking.getDateF() + " to " + booking.getDateT());
-                                    counterisdateavailable = checkDate(fromdatestring, todatestring, booking.getDateF(), booking.getDateT());
-                                    System.out.println(counterisdateavailable + " counterisavailable");
-                                    if (!counterisdateavailable) {
-                                        counter++;
+                                    if (booking.getbStatus().equalsIgnoreCase("Applying")||booking.getbStatus().equalsIgnoreCase("Accepted")||booking.getbStatus().equalsIgnoreCase("Pick Up")
+                                            ||booking.getbStatus().equalsIgnoreCase("Paid")||booking.getbStatus().equalsIgnoreCase("Not yet receive cash payment.")){
+                                        counterisdateavailable = checkDate(fromdatestring, todatestring, booking.getDateF(), booking.getDateT());
+                                        System.out.println(counterisdateavailable + " counterisavailable");
+                                        if (!counterisdateavailable) {
+                                            counter++;
+                                        }
                                     }
+
 
                                 }
                             }

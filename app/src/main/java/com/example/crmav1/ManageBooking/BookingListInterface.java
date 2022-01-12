@@ -63,7 +63,10 @@ public class BookingListInterface extends AppCompatActivity implements BookingLi
                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                        Booking book = dataSnapshot.getValue(Booking.class);
                        if (book.getbStatus().equalsIgnoreCase("Completed") || book.getbStatus().equalsIgnoreCase("Cancelled")){
-                           Toast.makeText(getApplicationContext(), "No Current Booking", Toast.LENGTH_LONG).show();
+                           if (bookings.size()<0){
+                               Toast.makeText(getApplicationContext(), "No Current Booking", Toast.LENGTH_LONG).show();
+                           }
+
                        }
                        else {
                            bookings.add(book);
