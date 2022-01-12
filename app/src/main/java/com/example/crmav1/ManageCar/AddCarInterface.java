@@ -95,7 +95,7 @@ public class AddCarInterface extends AppCompatActivity {
                 inputData();
                 Intent intent2next = new Intent(AddCarInterface.this, AddCarPhotoInterface.class);
                 if(!modelC.isEmpty() && !plateC.isEmpty() && !feeC.isEmpty() && !paxC.isEmpty()  && !descriptionC.isEmpty() &&
-                        !stickerUri.isEmpty() && auto.isChecked() == true || manual.isChecked() == true){
+                        !stickerUri.isEmpty() && image_uri != null && auto.isChecked() == true || manual.isChecked() == true){
                     intent2next.putExtra("modelC", modelC);
                     intent2next.putExtra("plateC", plateC);
                     intent2next.putExtra("feeC", feeC);
@@ -144,7 +144,16 @@ public class AddCarInterface extends AppCompatActivity {
         paxC = pax.getText().toString().trim();
         descriptionC = description.getText().toString().trim();
 
-        stickerUri = image_uri.toString();
+
+        if (image_uri == null)
+        {
+            Toast.makeText(getApplicationContext(), "Please insert your IC/ Passport Photo", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else
+        {
+            stickerUri = image_uri.toString();
+        }
 
         if(auto.isChecked()){
             typeC = "Automatic";

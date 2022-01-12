@@ -70,6 +70,7 @@ public class AddCarPhotoInterface extends AppCompatActivity {
     private List<String> imagesEncodedList;
 
     ProgressDialog progressDialog;
+    private Uri imageUri;
 
     @Override
     protected void onStart() {
@@ -168,7 +169,7 @@ public class AddCarPhotoInterface extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                progressDialog.show();
+
                 inputData();
             }
         });
@@ -209,8 +210,16 @@ public class AddCarPhotoInterface extends AppCompatActivity {
         String image_path = getIntent().getStringExtra("stickerUri");
         uriSticker = Uri.parse(image_path);
 
-        savaCar();
-
+        if (imageUri == null)
+        {
+            Toast.makeText(getApplicationContext(), "Please insert your IC/ Passport Photo", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else
+        {
+            progressDialog.show();
+            savaCar();
+        }
     }
 
     private void savaCar() {
@@ -323,7 +332,7 @@ public class AddCarPhotoInterface extends AppCompatActivity {
                     int countClipData = data.getClipData().getItemCount();
                     int currentImageSelect = 0;
                     while (currentImageSelect < countClipData){
-                        Uri imageUri = data.getClipData().getItemAt(currentImageSelect).getUri();
+                        imageUri = data.getClipData().getItemAt(currentImageSelect).getUri();
                         carPhoto.add(imageUri);
                         currentImageSelect = currentImageSelect +1;
                     }

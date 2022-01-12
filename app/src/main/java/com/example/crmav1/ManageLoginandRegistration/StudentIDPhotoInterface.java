@@ -77,17 +77,19 @@ public class StudentIDPhotoInterface extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 inputData();
-                Intent intent2next = new Intent(StudentIDPhotoInterface.this, StudentLicencePhotoInterface.class);
-                intent2next.putExtra("fullName", fullName);
-                intent2next.putExtra("emailAddress", emailAddress);
-                intent2next.putExtra("phoneNo", phoneNo);
-                intent2next.putExtra("stdIC", stdIC);
-                intent2next.putExtra("newPassword", newPassword);
-                intent2next.putExtra("campusS", stdCampus);
-                intent2next.putExtra("stdID", stdID);
-                intent2next.putExtra("image_uriIC", image_uriIC);
-                intent2next.putExtra("image_uriID", image_uriID);
-                startActivity(intent2next);
+                if (image_uri != null){
+                    Intent intent2next = new Intent(StudentIDPhotoInterface.this, StudentLicencePhotoInterface.class);
+                    intent2next.putExtra("fullName", fullName);
+                    intent2next.putExtra("emailAddress", emailAddress);
+                    intent2next.putExtra("phoneNo", phoneNo);
+                    intent2next.putExtra("stdIC", stdIC);
+                    intent2next.putExtra("newPassword", newPassword);
+                    intent2next.putExtra("campusS", stdCampus);
+                    intent2next.putExtra("stdID", stdID);
+                    intent2next.putExtra("image_uriIC", image_uriIC);
+                    intent2next.putExtra("image_uriID", image_uriID);
+                    startActivity(intent2next);
+                }
 
             }
         });
@@ -104,11 +106,16 @@ public class StudentIDPhotoInterface extends AppCompatActivity {
         stdCampus = getIntent().getStringExtra("campusS");
         String image_path= getIntent().getStringExtra("image_uriIC");
         ICfile = Uri.parse(image_path);
-        image_uriID = image_uri.toString();
         image_uriIC = ICfile.toString();
 
-        if(idPhoto.getDrawable() == null){
-            Toast.makeText(getApplicationContext(), "Please insert your Matric ID Photo", Toast.LENGTH_SHORT).show();
+        if (image_uri == null)
+        {
+            Toast.makeText(getApplicationContext(), "Please insert your Matric Card Photo", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else
+        {
+            image_uriID = image_uri.toString();
         }
 
     }

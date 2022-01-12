@@ -95,7 +95,7 @@ public class StudentRegistrationInterface extends AppCompatActivity {
                 inputData();
                 Intent intent2next = new Intent(StudentRegistrationInterface.this, StudentIDPhotoInterface.class);
                 if(!fullName.isEmpty() && !emailAddress.isEmpty() && !phoneNo.isEmpty() && !stdIC.isEmpty()  && !newPassword.isEmpty()  && !confirmPassword.isEmpty()
-                        && !stdID.isEmpty()  && !phoneNo.isEmpty() && gambang.isChecked() == true || pekan.isChecked() == true){
+                        && !stdID.isEmpty() && image_uri != null  && !phoneNo.isEmpty() && gambang.isChecked() == true || pekan.isChecked() == true){
                     if (password.getText().length()> 5){
                         if (newPassword.equals(confirmPassword)){
                             intent2next.putExtra("fullName", fullName);
@@ -129,7 +129,17 @@ public class StudentRegistrationInterface extends AppCompatActivity {
         stdID = id.getText().toString().trim().toUpperCase();
         newPassword = password.getText().toString().trim();
         confirmPassword = confirmPass.getText().toString();
-        image_uriIC = image_uri.toString();
+
+
+        if (image_uri == null)
+        {
+            Toast.makeText(getApplicationContext(), "Please insert your IC/ Passport Photo", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else
+        {
+            image_uriIC = image_uri.toString();
+        }
 
         if(gambang.isChecked()){
             campusS = "Gambang";
@@ -182,6 +192,7 @@ public class StudentRegistrationInterface extends AppCompatActivity {
 
         if (gambang.isChecked() == false && pekan.isChecked() == false){
             Toast.makeText(getApplicationContext(), "Please select your Campus", Toast.LENGTH_SHORT).show();
+            return;
         }
 
 

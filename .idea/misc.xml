@@ -55,6 +55,7 @@
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_scar_list_interface.xml" value="0.536" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_scar_owner_profile_interface.xml" value="0.259375" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_scheck_car_details_interface.xml" value="0.1" />
+        <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_splash_screen.xml" value="0.4" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_student_account_interface.xml" value="0.259375" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_student_idphoto_interface.xml" value="0.1" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/activity_student_licence_photo_interface.xml" value="0.2453125" />
@@ -76,6 +77,8 @@
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/cs_faq_list_adapter.xml" value="0.176" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/faq_list_adapter.xml" value="0.259375" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/fragment_chat.xml" value="0.17572463768115942" />
+        <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/fragment_first.xml" value="0.259375" />
+        <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/fragment_second.xml" value="0.259375" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/multiple_photo_adapter.xml" value="0.2392857142857143" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/photo_adapter.xml" value="0.16428571428571428" />
         <entry key="..\:/Users/User/Desktop/CRMAv1/app/src/main/res/layout/photo_adapter_std.xml" value="0.1" />
