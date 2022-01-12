@@ -3,6 +3,8 @@ package com.example.crmav1.ManageLoginandRegistration;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.crmav1.Adapter.ChatListAdapter;
 import com.example.crmav1.ManageAccount.CarOwnerAccountInterface;
 import com.example.crmav1.ManageAccount.CarOwnerProfileInterface;
 import com.example.crmav1.ManageAccount.CarOwnerRejectInterface;
@@ -20,6 +23,8 @@ import com.example.crmav1.ManageAccount.CarOwnerViewInterface;
 import com.example.crmav1.ManageBooking.CBookingListInterface;
 import com.example.crmav1.ManageCar.AddCarInterface;
 import com.example.crmav1.ManageCar.CarListInterface;
+import com.example.crmav1.Model.Chat;
+import com.example.crmav1.Model.Student;
 import com.example.crmav1.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,14 +37,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class CarOwnerMainInterface extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class CarOwnerMainInterface extends AppCompatActivity implements ChatListAdapter.ItemClickListener {
 
     private Button deleteAcc, addCar, viewCar;
 
     ProgressDialog progressDialogAdd, progressDialogDel, progressDialogView;
 
+    private RecyclerView recyclerView;
+    private ChatListAdapter adapter;
     private FirebaseUser CarOwner;
-    private DatabaseReference coDBRef;
+    private ArrayList<Student> students;
+    private List<String> name;
+    private DatabaseReference coDBRef, nameRef, chatRef;
     private FirebaseAuth auth;
 
     private String coID;
@@ -55,6 +67,13 @@ public class CarOwnerMainInterface extends AppCompatActivity {
         progressDialogView = new ProgressDialog(this);
         progressDialogView.setMessage("Loading...");
 
+        recyclerView = findViewById(R.id.chatList);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        students = new ArrayList<>();
+        adapter = new ChatListAdapter(this, students, this);
+        recyclerView.setAdapter(adapter);
+
         deleteAcc = findViewById(R.id.coDelete);
         addCar = findViewById(R.id.addCar);
         viewCar = findViewById(R.id.viewCar);
@@ -62,6 +81,72 @@ public class CarOwnerMainInterface extends AppCompatActivity {
         CarOwner = FirebaseAuth.getInstance().getCurrentUser();
         coDBRef = FirebaseDatabase.getInstance().getReference("Users");
         auth = FirebaseAuth.getInstance();
+
+        chatRef = FirebaseDatabase.getInstance().getReference("Chat");
+
+
+        chatRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists())
+                {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        Chat chat = dataSnapshot.getValue(Chat.class);
+                        if (chat.getSender().equals(CarOwner.getUid())){
+                            nameRef = FirebaseDatabase.getInstance().getReference("Users").child(chat.getReceiver());
+                            nameRef.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                        Student student = snapshot.getValue(Student.class);
+                                        System.out.println("student " + student.getsName());
+                                        System.out.println("receiver " + chat.getReceiver());
+                                        System.out.println("sender " + chat.getSender());
+                                        if (student.getsId().equals(chat.getReceiver())){
+
+                                            students.add(student);
+                                        }
+                                    adapter.notifyDataSetChanged();
+                                    }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+
+                            });
+                        }
+                        if (chat.getReceiver().equals(CarOwner.getUid())){
+                            nameRef = FirebaseDatabase.getInstance().getReference("Users").child(chat.getSender());
+                            nameRef.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        Student student = snapshot.getValue(Student.class);
+                                        if (student.getsId().equals(chat.getSender())){
+                                            students.add(student);
+                                        }
+                                    adapter.notifyDataSetChanged();
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        }
+
+                    }
+                    Toast.makeText(getApplicationContext(), "Data Found", Toast.LENGTH_LONG).show();
+                }else {
+                    Toast.makeText(getApplicationContext(), "Data Not Found", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         coID = CarOwner.getUid();
 
@@ -149,6 +234,10 @@ public class CarOwnerMainInterface extends AppCompatActivity {
 
     }
 
+    private void readChat() {
+
+    }
+
     private AlertDialog confirmation(){
         AlertDialog myQuittingDialogBox = new AlertDialog.Builder(this)
                 // set message, title, and icon
@@ -186,5 +275,10 @@ public class CarOwnerMainInterface extends AppCompatActivity {
                 .create();
 
         return myQuittingDialogBox;
+    }
+
+    @Override
+    public void onItemClick(int position) {
+
     }
 }
