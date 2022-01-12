@@ -13,11 +13,12 @@
         android:background="@drawable/tab">
 
 
-        <ImageView
+        <ImageButton
             android:id="@+id/back"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="6dp"

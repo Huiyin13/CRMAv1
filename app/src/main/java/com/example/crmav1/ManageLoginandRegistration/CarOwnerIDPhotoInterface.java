@@ -90,7 +90,7 @@ public class CarOwnerIDPhotoInterface extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                progressDialog.show();
+
                 inputData();
 
             }
@@ -114,11 +114,17 @@ public class CarOwnerIDPhotoInterface extends AppCompatActivity {
         ICfile = Uri.parse(image_path);
 
 
-        if(idPhoto.getDrawable() == null){
+        if (image_uriID == null)
+        {
             Toast.makeText(getApplicationContext(), "Please insert your Matric ID Photo", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else
+        {
+            progressDialog.show();
+            createAccount();
         }
 
-        createAccount();
     }
 
     private void createAccount() {

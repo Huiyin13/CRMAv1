@@ -39,60 +39,6 @@ public class LoginInterface extends AppCompatActivity {
     private FirebaseUser user;
     private DatabaseReference dbRef, userRef;
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Login...");
-
-
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user !=null){
-            userRef = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
-            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()){
-                        Student std = snapshot.getValue(Student.class);
-                        CarOwner co = snapshot.getValue(CarOwner.class);
-                        Admin admin = snapshot.getValue(Admin.class);
-
-                        if (std.getUserType().equals("Student")){
-                            if(firebaseAuth.getCurrentUser().isEmailVerified()) {
-                                Intent intent2main = new Intent(LoginInterface.this, StudentMainInterface.class);
-                                intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent2main);
-                                finish();
-                            }
-                        }
-
-                        else if (co.getUserType().equalsIgnoreCase("Car Owner")){
-                            if(firebaseAuth.getCurrentUser().isEmailVerified()) {
-                                Intent intent2main = new Intent(LoginInterface.this, CarOwnerMainInterface.class);
-                                intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent2main);
-                                finish();
-                            }
-                        }
-                        else  if (admin.getUserType().equalsIgnoreCase("Admin")){
-                            if(firebaseAuth.getCurrentUser().isEmailVerified()){
-                                Intent intent2main = new Intent(LoginInterface.this, AdminMainInterface.class);
-                                intent2main.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent2main);
-                                finish();
-                            }
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +46,9 @@ public class LoginInterface extends AppCompatActivity {
         setContentView(R.layout.activity_login_interface);
 
         this.setTitle("Login");
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Login...");
 
         firebaseAuth = FirebaseAuth.getInstance();
 

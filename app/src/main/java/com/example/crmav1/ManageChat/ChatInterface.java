@@ -38,8 +38,7 @@ public class ChatInterface extends AppCompatActivity {
 
     private TextView name;
     private EditText message;
-    private ImageView back;
-    private ImageButton send;
+    private ImageButton send, back;
     private RecyclerView messaging;
     private ChatAdapter adapter;
     private List<Chat> list;

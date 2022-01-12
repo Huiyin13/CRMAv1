@@ -88,7 +88,7 @@ public class StudentLicencePhotoInterface extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog.show();
+
                 inputData();
             }
         });
@@ -108,11 +108,17 @@ public class StudentLicencePhotoInterface extends AppCompatActivity {
         IDfile = Uri.parse(image_path1);
 
 
-        if(licencePhoto.getDrawable() == null){
-            Toast.makeText(getApplicationContext(), "Please insert your Matric ID Photo", Toast.LENGTH_SHORT).show();
+        if (image_uri == null)
+        {
+            Toast.makeText(getApplicationContext(), "Please insert your Licence Photo", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else
+        {
+            progressDialog.show();
+            createAccount();
         }
 
-        createAccount();
     }
 
     private void createAccount() {

@@ -94,30 +94,30 @@ public class CarOwnerRegistrationInterface extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                inputData();
-                Intent intent2next = new Intent(CarOwnerRegistrationInterface.this, CarOwnerIDPhotoInterface.class);
-                if(!fullName.isEmpty() && !emailAddress.isEmpty() && !phoneNo.isEmpty() && !coIC.isEmpty()  && !newPassword.isEmpty()  && !confirmPassword.isEmpty()
-                        && !coID.isEmpty()  && !phoneNo.isEmpty() && gambang.isChecked() == true || pekan.isChecked() == true){
-                    if (password.getText().length() > 5) {
-                        if (newPassword.equals(confirmPassword)) {
-                            intent2next.putExtra("fullName", fullName);
-                            intent2next.putExtra("emailAddress", emailAddress);
-                            intent2next.putExtra("phoneNo", phoneNo);
-                            intent2next.putExtra("coIC", coIC);
-                            intent2next.putExtra("newPassword", newPassword);
-                            intent2next.putExtra("campusCo", campusCo);
-                            intent2next.putExtra("coID", coID);
-                            intent2next.putExtra("image_uriIC", image_uriIC);
-                            startActivity(intent2next);
+                    inputData();
+                    Intent intent2next = new Intent(CarOwnerRegistrationInterface.this, CarOwnerIDPhotoInterface.class);
+                    if(!fullName.isEmpty() && !emailAddress.isEmpty() && !phoneNo.isEmpty() && !coIC.isEmpty()  && !newPassword.isEmpty()  && !confirmPassword.isEmpty()
+                            && !coID.isEmpty()  && !phoneNo.isEmpty() && image_uri != null && gambang.isChecked() == true || pekan.isChecked() == true){
+                        if (password.getText().length() > 5) {
+                            if (newPassword.equals(confirmPassword)) {
+                                intent2next.putExtra("fullName", fullName);
+                                intent2next.putExtra("emailAddress", emailAddress);
+                                intent2next.putExtra("phoneNo", phoneNo);
+                                intent2next.putExtra("coIC", coIC);
+                                intent2next.putExtra("newPassword", newPassword);
+                                intent2next.putExtra("campusCo", campusCo);
+                                intent2next.putExtra("coID", coID);
+                                intent2next.putExtra("image_uriIC", image_uriIC);
+                                startActivity(intent2next);
 
+                            }
+                        } else {
+                            Toast.makeText(CarOwnerRegistrationInterface.this, "Minimum password length is 6.", Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        Toast.makeText(CarOwnerRegistrationInterface.this, "Minimum password length is 6.", Toast.LENGTH_SHORT).show();
                     }
-                }
-                else{
-                    Toast.makeText(CarOwnerRegistrationInterface.this, "Some info missing!", Toast.LENGTH_SHORT).show();
-                }
+                    else{
+                        Toast.makeText(CarOwnerRegistrationInterface.this, "Some info missing!", Toast.LENGTH_SHORT).show();
+                    }
             }
         });
 
@@ -133,7 +133,15 @@ public class CarOwnerRegistrationInterface extends AppCompatActivity {
         newPassword = password.getText().toString().trim();
         confirmPassword = confirmPass.getText().toString().trim();
         coID = id.getText().toString().trim().toUpperCase();
-        image_uriIC = image_uri.toString();
+        if (image_uri == null)
+        {
+            Toast.makeText(getApplicationContext(), "Please insert your IC/ Passport Photo", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else
+        {
+            image_uriIC = image_uri.toString();
+        }
 
         if(gambang.isChecked()){
             campusCo = "Gambang";
@@ -181,12 +189,9 @@ public class CarOwnerRegistrationInterface extends AppCompatActivity {
             return;
         }
 
-        if(icPhoto.getDrawable() == null){
-            Toast.makeText(getApplicationContext(), "Please insert your IC/ Passport Photo", Toast.LENGTH_SHORT).show();
-        }
-
         if (gambang.isChecked() == false && pekan.isChecked() == false){
             Toast.makeText(getApplicationContext(), "Please select your Campus", Toast.LENGTH_SHORT).show();
+            return;
         }
 
 
