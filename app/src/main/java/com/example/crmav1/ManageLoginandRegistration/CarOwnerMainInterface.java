@@ -71,6 +71,7 @@ public class CarOwnerMainInterface extends AppCompatActivity implements ChatList
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         students = new ArrayList<>();
+        name = new ArrayList<>();
         adapter = new ChatListAdapter(this, students, this);
         recyclerView.setAdapter(adapter);
 
@@ -103,8 +104,21 @@ public class CarOwnerMainInterface extends AppCompatActivity implements ChatList
                                         System.out.println("receiver " + chat.getReceiver());
                                         System.out.println("sender " + chat.getSender());
                                         if (student.getsId().equals(chat.getReceiver())){
-
-                                            students.add(student);
+                                            name.add(chat.getReceiver());
+                                            for (String id : name){
+                                                if (student.getsId().equals(id)){
+                                                    if (students.size()!=0){
+                                                        for (Student student1 : students){
+                                                            if (!student.getsId().equals(student1.getsId())){
+                                                                students.add(student);
+                                                            }
+                                                        }
+                                                    }
+                                                    else {
+                                                        students.add(student);
+                                                    }
+                                                }
+                                            }
                                         }
                                     adapter.notifyDataSetChanged();
                                     }
@@ -123,7 +137,21 @@ public class CarOwnerMainInterface extends AppCompatActivity implements ChatList
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         Student student = snapshot.getValue(Student.class);
                                         if (student.getsId().equals(chat.getSender())){
-                                            students.add(student);
+                                            name.add(chat.getSender());
+                                            for (String id : name){
+                                                if (student.getsId().equals(id)){
+                                                    if (students.size()!=0){
+                                                        for (Student student1 : students){
+                                                            if (!student.getsId().equals(student1.getsId())){
+                                                                students.add(student);
+                                                            }
+                                                        }
+                                                    }
+                                                    else {
+                                                        students.add(student);
+                                                    }
+                                                }
+                                            }
                                         }
                                     adapter.notifyDataSetChanged();
                                 }
