@@ -18,9 +18,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.crmav1.ACarOwnerDetailsInterface;
 import com.example.crmav1.Adapter.CarPhotoHolder;
 import com.example.crmav1.ManageAccount.CarOwnerListInterface;
 import com.example.crmav1.ManageAccount.CarOwnerRejectInterface;
+import com.example.crmav1.ManageBooking.SBookingDetailsInterface;
+import com.example.crmav1.ManageBooking.SCarOwnerProfileInterface;
 import com.example.crmav1.ManageLoginandRegistration.AdminMainInterface;
 import com.example.crmav1.Model.Car;
 import com.example.crmav1.Model.cPhotoUri;
@@ -41,7 +44,7 @@ public class ACarDetailsInterface extends AppCompatActivity {
     private TextView model, plate, person, type, reason, fee, description, status, tvReason;
     private ImageView sticker;
     private RecyclerView photo;
-    private Button unlist, list, cancel, cancel2;
+    private Button unlist, list, cancel, cancel2, view;
 
     private FirebaseDatabase db;
     private DatabaseReference carDBRef, carDBRef2, updateRef;
@@ -68,6 +71,17 @@ public class ACarDetailsInterface extends AppCompatActivity {
         list = findViewById(R.id.cUnhide);
         cancel = findViewById(R.id.cancel);
         cancel2 = findViewById(R.id.cancel2);
+        view = findViewById(R.id.viewC);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2view = new Intent(ACarDetailsInterface.this, ACarOwnerDetailsInterface.class);
+                intent2view.putExtra("coId", uid);
+                intent2view.putExtra("cid", cid);
+                startActivity(intent2view);
+            }
+        });
 
         photo = findViewById(R.id.photoListView);
         photo.setHasFixedSize(true);

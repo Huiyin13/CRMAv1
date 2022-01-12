@@ -138,13 +138,13 @@
                 <TextView
                     android:id="@+id/description"
                     android:layout_width="match_parent"
-                    android:layout_height="218dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="25dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="25dp"
                     android:background="@drawable/input_text"
-                    android:hint="Reason"
+                    android:hint="Description"
                     android:minHeight="48dp"
                     android:padding="10dp"
                     android:textSize="18dp" />
@@ -198,6 +198,31 @@
                     android:padding="10dp" />
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="Car Owner:"
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp">
+
+                    <Button
+                        android:id="@+id/viewC"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="View" />
+
+                </LinearLayout>
+
+                <TextView
                     android:id="@+id/tvReason"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -211,7 +236,7 @@
                 <TextView
                     android:id="@+id/cHideReason"
                     android:layout_width="match_parent"
-                    android:layout_height="218dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="25dp"
                     android:layout_marginTop="15dp"

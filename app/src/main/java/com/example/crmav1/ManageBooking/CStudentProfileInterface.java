@@ -26,7 +26,7 @@ import com.squareup.picasso.Picasso;
 
 public class CStudentProfileInterface extends AppCompatActivity {
 
-    private TextView name, id, ic, phone, email;
+    private TextView name, id, ic, phone, email, campus;
     private ImageView icPhoto, idPhoto, licencePhoto;
     private Button back;
 
@@ -47,6 +47,7 @@ public class CStudentProfileInterface extends AppCompatActivity {
         idPhoto = findViewById(R.id.stdIDPhoto);
         licencePhoto = findViewById(R.id.stdLicencePhoto);
         back = findViewById(R.id.back);
+        campus = findViewById(R.id.stdCampus);
 
         cid = getIntent().getStringExtra("cid");
         bid = getIntent().getStringExtra("bid");
@@ -64,6 +65,7 @@ public class CStudentProfileInterface extends AppCompatActivity {
                     ic.setText(std.getsIC());
                     phone.setText(std.getsPhone());
                     email.setText(std.getsEmail());
+                    campus.setText(std.getsCampus());
 
                     Picasso.get().load(std.getsICUri()).into(icPhoto);
                     Picasso.get().load(std.getsIDUri()).into(idPhoto);

@@ -1,4 +1,4 @@
-package com.example.crmav1.ManageBooking;
+package com.example.crmav1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,10 +12,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.crmav1.ManageAccount.StudentAccountInterface;
-import com.example.crmav1.ManageLoginandRegistration.StudentMainInterface;
+import com.example.crmav1.ManageAccount.CarOwnerListInterface;
+import com.example.crmav1.ManageBooking.SBookingDetailsInterface;
+import com.example.crmav1.ManageBooking.SCarOwnerProfileInterface;
+import com.example.crmav1.ManageCar.ACarDetailsInterface;
+import com.example.crmav1.ManageCar.ACarListInterface;
+import com.example.crmav1.ManageLoginandRegistration.AdminMainInterface;
 import com.example.crmav1.Model.CarOwner;
-import com.example.crmav1.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,19 +27,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-public class SCarOwnerProfileInterface extends AppCompatActivity {
+public class ACarOwnerDetailsInterface extends AppCompatActivity {
 
     private TextView name, id, ic, phone, email, campus;
     private ImageView icPhoto, idPhoto;
     private Button back;
 
-    private String cid, bid, coId;
+    private String cid, coId;
     private DatabaseReference carOwner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scar_owner_profile_interface);
+        setContentView(R.layout.activity_acar_owner_details_interface);
 
         name = findViewById(R.id.coName);
         id = findViewById(R.id.coID);
@@ -49,7 +52,6 @@ public class SCarOwnerProfileInterface extends AppCompatActivity {
         campus = findViewById(R.id.coCampus);
 
         cid = getIntent().getStringExtra("cid");
-        bid = getIntent().getStringExtra("bid");
         coId = getIntent().getStringExtra("coId");
 
         carOwner = FirebaseDatabase.getInstance().getReference("Users").child(coId);
@@ -90,9 +92,8 @@ public class SCarOwnerProfileInterface extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2back = new Intent(SCarOwnerProfileInterface.this, SBookingDetailsInterface.class);
+                Intent intent2back = new Intent(ACarOwnerDetailsInterface.this, ACarDetailsInterface.class);
                 intent2back.putExtra("coId", coId);
-                intent2back.putExtra("bid", bid);
                 intent2back.putExtra("cid", cid);
                 startActivity(intent2back);
                 finish();
@@ -106,16 +107,16 @@ public class SCarOwnerProfileInterface extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.book:
-                        startActivity(new Intent(getApplicationContext(), BookingListInterface.class));
+                    case R.id.car:
+                        startActivity(new Intent(getApplicationContext(), ACarListInterface.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.list:
+                        startActivity(new Intent(getApplicationContext(), CarOwnerListInterface.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.home:
-                        startActivity(new Intent(SCarOwnerProfileInterface.this, StudentMainInterface.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.account:
-                        startActivity(new Intent(SCarOwnerProfileInterface.this, StudentAccountInterface.class));
+                        startActivity(new Intent(getApplicationContext(), AdminMainInterface.class));
                         overridePendingTransition(0,0);
                         return true;
                 }

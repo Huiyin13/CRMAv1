@@ -212,7 +212,7 @@ public class AddCarPhotoInterface extends AppCompatActivity {
 
         if (imageUri == null)
         {
-            Toast.makeText(getApplicationContext(), "Please insert your IC/ Passport Photo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Please insert your Car Photos", Toast.LENGTH_SHORT).show();
             return;
         }
         else

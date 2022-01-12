@@ -244,11 +244,13 @@ public class CarDetailsInterface extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
 
                         DatabaseReference deleteCUri = FirebaseDatabase.getInstance().getReference("Car").child(user.getUid()).child(cid).child("cPhotoUri");
+                        DatabaseReference deleteBooking = FirebaseDatabase.getInstance().getReference("Car").child(user.getUid()).child(cid).child("Booking");
                         DatabaseReference deleteC = FirebaseDatabase.getInstance().getReference("Car").child(user.getUid()).child(cid);
                         deleteC.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 deleteCUri.removeValue();
+                                deleteBooking.removeValue();
                                 Toast.makeText(CarDetailsInterface.this, "This car details is deleted.", Toast.LENGTH_SHORT).show();
                                 Intent intent2delete = new Intent(CarDetailsInterface.this, CarListInterface.class);
                                 startActivity(intent2delete);

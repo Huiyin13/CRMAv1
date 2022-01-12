@@ -279,9 +279,7 @@ public class CarOwnerMainInterface extends AppCompatActivity implements ChatList
                         coID.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                /*String userID = auth.getUid();
-                                DatabaseReference ID = FirebaseDatabase.getInstance().getReference("Users");
-                                ID.child(userID).removeValue();*/
+
                                 String userID = coID.getUid();
                                 DatabaseReference ID = FirebaseDatabase.getInstance().getReference("Users");
                                 ID.child(userID).removeValue();

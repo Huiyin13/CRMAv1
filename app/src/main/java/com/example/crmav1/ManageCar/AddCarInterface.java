@@ -147,7 +147,7 @@ public class AddCarInterface extends AppCompatActivity {
 
         if (image_uri == null)
         {
-            Toast.makeText(getApplicationContext(), "Please insert your IC/ Passport Photo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Please insert your UMP car sticker", Toast.LENGTH_SHORT).show();
             return;
         }
         else
