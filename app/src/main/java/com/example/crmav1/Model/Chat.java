@@ -5,28 +5,28 @@ public class Chat {
     private String sender;
     private String receiver;
     private String msg;
-    private String mid;
+    private String type;
 
     public Chat() {
     }
 
-    public Chat(String sender, String receiver, String msg, String mid) {
+    public Chat(String sender, String receiver, String msg, String type) {
         this.sender = sender;
         this.receiver = receiver;
         this.msg = msg;
-        this.mid = mid;
+        this.type = type;
     }
 
     public void setMsg(String msg) {
         this.msg = msg;
     }
 
-    public String getMid() {
-        return mid;
+    public String getType() {
+        return type;
     }
 
-    public void setMid(String type) {
-        this.mid = mid;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getSender() {
