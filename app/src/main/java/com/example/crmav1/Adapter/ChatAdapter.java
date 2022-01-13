@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.PointerIcon;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import com.example.crmav1.Model.Chat;
 import com.example.crmav1.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -48,7 +50,18 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Holder> {
     @Override
     public void onBindViewHolder(@NonNull ChatAdapter.Holder holder, int position) {
         Chat chat1 = chat.get(position);
-        holder.show_message.setText(chat1.getMsg());
+        if (chat1.getType().equals("text")){
+            holder.show_message.setVisibility(View.VISIBLE);
+            holder.show_image.setVisibility(View.GONE);
+            holder.show_message.setText(chat1.getMsg());
+        }
+        else {
+            holder.show_message.setVisibility(View.GONE);
+            holder.show_image.setVisibility(View.VISIBLE);
+            Picasso.get().load(chat1.getMsg()).placeholder(R.drawable.ic_image).into(holder.show_image);
+
+        }
+
     }
 
     @Override
@@ -58,9 +71,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.Holder> {
 
     public class Holder extends RecyclerView.ViewHolder {
         TextView show_message;
+        ImageView show_image;
         public Holder(@NonNull View itemView) {
             super(itemView);
             show_message = itemView.findViewById(R.id.show_message);
+            show_image = itemView.findViewById(R.id.show_image);
         }
     }
 
