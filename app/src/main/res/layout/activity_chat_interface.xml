@@ -13,31 +13,25 @@
         android:background="@drawable/tab">
 
 
-        <ImageButton
-            android:id="@+id/back"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="6dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="365dp"
-            android:layout_marginRight="365dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/left" />
-
         <TextView
             android:id="@+id/name"
             android:layout_width="411dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginStart="70dp"
             android:minHeight="48dp"
             android:padding="10dp"
             android:text="name"
-            android:layout_marginStart="50dp"
             android:textSize="18dp" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/left" />
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView

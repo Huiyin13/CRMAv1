@@ -76,6 +76,7 @@ public class SBookingDetailsInterface extends AppCompatActivity {
                 Intent intent2chat = new Intent(SBookingDetailsInterface.this, ChatInterface.class);
                 intent2chat.putExtra("uid", coId);
                 intent2chat.putExtra("bid", bid);
+                intent2chat.putExtra("cid", cid);
                 startActivity(intent2chat);
             }
         });

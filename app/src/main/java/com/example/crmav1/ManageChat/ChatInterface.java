@@ -38,7 +38,8 @@ public class ChatInterface extends AppCompatActivity {
 
     private TextView name;
     private EditText message;
-    private ImageButton send, back;
+    private ImageButton send;
+    private ImageView back;
     private RecyclerView messaging;
     private ChatAdapter adapter;
     private List<Chat> list;
@@ -46,7 +47,7 @@ public class ChatInterface extends AppCompatActivity {
     private FirebaseUser user;
     private DatabaseReference nameRef, chatRef;
 
-    private String uid, userType, bid, cid;
+    private String uid, userType, bid, cid, coId, sId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,12 +82,13 @@ public class ChatInterface extends AppCompatActivity {
                     if (carOwner.getUserType().equalsIgnoreCase("Car Owner")){
                         name.setText(carOwner.getCoName());
                         userType = carOwner.getUserType();
-
+                        coId = carOwner.getCoId();
                         System.out.println(carOwner.getCoName());
                     }
                     else if (student.getUserType().equalsIgnoreCase("Student")){
                         name.setText(student.getsName());
                         userType = student.getUserType();
+                        sId = student.getsId();
                         System.out.println(student.getsName());
                     }
                 }
@@ -121,18 +123,22 @@ public class ChatInterface extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (userType.equalsIgnoreCase("Student")){
-                    Intent intent2back = new Intent(ChatInterface.this, SBookingDetailsInterface.class);
-                    intent2back.putExtra("bid", bid);
-                    intent2back.putExtra("coId", uid);
-                    startActivity(intent2back);
-                }
-                else {
+                if (userType.equalsIgnoreCase("Student"))
+                {
                     Intent intent2back = new Intent(ChatInterface.this, CBookingDetailsInterface.class);
                     intent2back.putExtra("bid", bid);
-                    intent2back.putExtra("sId", uid);
+                    intent2back.putExtra("sId", sId);
                     intent2back.putExtra("cid", cid);
                     startActivity(intent2back);
+                    finish();
+                }
+                else {
+                    Intent intent2back = new Intent(ChatInterface.this, SBookingDetailsInterface.class);
+                    intent2back.putExtra("bid", bid);
+                    intent2back.putExtra("coId", coId);
+                    intent2back.putExtra("cid", cid);
+                    startActivity(intent2back);
+                    finish();
                 }
 
             }
