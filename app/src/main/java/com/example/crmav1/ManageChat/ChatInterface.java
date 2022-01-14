@@ -2,6 +2,7 @@ package com.example.crmav1.ManageChat;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -17,6 +18,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -33,6 +35,11 @@ import com.example.crmav1.ManageBooking.SBookingDetailsInterface;
 import com.example.crmav1.Model.CarOwner;
 import com.example.crmav1.Model.Chat;
 import com.example.crmav1.Model.Student;
+import com.example.crmav1.Notifications.Client;
+import com.example.crmav1.Notifications.Data;
+import com.example.crmav1.Notifications.MyResponse;
+import com.example.crmav1.Notifications.Sender;
+import com.example.crmav1.Notifications.Token;
 import com.example.crmav1.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,7 +50,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -53,6 +62,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ChatInterface extends AppCompatActivity {
 
@@ -68,6 +81,9 @@ public class ChatInterface extends AppCompatActivity {
     private DatabaseReference nameRef, chatRef;
 
     private String uid, userType, bid, cid, coId, sId;
+    String username;
+    APIService apiService;
+    boolean notify = false;
 
     //permission constants
     private static final int CAMERA_REQUEST_CODE = 100;
@@ -81,6 +97,8 @@ public class ChatInterface extends AppCompatActivity {
     //image picked uri
     private Uri image_uri;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +110,8 @@ public class ChatInterface extends AppCompatActivity {
         back = findViewById(R.id.back);
         send = findViewById(R.id.send);
         image = findViewById(R.id.image);
+
+        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
 
         //init permission array
         cameraPermission =  new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -152,6 +172,7 @@ public class ChatInterface extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                notify = true;
                 String msging = message.getText().toString().trim();
                 if (!msging.equalsIgnoreCase("")){
                     sendMsg(user.getUid(), uid, msging);
@@ -370,6 +391,84 @@ public class ChatInterface extends AppCompatActivity {
         hashMap.put("type", "text");
 
         chat.child("Chat").push().setValue(hashMap);
+
+        final String message = msg;
+        DatabaseReference userGet = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
+        userGet.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                CarOwner carOwner = snapshot.getValue(CarOwner.class);
+                Student student = snapshot.getValue(Student.class);
+
+                if (carOwner.getUserType().equalsIgnoreCase("Car Owner")){
+                    username = carOwner.getCoName();
+                    System.out.println("STUDNET NAME:::"+student.getsName());
+                    if (notify){
+                        sendNotification(receiver, username, message);
+                    }
+                    notify = false;
+                    System.out.println("wth:: " + carOwner.getCoName());
+                }
+                else if (student.getUserType().equalsIgnoreCase("Student")){
+                    username = student.getsName();
+                    System.out.println("co NAME:::"+student.getsName());
+                    if (notify){
+                        sendNotification(receiver, username, message);
+                    }
+                    notify = false;
+                    System.out.println("wth:: " + student.getsName());
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void sendNotification(String receiver, String username, String message) {
+
+        DatabaseReference tokens =  FirebaseDatabase.getInstance().getReference("Tokens");
+        Query query = tokens.orderByKey().equalTo(receiver);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Token token = dataSnapshot.getValue(Token.class);
+                    System.out.println("tokennn:: " +token.getToken());
+                    Data data = new Data(user.getUid(), R.drawable.crmaa, username+": "+ message, "New Message", uid);
+                    Sender sender = new Sender(data, token.getToken());
+                    System.out.println("sened52");
+
+                    apiService.sendNotification(sender).enqueue(new Callback<MyResponse>() {
+                        @Override
+                        public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                            System.out.println("Succrdsss");
+                            if (response.code() == 200){
+                                if (response.body().success !=1){
+                                    Toast.makeText(ChatInterface.this, "Failed", Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<MyResponse> call, Throwable t) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     public void  readMsg (String myID, String receiverID){
@@ -390,6 +489,7 @@ public class ChatInterface extends AppCompatActivity {
                     }
                     adapter = new ChatAdapter(ChatInterface.this, list);
                     messaging.setAdapter(adapter);
+                    updateToken(FirebaseInstanceId.getInstance().getToken());
                 }
             }
 
@@ -399,5 +499,11 @@ public class ChatInterface extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void updateToken(String token){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Tokens");
+        Token token1 = new Token(token);
+        reference.child(user.getUid()).setValue(token1);
     }
 }
