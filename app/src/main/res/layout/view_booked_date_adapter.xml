@@ -20,7 +20,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="1dp"
-                android:paddingEnd="20dp"
                 android:text="xxx"
                 android:textColor="#000000"
                 android:textSize="25dp" />
