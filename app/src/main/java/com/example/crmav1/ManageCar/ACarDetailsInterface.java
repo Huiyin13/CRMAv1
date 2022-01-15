@@ -116,7 +116,7 @@ public class ACarDetailsInterface extends AppCompatActivity {
             public void onClick(View view) {
                 carDBRef.child("cStatus").setValue("Free");
                 carDBRef.child("cHideReason").setValue(" ");
-                Toast.makeText(ACarDetailsInterface.this, "You have unlist the car.", Toast.LENGTH_SHORT).show() ;
+                Toast.makeText(ACarDetailsInterface.this, "You have list the car.", Toast.LENGTH_SHORT).show() ;
                 Intent intent2back = new Intent(ACarDetailsInterface.this, ACarListInterface.class);
                 startActivity(intent2back);
             }
