@@ -136,8 +136,7 @@ public class CarListInterface extends AppCompatActivity implements CarListAdapte
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.book:
-                        startActivity(new Intent(getApplicationContext(), CBookingListInterface.class));
-                        overridePendingTransition(0,0);
+
                         return true;
                     case R.id.home:
                         startActivity(new Intent(CarListInterface.this, CarOwnerMainInterface.class));

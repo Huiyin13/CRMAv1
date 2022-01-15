@@ -111,8 +111,6 @@ public class SCarListInterface extends AppCompatActivity implements SCarListAdap
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.book:
-                        startActivity(new Intent(getApplicationContext(), BookingListInterface.class));
-                        overridePendingTransition(0,0);
                         return true;
                     case R.id.home:
                         startActivity(new Intent(SCarListInterface.this, StudentMainInterface.class));

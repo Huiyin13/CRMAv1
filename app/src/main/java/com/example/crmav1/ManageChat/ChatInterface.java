@@ -489,8 +489,9 @@ public class ChatInterface extends AppCompatActivity {
                     }
                     adapter = new ChatAdapter(ChatInterface.this, list);
                     messaging.setAdapter(adapter);
-                    updateToken(FirebaseInstanceId.getInstance().getToken());
+
                 }
+                updateToken(FirebaseInstanceId.getInstance().getToken());
             }
 
             @Override
