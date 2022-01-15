@@ -31,6 +31,8 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder
     private Context context;
     private List<Student> studentList;
     private ChatListAdapter.ItemClickListener nameListener;
+
+
     String thelastmsg;
     String type;
 
