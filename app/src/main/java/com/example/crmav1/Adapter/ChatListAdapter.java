@@ -25,6 +25,9 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder
     private List<Student> studentList;
     private ChatListAdapter.ItemClickListener nameListener;
 
+    String thelastmsg;
+    String type;
+
     public ChatListAdapter(Context context, List<Student> studentList, ItemClickListener nameListener) {
         this.context = context;
         this.studentList = studentList;
@@ -44,6 +47,9 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder
         Student student = studentList.get(position);
 
         holder.name.setText(student.getsName());
+
+
+        lastMessage(student.getsId(), holder.lastMsg);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,5 +78,48 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder
             super(itemView);
             name = itemView.findViewById(R.id.name);
         }
+    }
+
+
+    private  void lastMessage(final String userid, final TextView lastmsg){
+        thelastmsg = "default";
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Chat");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Chat chat = dataSnapshot.getValue(Chat.class);
+                    type = chat.getType();
+                    if (chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userid) ||
+                    chat.getReceiver().equals(userid) && chat.getSender().equals(firebaseUser.getUid())){
+                        if (type.equalsIgnoreCase("image")){
+                            thelastmsg = "Image";
+                        }
+                        else {
+                            thelastmsg = chat.getMsg();
+                        }
+                    }
+                }
+
+                switch (thelastmsg){
+                    case "Image":
+                        lastmsg.setText("Image");
+                        break;
+                    default:
+                        lastmsg.setText(thelastmsg);
+                        break;
+                }
+
+                thelastmsg = "default";
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 }

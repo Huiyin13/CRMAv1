@@ -28,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class CarOwnerAccountInterface extends AppCompatActivity {
 
-    private TextView name, email, status, chat;
+    private TextView name, email, status;
     private Button logout, faq, edit;
     private FirebaseUser CarOwner;
     private DatabaseReference coDBRef;
@@ -50,7 +50,6 @@ public class CarOwnerAccountInterface extends AppCompatActivity {
         edit = findViewById(R.id.coEdit);
         faq = findViewById(R.id.coFAQ);
         status = findViewById(R.id.coStatus);
-        chat = findViewById(R.id.chat);
 
         CarOwner = FirebaseAuth.getInstance().getCurrentUser();
         coDBRef = FirebaseDatabase.getInstance().getReference("Users");
@@ -78,12 +77,12 @@ public class CarOwnerAccountInterface extends AppCompatActivity {
                 email.setText(emailCo);
                 if (statusCo.equalsIgnoreCase("Pending")){
                     edit.setVisibility(View.GONE);
-                    chat.setVisibility(View.GONE);
+
                     status.setText("Your registration is still pending for approve. Kindly wait for within 48 hours. If have any inquiries, please email to crma.v01@gmail.com.");
                 }
                 else if (statusCo.equalsIgnoreCase("Rejected")){
                     edit.setVisibility(View.GONE);
-                    chat.setVisibility(View.GONE);
+
                     status.setText(reasonCo);
                 }
 

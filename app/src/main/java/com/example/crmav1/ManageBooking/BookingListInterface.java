@@ -103,8 +103,7 @@ public class BookingListInterface extends AppCompatActivity implements BookingLi
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.book:
-                        startActivity(new Intent(getApplicationContext(), BookingListInterface.class));
-                        overridePendingTransition(0,0);
+
                         return true;
                     case R.id.home:
                         startActivity(new Intent(BookingListInterface.this, StudentMainInterface.class));

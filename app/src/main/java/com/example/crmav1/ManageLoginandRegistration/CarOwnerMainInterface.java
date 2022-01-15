@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.crmav1.Adapter.ChatListAdapter;
@@ -53,8 +54,9 @@ public class CarOwnerMainInterface extends AppCompatActivity implements ChatList
     private List<String> name;
     private DatabaseReference coDBRef, nameRef, chatRef;
     private FirebaseAuth auth;
-
+    private TextView chat;
     private String coID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,8 @@ public class CarOwnerMainInterface extends AppCompatActivity implements ChatList
 
         progressDialogView = new ProgressDialog(this);
         progressDialogView.setMessage("Loading...");
+
+        chat = findViewById(R.id.chat);
 
         recyclerView = findViewById(R.id.chatList);
         recyclerView.setHasFixedSize(true);
@@ -195,6 +199,8 @@ public class CarOwnerMainInterface extends AppCompatActivity implements ChatList
                 if (statusCo.equalsIgnoreCase("Rejected")){
                     viewCar.setVisibility(View.GONE);
                     addCar.setVisibility(View.GONE);
+                    chat.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.GONE);
                 }
                 else if (statusCo.equalsIgnoreCase("Approved")){
                     deleteAcc.setVisibility(View.GONE);
@@ -203,6 +209,8 @@ public class CarOwnerMainInterface extends AppCompatActivity implements ChatList
                     viewCar.setVisibility(View.GONE);
                     addCar.setVisibility(View.GONE);
                     deleteAcc.setVisibility(View.GONE);
+                    chat.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.GONE);
                 }
 
                 viewCar.setOnClickListener(new View.OnClickListener() {

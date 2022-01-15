@@ -274,6 +274,7 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
                                 paymentF = totalHours * Integer.parseInt(fee);
                                 payment.setText("RM " + paymentF + " / " + totalHours + " hour(s)");
 
+
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
@@ -298,7 +299,7 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressDialog.show();
+
 //                checkDate();
 //                if (finalisdateavailable){
                 if (payment.getText().toString().equalsIgnoreCase("Invalid Date"))
@@ -306,7 +307,7 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
                     Toast.makeText(BookingFormInterface.this, "Please Select another Date", Toast.LENGTH_SHORT).show();
                 }
                 else if (timeF.getText().length()!=0 && timeT.getText().length()!=0 && dateT.getText().length()!=0 && dateF.getText().length()!=0 && payment.getText().length()!=0){
-
+                    progressDialog.show();
                     user = FirebaseAuth.getInstance().getCurrentUser();
                     bookRef = FirebaseDatabase.getInstance().getReference("Car").child(coId).child(cid).child("Booking");
 //

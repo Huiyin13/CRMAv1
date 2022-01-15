@@ -119,8 +119,7 @@ public class CBookingListInterface extends AppCompatActivity implements CBooking
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.book:
-                        startActivity(new Intent(getApplicationContext(), CBookingListInterface.class));
-                        overridePendingTransition(0,0);
+
                         return true;
                     case R.id.home:
                         startActivity(new Intent(CBookingListInterface.this, CarOwnerMainInterface.class));
