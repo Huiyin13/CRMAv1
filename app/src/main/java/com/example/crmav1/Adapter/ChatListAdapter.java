@@ -15,6 +15,13 @@ import com.example.crmav1.ManageChat.ChatInterface;
 import com.example.crmav1.Model.Chat;
 import com.example.crmav1.Model.Student;
 import com.example.crmav1.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +31,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder
     private Context context;
     private List<Student> studentList;
     private ChatListAdapter.ItemClickListener nameListener;
+
 
     String thelastmsg;
     String type;
@@ -47,7 +55,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder
         Student student = studentList.get(position);
 
         holder.name.setText(student.getsName());
-
 
         lastMessage(student.getsId(), holder.lastMsg);
 
@@ -73,13 +80,13 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Holder
     }
 
     public class Holder extends RecyclerView.ViewHolder {
-        TextView name;
+        TextView name,lastMsg;
         public Holder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name);
+            lastMsg = itemView.findViewById(R.id.lastMessage);
         }
     }
-
 
     private  void lastMessage(final String userid, final TextView lastmsg){
         thelastmsg = "default";
