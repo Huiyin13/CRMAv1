@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CRMAv1">
         <activity
+            android:name=".ManageLoginandRegistration.ForgotPasswordInterface"
+            android:exported="false" />
+        <activity
             android:name=".ManageCar.ACarOwnerDetailsInterface"
             android:exported="false" />
         <activity
@@ -168,21 +171,25 @@
             android:exported="false" />
         <activity
             android:name=".ManageLoginandRegistration.LoginInterface"
-            android:exported="false"/>
-        <service android:name=".Notifications.MyFirebaseIdService"
+            android:exported="false" />
+
+        <service
+            android:name=".Notifications.MyFirebaseIdService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".Notifications.MyFirebaseMessaging"
+        <service
+            android:name=".Notifications.MyFirebaseMessaging"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

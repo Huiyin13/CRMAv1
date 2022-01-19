@@ -71,7 +71,7 @@ public class BookingFormInterface extends AppCompatActivity implements DatePicke
 
         progressDialogCalc = new ProgressDialog(this);
         progressDialogCalc.setMessage("Calculating....");
-
+        progressDialog.dismiss();
         time1 = findViewById(R.id.time1);
         time2 = findViewById(R.id.time2);
         date1 = findViewById(R.id.date1);

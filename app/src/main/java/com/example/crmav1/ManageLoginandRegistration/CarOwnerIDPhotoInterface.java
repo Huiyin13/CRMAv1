@@ -136,6 +136,7 @@ public class CarOwnerIDPhotoInterface extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
                 Toast.makeText(CarOwnerIDPhotoInterface.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

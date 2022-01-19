@@ -75,6 +75,7 @@ public class AddCarPhotoInterface extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        progressDialog.dismiss();
         DatabaseReference delref = FirebaseDatabase.getInstance().getReference("Car").child("carPhotoUri");
         delref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -95,6 +96,7 @@ public class AddCarPhotoInterface extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_add_car_photo_interface);
 
 
@@ -299,6 +301,7 @@ public class AddCarPhotoInterface extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        progressDialog.dismiss();
                         Toast.makeText(AddCarPhotoInterface.this, "Add Car Failed", Toast.LENGTH_SHORT).show();
                     }
                 });
