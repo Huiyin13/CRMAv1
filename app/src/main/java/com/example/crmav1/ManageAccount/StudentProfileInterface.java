@@ -151,7 +151,7 @@ public class StudentProfileInterface extends AppCompatActivity {
                     public void onClick(View view) {
                         if (name.getText().length()!=0 && phone.getText().length()!=0){
                             uid = auth.getUid();
-                            nameStd = name.getText().toString();
+                            nameStd = name.getText().toString().toUpperCase();
                             phoneStd = phone.getText().toString();
 
                             if (gambang.isChecked()){
