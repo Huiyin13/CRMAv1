@@ -391,7 +391,21 @@ public class ChatInterface extends AppCompatActivity {
         hashMap.put("type", "text");
 
         chat.child("Chat").push().setValue(hashMap);
+        DatabaseReference chatlistref = FirebaseDatabase.getInstance().getReference("Chatlist").child(user.getUid()).child(uid);
+        chatlistref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.exists())
+                {
+                    chatlistref.child("id").setValue(uid);
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         final String message = msg;
         DatabaseReference userGet = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
         userGet.addValueEventListener(new ValueEventListener() {

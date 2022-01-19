@@ -142,7 +142,7 @@ public class CarOwnerProfileInterface extends AppCompatActivity {
                     public void onClick(View view) {
                         if (name.getText().length()!=0 && phone.getText().length()!=0){
                             uid = auth.getUid();
-                            nameCO = name.getText().toString();
+                            nameCO = name.getText().toString().toUpperCase();
                             phoneCO = phone.getText().toString();
 
                             if (gambang.isChecked()){

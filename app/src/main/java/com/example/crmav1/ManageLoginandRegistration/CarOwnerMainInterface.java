@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.example.crmav1.ManageBooking.CBookingListInterface;
 import com.example.crmav1.ManageCar.AddCarInterface;
 import com.example.crmav1.ManageCar.CarListInterface;
 import com.example.crmav1.Model.Chat;
+import com.example.crmav1.Model.Chatlist;
 import com.example.crmav1.Model.Student;
 import com.example.crmav1.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -50,12 +52,13 @@ public class CarOwnerMainInterface extends AppCompatActivity implements ChatList
     private RecyclerView recyclerView;
     private ChatListAdapter adapter;
     private FirebaseUser CarOwner;
-    private ArrayList<Student> students;
-    private List<String> name;
-    private DatabaseReference coDBRef, nameRef, chatRef;
+    private List<Chatlist> userlist;
+    private List<Student> studentList;
+    private DatabaseReference coDBRef, databaseReference;
     private FirebaseAuth auth;
     private TextView chat;
     private String coID;
+    private Context context;
 
 
     @Override
@@ -65,6 +68,7 @@ public class CarOwnerMainInterface extends AppCompatActivity implements ChatList
 
         progressDialogDel = new ProgressDialog(this);
         progressDialogDel.setMessage("Deleting...");
+        context = this;
 
         progressDialogView = new ProgressDialog(this);
         progressDialogView.setMessage("Loading...");
@@ -74,10 +78,7 @@ public class CarOwnerMainInterface extends AppCompatActivity implements ChatList
         recyclerView = findViewById(R.id.chatList);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        students = new ArrayList<>();
-        name = new ArrayList<>();
-        adapter = new ChatListAdapter(this, students, this);
-        recyclerView.setAdapter(adapter);
+        userlist = new ArrayList<>();
 
         deleteAcc = findViewById(R.id.coDelete);
         addCar = findViewById(R.id.addCar);
@@ -87,91 +88,21 @@ public class CarOwnerMainInterface extends AppCompatActivity implements ChatList
         coDBRef = FirebaseDatabase.getInstance().getReference("Users");
         auth = FirebaseAuth.getInstance();
 
-        chatRef = FirebaseDatabase.getInstance().getReference("Chat");
 
+        coID = CarOwner.getUid();
 
-        chatRef.addValueEventListener(new ValueEventListener() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("Chatlist").child(coID);
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists())
+                userlist.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren())
                 {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                        Chat chat = dataSnapshot.getValue(Chat.class);
-                        if (chat.getSender().equals(CarOwner.getUid())){
-                            nameRef = FirebaseDatabase.getInstance().getReference("Users").child(chat.getReceiver());
-                            nameRef.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                                        Student student = snapshot.getValue(Student.class);
-                                        System.out.println("student " + student.getsName());
-                                        System.out.println("receiver " + chat.getReceiver());
-                                        System.out.println("sender " + chat.getSender());
-                                        if (student.getsId().equals(chat.getReceiver())){
-                                            name.add(chat.getReceiver());
-                                            for (String id : name){
-                                                if (student.getsId().equals(id)){
-                                                    if (students.size()!=0){
-                                                        for (Student student1 : students){
-                                                            if (!student.getsId().equals(student1.getsId())){
-                                                                students.add(student);
-                                                            }
-                                                        }
-                                                    }
-                                                    else {
-                                                        students.add(student);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    adapter.notifyDataSetChanged();
-                                    }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-
-                            });
-                        }
-                        if (chat.getReceiver().equals(CarOwner.getUid())){
-                            nameRef = FirebaseDatabase.getInstance().getReference("Users").child(chat.getSender());
-                            nameRef.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        Student student = snapshot.getValue(Student.class);
-                                        if (student.getsId().equals(chat.getSender())){
-                                            name.add(chat.getSender());
-                                            for (String id : name){
-                                                if (student.getsId().equals(id)){
-                                                    if (students.size()!=0){
-                                                        for (Student student1 : students){
-                                                            if (!student.getsId().equals(student1.getsId())){
-                                                                students.add(student);
-                                                            }
-                                                        }
-                                                    }
-                                                    else {
-                                                        students.add(student);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    adapter.notifyDataSetChanged();
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
-                        }
-
-                    }
-                    Toast.makeText(getApplicationContext(), "Data Found", Toast.LENGTH_LONG).show();
-                }else {
-                    Toast.makeText(getApplicationContext(), "Data Not Found", Toast.LENGTH_LONG).show();
+                    Chatlist chatlist = dataSnapshot.getValue(Chatlist.class);
+                    userlist.add(chatlist);
                 }
+
+                readChat();
             }
 
             @Override
@@ -179,9 +110,6 @@ public class CarOwnerMainInterface extends AppCompatActivity implements ChatList
 
             }
         });
-
-        coID = CarOwner.getUid();
-
         coDBRef.child(coID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -271,7 +199,36 @@ public class CarOwnerMainInterface extends AppCompatActivity implements ChatList
     }
 
     private void readChat() {
+        studentList = new ArrayList<>();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                studentList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren())
+                {
+                    Student student = dataSnapshot.getValue(Student.class);
+                    if (student.getUserType().equalsIgnoreCase("Student"))
+                    {
+                        for (Chatlist chatlist : userlist)
+                        {
+                            if (student.getsId() != null && student.getsId().equals(chatlist.getId()))
+                            {
+                                studentList.add(student);
+                            }
+                        }
+                    }
+                }
+                adapter = new ChatListAdapter(context, studentList, CarOwnerMainInterface.this);
+                recyclerView.setAdapter(adapter);
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private AlertDialog confirmation(){
