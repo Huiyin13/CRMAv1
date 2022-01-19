@@ -54,7 +54,7 @@ public class AddFaqInterface extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Adding FAQ....");
-
+        progressDialog.dismiss();
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

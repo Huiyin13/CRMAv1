@@ -130,6 +130,7 @@ public class StudentLicencePhotoInterface extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
                 Toast.makeText(StudentLicencePhotoInterface.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

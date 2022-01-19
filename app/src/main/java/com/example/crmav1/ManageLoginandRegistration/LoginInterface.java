@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.crmav1.Model.Admin;
@@ -32,6 +33,7 @@ public class LoginInterface extends AppCompatActivity {
     private EditText email, password;
     private RadioButton admin, student, carOwner;
     private Button login, register;
+    private TextView reset;
 
     ProgressDialog progressDialog;
 
@@ -59,6 +61,15 @@ public class LoginInterface extends AppCompatActivity {
         carOwner = findViewById(R.id.rbOwner);
         login = findViewById(R.id.btnLogin);
         register = findViewById(R.id.btnRegister);
+        reset = findViewById(R.id.reset);
+
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2reset = new Intent(LoginInterface.this, ForgotPasswordInterface.class);
+                startActivity(intent2reset);
+            }
+        });
 
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -147,6 +158,7 @@ public class LoginInterface extends AppCompatActivity {
                                     }
                                 }
                                 else{
+                                    progressDialog.dismiss();
                                     finish();
                                     startActivity(getIntent());
                                     Toast.makeText(LoginInterface.this, "Unsuccessfully login.", Toast.LENGTH_SHORT).show();
@@ -155,6 +167,7 @@ public class LoginInterface extends AppCompatActivity {
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
+                                progressDialog.dismiss();
                                 Toast.makeText(LoginInterface.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -162,6 +175,7 @@ public class LoginInterface extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        progressDialog.dismiss();
                         Toast.makeText(LoginInterface.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });

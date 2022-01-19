@@ -16,6 +16,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -152,45 +153,60 @@ public class CarOwnerRegistrationInterface extends AppCompatActivity {
 
         if(fullName.isEmpty()){
             name.setError("Full Name is required");
+            name.requestFocus();
             return;
         }
         if(coID.isEmpty()){
             id.setError("Matric ID is required");
+            id.requestFocus();
             return;
         }
         if(coIC.isEmpty()){
             ic.setError("IC Number/ Passport Number is required");
+            ic.requestFocus();
             return;
         }
         if(phoneNo.isEmpty()){
             phone.setError("Contact Number is required");
+            phone.requestFocus();
             return;
         }
         if(emailAddress.isEmpty()){
             email.setError("Email Address is required");
+            email.requestFocus();
+            return;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches()){
+            email.setError("Please provide valid email");
+            email.requestFocus();
             return;
         }
 
         if(newPassword.isEmpty()){
             password.setError("Password is required");
+            password.requestFocus();
             return;
         }
         if (password.getText().length() < 5) {
             password.setError("Password minimum length is 6");
+            password.requestFocus();
             return;
         }
         if(confirmPassword.isEmpty()){
             confirmPass.setError("Confirm Password is required");
+            confirmPass.requestFocus();
             return;
         }
 
         if(!newPassword.equals(confirmPassword)) {
             confirmPass.setError("Password does not match!");
+            confirmPass.requestFocus();
             return;
         }
 
         if (gambang.isChecked() == false && pekan.isChecked() == false){
             Toast.makeText(getApplicationContext(), "Please select your Campus", Toast.LENGTH_SHORT).show();
+            campus.requestFocus();
             return;
         }
 
