@@ -335,7 +335,7 @@ public class PaymentSelectionInterface extends AppCompatActivity {
         //If Payment is not successful
         @Override
         public void onError(@NonNull Exception e) {
-            progressDialog.show();
+            progressDialog.dismiss();
             final PaymentSelectionInterface activity = activityRef.get();
             if (activity == null) {
                 return;
